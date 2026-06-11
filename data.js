@@ -3,7 +3,6 @@ const STRINOVA_DATA = [
     "id": "marina",
     "name": "Marina",
     "role": "Duelist",
-    "weaponName": "M32 Grenade Launcher",
     "weaponType": "Grenade Launcher",
     "themeColor": "#ff4a8b",
     "upgradePairs": [
@@ -73,7 +72,6 @@ const STRINOVA_DATA = [
     "id": "michele",
     "name": "Michele",
     "role": "Duelist",
-    "weaponName": "Pioneer",
     "weaponType": "Assault Rifle",
     "themeColor": "#00f0ff",
     "upgradePairs": [
@@ -143,7 +141,6 @@ const STRINOVA_DATA = [
     "id": "audrey",
     "name": "Audrey",
     "role": "Vanguard",
-    "weaponName": "Mona",
     "weaponType": "Light Machine Gun",
     "themeColor": "#ff9f00",
     "upgradePairs": [
@@ -213,7 +210,6 @@ const STRINOVA_DATA = [
     "id": "kokona",
     "name": "Kokona",
     "role": "Support",
-    "weaponName": "Heartseeker",
     "weaponType": "Submachine Gun",
     "themeColor": "#10b981",
     "upgradePairs": [
@@ -283,7 +279,6 @@ const STRINOVA_DATA = [
     "id": "melinda",
     "name": "Melinda",
     "role": "Sentinel",
-    "weaponName": "Eagle Eye",
     "weaponType": "Sniper Rifle",
     "themeColor": "#a855f7",
     "upgradePairs": [

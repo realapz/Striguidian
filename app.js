@@ -108,8 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="character-info-wrapper">
                     <h3 class="character-name">${char.name}</h3>
                     <div class="weapon-subinfo">
-                        <span>${char.weaponName}</span>
-                        <span class="weapon-dot"></span>
                         <span>${char.weaponType}</span>
                     </div>
                 </div>
@@ -186,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2 class="detail-character-name">${char.name}</h2>
                     <div class="detail-sub-row">
                         <span class="role-badge" style="border-color: ${char.themeColor}; color: ${char.themeColor}">${char.role}</span>
-                        <span class="detail-weapon-info">${char.weaponName} (${char.weaponType})</span>
+                        <span class="detail-weapon-info">${char.weaponType}</span>
                     </div>
                 </div>
             </div>
