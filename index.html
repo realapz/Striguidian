@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strinova Weapon Upgrade Guide | APZ Guides</title>
+    <meta name="description" content="Explore top-player weapon upgrade buy orders and awakening builds for all characters in Strinova. Maximize your gameplay with optimal consensus builds.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <span class="logo-glowing-dot"></span>
+                <h1 class="logo-text">APZ <span class="logo-subtext">GUIDES</span></h1>
+            </div>
+            <p class="tagline">Strinova Top-Player Weapon Upgrade & Awakening Builds</p>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <!-- Search and Filter Control Center -->
+        <section class="controls-section">
+            <div class="search-bar-container">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="character-search" placeholder="Search by name, weapon, or role..." aria-label="Search characters">
+            </div>
+
+            <div class="filters-container" id="role-filters" aria-label="Filter by role">
+                <button class="filter-btn active" data-role="all" id="filter-all">All Roles</button>
+                <button class="filter-btn" data-role="duelist" id="filter-duelist">Duelist</button>
+                <button class="filter-btn" data-role="vanguard" id="filter-vanguard">Vanguard</button>
+                <button class="filter-btn" data-role="sentinel" id="filter-sentinel">Sentinel</button>
+                <button class="filter-btn" data-role="support" id="filter-support">Support</button>
+            </div>
+        </section>
+
+        <!-- Characters Grid -->
+        <section class="grid-section">
+            <h2 class="section-title" id="grid-header">All Characters</h2>
+            <div class="characters-grid" id="characters-grid-container">
+                <!-- Character cards will be injected here by app.js -->
+                <div class="loading-spinner">Loading characters...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Character Details Modal (Overlay) -->
+    <dialog class="detail-modal" id="character-detail-modal">
+        <div class="modal-backdrop" id="modal-close-backdrop"></div>
+        <div class="modal-content-wrapper">
+            <button class="modal-close-btn" id="modal-close-button" aria-label="Close details">&times;</button>
+            
+            <article class="modal-details-body" id="modal-details-body">
+                <!-- Detail content will be dynamically loaded here by app.js -->
+            </article>
+        </div>
+    </dialog>
+
+    <footer class="app-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 APZ Guides. Created for the Strinova Community.</p>
+            <p class="disclaimer">This is an unofficial community fan site. All game assets, characters, names, and images are trademarks and copyright of their respective owners.</p>
+        </div>
+    </footer>
+
+    <!-- Core App Logic -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
