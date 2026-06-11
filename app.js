@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.innerHTML = `
                 <div class="card-header-area">
                     <div class="avatar-graphic">
-                        <span class="avatar-letter">${char.name.charAt(0)}</span>
+                        ${char.imageUrl ? `<img src="${char.imageUrl}" alt="${char.name}" class="avatar-img">` : `<span class="avatar-letter">${char.name.charAt(0)}</span>`}
                     </div>
                     <span class="role-badge">${char.role}</span>
                 </div>
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalDetailsBody.innerHTML = `
             <div class="detail-header">
                 <div class="modal-avatar" style="--modal-theme: ${char.themeColor}">
-                    <span class="modal-avatar-letter">${char.name.charAt(0)}</span>
+                    ${char.imageUrl ? `<img src="${char.imageUrl}" alt="${char.name}" class="modal-avatar-img">` : `<span class="modal-avatar-letter">${char.name.charAt(0)}</span>`}
                 </div>
                 <div class="detail-header-text">
                     <h2 class="detail-character-name">${char.name}</h2>

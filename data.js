@@ -5,6 +5,7 @@ const STRINOVA_DATA = [
     "role": "Duelist",
     "weaponType": "Grenade Launcher",
     "themeColor": "#ff4a8b",
+    "imageUrl": "images/marina.png",
     "upgradePairs": [
       {
         "category": "Firepower",
@@ -74,6 +75,7 @@ const STRINOVA_DATA = [
     "role": "Duelist",
     "weaponType": "Assault Rifle",
     "themeColor": "#00f0ff",
+    "imageUrl": "",
     "upgradePairs": [
       {
         "category": "Firepower",
@@ -143,6 +145,7 @@ const STRINOVA_DATA = [
     "role": "Vanguard",
     "weaponType": "Light Machine Gun",
     "themeColor": "#ff9f00",
+    "imageUrl": "",
     "upgradePairs": [
       {
         "category": "Firepower",
@@ -212,6 +215,7 @@ const STRINOVA_DATA = [
     "role": "Support",
     "weaponType": "Submachine Gun",
     "themeColor": "#10b981",
+    "imageUrl": "",
     "upgradePairs": [
       {
         "category": "Firepower",
@@ -281,6 +285,7 @@ const STRINOVA_DATA = [
     "role": "Sentinel",
     "weaponType": "Sniper Rifle",
     "themeColor": "#a855f7",
+    "imageUrl": "",
     "upgradePairs": [
       {
         "category": "Firepower",
