@@ -1,54 +1,42 @@
 # Strinova Weapon Upgrade Guide
 
-A responsive, high-fidelity web application hosted on GitHub Pages that displays Strinova characters, their weapon upgrades (awakening perks), and the recommended upgrade buy orders based on top player recommendations (consensus percentages).
+We are refining the site structure to support Strinova's game mechanics: **8 upgrades per weapon structured as 4 mutually exclusive binary pairs**. 
 
-## User Review Required
-
-> [!IMPORTANT]
-> **Technical Stack Update**:
-> Since Node.js is not installed on your system, we will build the site using **Vanilla HTML5, CSS3, and modern JavaScript (ES6)** instead of React/Vite.
-> *   **No Install Required**: You do not need to install Node.js, npm, or run any package installers.
->   **Direct Preview**: You can open `index.html` directly in any web browser to test your changes.
-> *   **Seamless Hosting**: It will deploy instantly and for free to GitHub Pages by pushing the files directly.
-> *   **Premium Design**: We can still achieve the exact same stunning, responsive, and animated user interface using modern Vanilla CSS (variables, grids, animations) and JavaScript.
+Players must choose one upgrade from each pair (e.g., Base Damage OR Rate of Fire) and then decide the priority buy order of their 4 selected choices.
 
 ## Proposed Changes
 
-We will create the web files directly in the root of your repository `C:/Users/Jeramiah/Documents/GitHub/apzguides`.
+We will modify `data.js`, `styles.css`, and `app.js` in `C:/Users/Jeramiah/Documents/GitHub/apzguides`.
 
 ---
 
-### [NEW] Web Frontend Files
+### [MODIFY] [data.js](file:///C:/Users/Jeramiah/Documents/GitHub/apzguides/data.js)
+Refactor the dataset to define 4 upgrade pairs for each character. Each pair contains:
+*   `type`: The categories (e.g., "Firepower", "Precision", "Sustain", "Handling").
+*   `optionA` & `optionB`: Upgrade details including effect and top-player selection percentage.
+*   `recommended`: Indicates which option is selected (e.g., "A" or "B").
+*   `buyPriority`: A ranking (1 to 4) indicating when this selected upgrade is bought during the match.
 
-#### [NEW] [index.html](file:///C:/Users/Jeramiah/Documents/GitHub/apzguides/index.html)
-Main HTML5 entry point containing:
-*   A header with logo and role navigation (Duelist, Sentinel, Controller, Support, Vanguard).
-*   Search and filter controls.
-*   A responsive grid containing Strinova character cards.
-*   A detailed, interactive overlay/view for each character.
+### [MODIFY] [styles.css](file:///C:/Users/Jeramiah/Documents/GitHub/apzguides/styles.css)
+Add styles for the binary-choice layout:
+*   `upgrade-pair-row`: Flex layout displaying the two options side-by-side.
+*   `upgrade-choice-card`: Styles for the individual upgrade blocks.
+    *   **Chosen state**: Neon glow, colored borders, active priority badge (e.g., "#1 Buy").
+    *   **Subdued state**: Lower opacity, crossed-out style or locked badge, signaling it is bypassed.
+*   `vs-connector`: A central divider indicating the percentage split between choices (e.g., `85% vs 15%`).
 
-#### [NEW] [styles.css](file:///C:/Users/Jeramiah/Documents/GitHub/apzguides/styles.css)
-Core styling using modern Vanilla CSS, featuring:
-*   An anime-cyberpunk dark theme (deep navy/slate background, neon pink and blue glowing borders).
-*   Smooth animations (fade-ins, button hover glows, progress bar fills).
-*   A responsive grid layout.
-
-#### [NEW] [app.js](file:///C:/Users/Jeramiah/Documents/GitHub/apzguides/app.js)
-Frontend logic handling:
-*   Dynamic rendering of character cards.
-*   Filtering by character role and text search.
-*   Showing/hiding the details view.
-*   Displaying the step-by-step weapon upgrade buy order.
-
-#### [NEW] [characters.json](file:///C:/Users/Jeramiah/Documents/GitHub/apzguides/characters.json)
-Data file storing character details, weapon name, upgrade choices, and consensus buy-order percentages.
+### [MODIFY] [app.js](file:///C:/Users/Jeramiah/Documents/GitHub/apzguides/app.js)
+Modify the details modal rendering logic to:
+*   Render 4 rows of side-by-side binary comparison cards.
+*   Clearly mark the chosen vs. unchosen upgrade in each pair.
+*   Sort the timeline or show a secondary summary list highlighting the final `#1` to `#4` buy order sequence.
 
 ---
 
 ## Verification Plan
 
 ### Manual Verification
-- Open `index.html` directly in your browser.
-- Verify responsive layout on mobile, tablet, and desktop screens.
-- Test filters (sorting characters by role or searching by name).
-- Verify interactive elements (opening/closing details, weapon buy order progression).
+- Open `index.html` locally.
+- Open a character detail modal and verify that all 4 pairs of upgrades are displayed side-by-side.
+- Ensure the active/chosen upgrade is highlighted and the unchosen option is correctly dimmed.
+- Verify that the buy order badges (#1 to #4) are correctly positioned on the chosen options.

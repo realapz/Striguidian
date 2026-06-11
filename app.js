@@ -79,13 +79,21 @@ document.addEventListener('DOMContentLoaded', () => {
             card.setAttribute('aria-haspopup', 'dialog');
             card.setAttribute('aria-label', `View weapon upgrades for ${char.name}`);
 
-            // Pre-calculate short names for buy order to show on card
-            const miniStepsHTML = char.buyOrder.map((stepId, index) => {
-                const upgrade = char.upgrades.find(u => u.id === stepId);
-                const stepLabel = upgrade ? upgrade.name : stepId;
-                const arrow = index < char.buyOrder.length - 1 ? '<span class="mini-step-arrow">&rarr;</span>' : '';
+            // Extract and sort chosen upgrades by priority
+            const chosenUpgradesSorted = char.upgradePairs
+                .map(pair => {
+                    const upgrade = pair.recommended === 'A' ? pair.optionA : pair.optionB;
+                    return {
+                        name: upgrade.name,
+                        priority: pair.buyPriority
+                    };
+                })
+                .sort((a, b) => a.priority - b.priority);
+
+            const miniStepsHTML = chosenUpgradesSorted.map((upg, index) => {
+                const arrow = index < chosenUpgradesSorted.length - 1 ? '<span class="mini-step-arrow">&rarr;</span>' : '';
                 return `
-                    <span class="mini-step-badge">${stepLabel}</span>
+                    <span class="mini-step-badge">${upg.name}</span>
                     ${arrow}
                 `;
             }).join('');
@@ -130,23 +138,40 @@ document.addEventListener('DOMContentLoaded', () => {
     function openCharacterDetails(char) {
         modalDetailsBody.style.setProperty('--modal-theme', char.themeColor);
         
-        // Generate buy order timeline HTML
-        const timelineHTML = char.buyOrder.map((stepId, index) => {
-            const upgrade = char.upgrades.find(u => u.id === stepId);
-            if (!upgrade) return '';
+        // Generate buy order pairs HTML
+        const pairsHTML = char.upgradePairs.map(pair => {
+            const optionA = pair.optionA;
+            const optionB = pair.optionB;
+            const isAChosen = pair.recommended === 'A';
+            const isBChosen = pair.recommended === 'B';
             
             return `
-                <div class="timeline-item">
-                    <div class="timeline-number-node">${index + 1}</div>
-                    <div class="timeline-card">
-                        <div class="timeline-card-header">
-                            <span class="upgrade-title">${upgrade.name}</span>
-                            <span class="consensus-percentage-badge">${upgrade.consensus}% Buy First</span>
+                <div class="upgrade-pair-row">
+                    <div class="upgrade-pair-header">
+                        <span class="upgrade-category-title">${pair.category}</span>
+                        <span class="buy-priority-tag">Buy Priority #${pair.buyPriority}</span>
+                    </div>
+                    <div class="upgrade-pair-grid">
+                        <!-- Option A Card -->
+                        <div class="upgrade-choice-card ${isAChosen ? 'chosen' : 'subdued'}">
+                            <span class="choice-card-name">${optionA.name}</span>
+                            <p class="choice-card-effect">${optionA.effect}</p>
+                            <div class="choice-percentage-bar-area">
+                                <span class="choice-percent-number">${optionA.consensus}%</span>
+                                <div class="choice-percent-track">
+                                    <div class="choice-percent-fill" id="fill-${char.id}-${optionA.id}" style="width: 0%"></div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="upgrade-effect">${upgrade.effect}</p>
-                        <div class="consensus-metric-area">
-                            <div class="consensus-progress-track">
-                                <div class="consensus-progress-bar" id="progress-${char.id}-${stepId}" style="width: 0%"></div>
+                        <!-- Option B Card -->
+                        <div class="upgrade-choice-card ${isBChosen ? 'chosen' : 'subdued'}">
+                            <span class="choice-card-name">${optionB.name}</span>
+                            <p class="choice-card-effect">${optionB.effect}</p>
+                            <div class="choice-percentage-bar-area">
+                                <span class="choice-percent-number">${optionB.consensus}%</span>
+                                <div class="choice-percent-track">
+                                    <div class="choice-percent-fill" id="fill-${char.id}-${optionB.id}" style="width: 0%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -168,12 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
             
-            <p class="detail-description">${char.description}</p>
-            
             <section class="buy-order-section">
-                <h3 class="visualizer-section-title">Upgrade Build Priority</h3>
-                <div class="timeline-flow">
-                    ${timelineHTML}
+                <h3 class="visualizer-section-title">Upgrade Decision Matrix</h3>
+                <div class="upgrade-pairs-container">
+                    ${pairsHTML}
                 </div>
             </section>
         `;
@@ -182,16 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
         detailModal.showModal();
         document.body.style.overflow = 'hidden'; // Block background scroll
 
-        // Animate the progress bars after modal displays
+        // Animate the progress fills after modal displays
         setTimeout(() => {
-            char.buyOrder.forEach(stepId => {
-                const upgrade = char.upgrades.find(u => u.id === stepId);
-                if (upgrade) {
-                    const progressBar = document.getElementById(`progress-${char.id}-${stepId}`);
-                    if (progressBar) {
-                        progressBar.style.width = `${upgrade.consensus}%`;
-                    }
-                }
+            char.upgradePairs.forEach(pair => {
+                const fillA = document.getElementById(`fill-${char.id}-${pair.optionA.id}`);
+                const fillB = document.getElementById(`fill-${char.id}-${pair.optionB.id}`);
+                if (fillA) fillA.style.width = `${pair.optionA.consensus}%`;
+                if (fillB) fillB.style.width = `${pair.optionB.consensus}%`;
             });
         }, 100);
     }

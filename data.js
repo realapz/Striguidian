@@ -6,34 +6,76 @@ const STRINOVA_DATA = [
     "weaponName": "M32 Grenade Launcher",
     "weaponType": "Grenade Launcher",
     "themeColor": "#ff4a8b",
-    "description": "A powerful skirmisher who excels at clearing zones and flushing out enemies with explosive rounds.",
-    "upgrades": [
+    "upgradePairs": [
       {
-        "id": "dmg",
-        "name": "Base Damage",
-        "effect": "Increases base explosive damage by +5%",
-        "consensus": 92
+        "category": "Firepower",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "base_dmg",
+          "name": "Base Damage",
+          "effect": "Increases explosion splash damage by +5%",
+          "consensus": 92
+        },
+        "optionB": {
+          "id": "rate_of_fire",
+          "name": "Rate of Fire",
+          "effect": "Increases weapon firing speed by +8%",
+          "consensus": 8
+        }
       },
       {
-        "id": "radius",
-        "name": "Explosion Radius",
-        "effect": "Expands blast radius by +10%",
-        "consensus": 85
+        "category": "Precision",
+        "recommended": "A",
+        "buyPriority": 4,
+        "optionA": {
+          "id": "headshot_dmg",
+          "name": "Headshot Damage",
+          "effect": "Increases headshot multiplier by +15%",
+          "consensus": 70
+        },
+        "optionB": {
+          "id": "string_dmg",
+          "name": "String Damage",
+          "effect": "Increases string connection damage by +10%",
+          "consensus": 30
+        }
       },
       {
-        "id": "reload",
-        "name": "Reload Speed",
-        "effect": "Reduces reload duration by -15%",
-        "consensus": 74
+        "category": "Sustain",
+        "recommended": "A",
+        "buyPriority": 3,
+        "optionA": {
+          "id": "reload_speed",
+          "name": "Reload Speed",
+          "effect": "Reduces reload duration by -15%",
+          "consensus": 85
+        },
+        "optionB": {
+          "id": "mag_capacity",
+          "name": "Magazine Capacity",
+          "effect": "Adds +2 grenades to total magazine size",
+          "consensus": 15
+        }
       },
       {
-        "id": "fire_rate",
-        "name": "Rate of Fire",
-        "effect": "Increases firing speed by +8%",
-        "consensus": 61
+        "category": "Handling",
+        "recommended": "B",
+        "buyPriority": 2,
+        "optionA": {
+          "id": "spread_control",
+          "name": "Spread Control",
+          "effect": "Reduces weapon projectile spread bloom by -20%",
+          "consensus": 20
+        },
+        "optionB": {
+          "id": "recoil_control",
+          "name": "Recoil Control",
+          "effect": "Reduces explosive weapon recoil bump by -15%",
+          "consensus": 80
+        }
       }
-    ],
-    "buyOrder": ["dmg", "radius", "reload", "fire_rate"]
+    ]
   },
   {
     "id": "michele",
@@ -42,34 +84,76 @@ const STRINOVA_DATA = [
     "weaponName": "Pioneer",
     "weaponType": "Assault Rifle",
     "themeColor": "#00f0ff",
-    "description": "An aggressive front-line combatant featuring high precision and excellent mobility in direct firefights.",
-    "upgrades": [
+    "upgradePairs": [
       {
-        "id": "headshot",
-        "name": "Headshot Damage",
-        "effect": "Increases headshot multiplier by +15%",
-        "consensus": 95
+        "category": "Firepower",
+        "recommended": "B",
+        "buyPriority": 2,
+        "optionA": {
+          "id": "base_dmg",
+          "name": "Base Damage",
+          "effect": "Increases base bullet damage by +5%",
+          "consensus": 12
+        },
+        "optionB": {
+          "id": "rate_of_fire",
+          "name": "Rate of Fire",
+          "effect": "Increases rifle firing rate by +10%",
+          "consensus": 88
+        }
       },
       {
-        "id": "fire_rate",
-        "name": "Rate of Fire",
-        "effect": "Increases assault rifle firing speed by +10%",
-        "consensus": 88
+        "category": "Precision",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "headshot_dmg",
+          "name": "Headshot Damage",
+          "effect": "Increases rifle headshot multiplier by +15%",
+          "consensus": 95
+        },
+        "optionB": {
+          "id": "string_dmg",
+          "name": "String Damage",
+          "effect": "Increases string connection damage by +10%",
+          "consensus": 5
+        }
       },
       {
-        "id": "recoil",
-        "name": "Recoil Control",
-        "effect": "Reduces vertical and horizontal recoil by -20%",
-        "consensus": 78
+        "category": "Sustain",
+        "recommended": "B",
+        "buyPriority": 4,
+        "optionA": {
+          "id": "reload_speed",
+          "name": "Reload Speed",
+          "effect": "Reduces rifle reload duration by -12%",
+          "consensus": 35
+        },
+        "optionB": {
+          "id": "mag_capacity",
+          "name": "Magazine Capacity",
+          "effect": "Adds +5 rounds to active magazine size",
+          "consensus": 65
+        }
       },
       {
-        "id": "mag",
-        "name": "Magazine Size",
-        "effect": "Adds +5 rounds to total magazine capacity",
-        "consensus": 65
+        "category": "Handling",
+        "recommended": "B",
+        "buyPriority": 3,
+        "optionA": {
+          "id": "spread_control",
+          "name": "Spread Control",
+          "effect": "Reduces weapon hipfire spread bloom by -15%",
+          "consensus": 22
+        },
+        "optionB": {
+          "id": "recoil_control",
+          "name": "Recoil Control",
+          "effect": "Reduces rifle kick and recoil bump by -20%",
+          "consensus": 78
+        }
       }
-    ],
-    "buyOrder": ["headshot", "fire_rate", "recoil", "mag"]
+    ]
   },
   {
     "id": "audrey",
@@ -78,34 +162,76 @@ const STRINOVA_DATA = [
     "weaponName": "Mona",
     "weaponType": "Light Machine Gun",
     "themeColor": "#ff9f00",
-    "description": "Suppressive fire specialist capable of holding choke points and locking down lanes with a massive magazine.",
-    "upgrades": [
+    "upgradePairs": [
       {
-        "id": "mag",
-        "name": "Magazine Capacity",
-        "effect": "Adds +15 rounds to the weapon magazine",
-        "consensus": 90
+        "category": "Firepower",
+        "recommended": "A",
+        "buyPriority": 2,
+        "optionA": {
+          "id": "base_dmg",
+          "name": "Base Damage",
+          "effect": "Increases base round damage by +5%",
+          "consensus": 82
+        },
+        "optionB": {
+          "id": "rate_of_fire",
+          "name": "Rate of Fire",
+          "effect": "Increases LMG firing speed by +8%",
+          "consensus": 18
+        }
       },
       {
-        "id": "dmg",
-        "name": "Base Damage",
-        "effect": "Increases damage per round by +5%",
-        "consensus": 82
+        "category": "Precision",
+        "recommended": "B",
+        "buyPriority": 4,
+        "optionA": {
+          "id": "headshot_dmg",
+          "name": "Headshot Damage",
+          "effect": "Increases LMG headshot multiplier by +12%",
+          "consensus": 40
+        },
+        "optionB": {
+          "id": "string_dmg",
+          "name": "String Damage",
+          "effect": "Increases string connection damage by +10%",
+          "consensus": 60
+        }
       },
       {
-        "id": "reload",
-        "name": "Reload Speed",
-        "effect": "Reduces the heavy LMG reload duration by -12%",
-        "consensus": 75
+        "category": "Sustain",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "mag_capacity",
+          "name": "Magazine Capacity",
+          "effect": "Adds +15 rounds to the weapon magazine",
+          "consensus": 90
+        },
+        "optionB": {
+          "id": "reload_speed",
+          "name": "Reload Speed",
+          "effect": "Reduces heavy LMG reload duration by -12%",
+          "consensus": 10
+        }
       },
       {
-        "id": "ads",
-        "name": "ADS Speed",
-        "effect": "Improves aim-down-sights transition time by +15%",
-        "consensus": 58
+        "category": "Handling",
+        "recommended": "A",
+        "buyPriority": 3,
+        "optionA": {
+          "id": "spread_control",
+          "name": "Spread Control",
+          "effect": "Improves steady firing spread by -20%",
+          "consensus": 75
+        },
+        "optionB": {
+          "id": "recoil_control",
+          "name": "Recoil Control",
+          "effect": "Reduces persistent recoil rise by -15%",
+          "consensus": 25
+        }
       }
-    ],
-    "buyOrder": ["mag", "dmg", "reload", "ads"]
+    ]
   },
   {
     "id": "kokona",
@@ -114,34 +240,76 @@ const STRINOVA_DATA = [
     "weaponName": "Heartseeker",
     "weaponType": "Submachine Gun",
     "themeColor": "#10b981",
-    "description": "Dedicated healer who supports the squad with vital repairs, shields, and fast-firing SMG coverage.",
-    "upgrades": [
+    "upgradePairs": [
       {
-        "id": "healing",
-        "name": "Healing Output",
-        "effect": "Increases active and passive healing rate by +10%",
-        "consensus": 96
+        "category": "Firepower",
+        "recommended": "B",
+        "buyPriority": 4,
+        "optionA": {
+          "id": "base_dmg",
+          "name": "Base Damage",
+          "effect": "Increases base SMG bullet damage by +5%",
+          "consensus": 30
+        },
+        "optionB": {
+          "id": "rate_of_fire",
+          "name": "Rate of Fire",
+          "effect": "Increases SMG weapon firing rate by +8%",
+          "consensus": 70
+        }
       },
       {
-        "id": "cooldown",
-        "name": "Ability Cooldown",
-        "effect": "Reduces tactical healing field cooldown by -10%",
-        "consensus": 89
+        "category": "Precision",
+        "recommended": "B",
+        "buyPriority": 2,
+        "optionA": {
+          "id": "headshot_dmg",
+          "name": "Headshot Damage",
+          "effect": "Increases headshot multiplier by +12%",
+          "consensus": 15
+        },
+        "optionB": {
+          "id": "string_dmg",
+          "name": "String Damage",
+          "effect": "Increases string connection damage by +10%",
+          "consensus": 85
+        }
       },
       {
-        "id": "reload",
-        "name": "Reload Speed",
-        "effect": "Reduces SMG reload speed by -15%",
-        "consensus": 70
+        "category": "Sustain",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "reload_speed",
+          "name": "Reload Speed",
+          "effect": "Reduces SMG reload duration by -15%",
+          "consensus": 96
+        },
+        "optionB": {
+          "id": "mag_capacity",
+          "name": "Magazine Capacity",
+          "effect": "Adds +4 rounds to SMG magazine size",
+          "consensus": 4
+        }
       },
       {
-        "id": "fire_rate",
-        "name": "Rate of Fire",
-        "effect": "Increases SMG firing rate by +8%",
-        "consensus": 55
+        "category": "Handling",
+        "recommended": "A",
+        "buyPriority": 3,
+        "optionA": {
+          "id": "spread_control",
+          "name": "Spread Control",
+          "effect": "Reduces SMG bullet spread diameter by -15%",
+          "consensus": 72
+        },
+        "optionB": {
+          "id": "recoil_control",
+          "name": "Recoil Control",
+          "effect": "Reduces horizontal SMG recoil kick by -15%",
+          "consensus": 28
+        }
       }
-    ],
-    "buyOrder": ["healing", "cooldown", "reload", "fire_rate"]
+    ]
   },
   {
     "id": "melinda",
@@ -150,33 +318,75 @@ const STRINOVA_DATA = [
     "weaponName": "Eagle Eye",
     "weaponType": "Sniper Rifle",
     "themeColor": "#a855f7",
-    "description": "Tactical sniper providing long-range surveillance and high-damage single-shot capability.",
-    "upgrades": [
+    "upgradePairs": [
       {
-        "id": "headshot",
-        "name": "Headshot Damage",
-        "effect": "Increases one-shot headshot capacity by +25%",
-        "consensus": 98
+        "category": "Firepower",
+        "recommended": "A",
+        "buyPriority": 2,
+        "optionA": {
+          "id": "base_dmg",
+          "name": "Base Damage",
+          "effect": "Increases sniper body-shot damage by +8%",
+          "consensus": 86
+        },
+        "optionB": {
+          "id": "rate_of_fire",
+          "name": "Rate of Fire",
+          "effect": "Reduces bolt-action reset time by -10%",
+          "consensus": 14
+        }
       },
       {
-        "id": "dmg",
-        "name": "Base Damage",
-        "effect": "Increases base body-shot damage by +8%",
-        "consensus": 86
+        "category": "Precision",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "headshot_dmg",
+          "name": "Headshot Damage",
+          "effect": "Increases headshot multiplier by +25%",
+          "consensus": 98
+        },
+        "optionB": {
+          "id": "string_dmg",
+          "name": "String Damage",
+          "effect": "Increases string connection damage by +10%",
+          "consensus": 2
+        }
       },
       {
-        "id": "scope",
-        "name": "Scope Zoom Speed",
-        "effect": "Reduces scope zoom-in transition time by -15%",
-        "consensus": 80
+        "category": "Sustain",
+        "recommended": "A",
+        "buyPriority": 4,
+        "optionA": {
+          "id": "reload_speed",
+          "name": "Reload Speed",
+          "effect": "Reduces sniper reload duration by -10%",
+          "consensus": 62
+        },
+        "optionB": {
+          "id": "mag_capacity",
+          "name": "Magazine Capacity",
+          "effect": "Adds +1 sniper round per reload load",
+          "consensus": 38
+        }
       },
       {
-        "id": "reload",
-        "name": "Reload Speed",
-        "effect": "Reduces sniper bolt-action reload duration by -10%",
-        "consensus": 62
+        "category": "Handling",
+        "recommended": "B",
+        "buyPriority": 3,
+        "optionA": {
+          "id": "spread_control",
+          "name": "Spread Control",
+          "effect": "Reduces scope transition sway by -20%",
+          "consensus": 20
+        },
+        "optionB": {
+          "id": "recoil_control",
+          "name": "Recoil Control",
+          "effect": "Reduces scope recovery recoil kick by -15%",
+          "consensus": 80
+        }
       }
-    ],
-    "buyOrder": ["headshot", "dmg", "scope", "reload"]
+    ]
   }
 ];

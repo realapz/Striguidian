@@ -588,7 +588,7 @@ body::before {
     border: 1px solid var(--border-color);
 }
 
-/* Buy Order Upgrade Visualizer */
+/* Binary Choice Upgrade Visualizer */
 .visualizer-section-title {
     font-family: var(--font-display);
     font-size: 1.15rem;
@@ -610,109 +610,158 @@ body::before {
     border-radius: 2px;
 }
 
-.timeline-flow {
+.upgrade-pairs-container {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.75rem;
 }
 
-.timeline-item {
-    display: flex;
-    gap: 1.25rem;
-    position: relative;
-}
-
-.timeline-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 20px;
-    top: 40px;
-    width: 2px;
-    height: calc(100% - 20px);
-    background: linear-gradient(180deg, var(--modal-theme) 40%, var(--border-color));
-}
-
-.timeline-number-node {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    background: var(--bg-card);
-    border: 2px solid var(--modal-theme);
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--modal-theme);
-    flex-shrink: 0;
-    z-index: 1;
-}
-
-.timeline-card {
-    flex-grow: 1;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 14px;
-    padding: 1.15rem;
+.upgrade-pair-row {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
-    transition: border-color var(--transition-fast);
+    gap: 0.75rem;
 }
 
-.timeline-card:hover {
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-.timeline-card-header {
+.upgrade-pair-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
 }
 
-.upgrade-title {
-    font-size: 1rem;
+.upgrade-category-title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
     font-weight: 700;
-    color: var(--text-primary);
-}
-
-.upgrade-effect {
-    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     color: var(--text-secondary);
 }
 
-/* Consensus Metrics */
-.consensus-metric-area {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-top: 0.25rem;
+.buy-priority-tag {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--modal-theme);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--modal-theme);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.consensus-progress-track {
+.upgrade-pair-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: stretch;
+    position: relative;
+}
+
+.upgrade-choice-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+.upgrade-choice-card.chosen {
+    border-color: var(--modal-theme);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.01);
+    background: rgba(255, 255, 255, 0.005);
+}
+
+.upgrade-choice-card.chosen::after {
+    content: 'CHOSEN';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--modal-theme);
+    letter-spacing: 0.05em;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid var(--modal-theme);
+}
+
+.upgrade-choice-card.subdued {
+    opacity: 0.25;
+    background: rgba(0, 0, 0, 0.2);
+    border-color: var(--border-color);
+    pointer-events: none;
+    user-select: none;
+}
+
+.upgrade-choice-card.subdued::after {
+    content: 'BYPASSED';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.choice-card-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding-right: 3.5rem;
+}
+
+.choice-card-effect {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.choice-percentage-bar-area {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.choice-percent-number {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.upgrade-choice-card.chosen .choice-percent-number {
+    color: var(--modal-theme);
+}
+
+.choice-percent-track {
     flex-grow: 1;
-    height: 6px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 3px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 2px;
     overflow: hidden;
 }
 
-.consensus-progress-bar {
+.choice-percent-fill {
     height: 100%;
-    background: var(--modal-theme);
-    border-radius: 3px;
-    width: 0; /* Animated dynamically by app.js */
-    transition: width var(--transition-slow) cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--text-muted);
+    width: 0;
+    transition: width var(--transition-slow) ease;
 }
 
-.consensus-percentage-badge {
-    font-size: 0.75rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: var(--modal-theme);
-    white-space: nowrap;
+.upgrade-choice-card.chosen .choice-percent-fill {
+    background: var(--modal-theme);
 }
 
 /* --------------------------------------------------------------------------
