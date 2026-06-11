@@ -3,9 +3,9 @@ const STRINOVA_DATA = [
     "id": "audrey",
     "name": "Audrey",
     "role": "Sentinel",
-    "weaponType": "Grenade Launcher",
+    "weaponType": "LMG",
     "themeColor": "#fff34a",
-    "imageUrl": "images/marina.png",
+    "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/1/16/Audrey_Profile.png/100px-Audrey_Profile.png",
     "upgradePairs": [
       {
         "category": "Firing",
@@ -75,7 +75,7 @@ const STRINOVA_DATA = [
     "role": "Duelist",
     "weaponType": "Assault Rifle",
     "themeColor": "#00f0ff",
-    "imageUrl": "",
+    "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/f9/Michele_Profile.png/100px-Michele_Profile.png",
     "upgradePairs": [
       {
         "category": "Firing",
