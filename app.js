@@ -155,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <!-- Option A Card -->
                         <div class="upgrade-choice-card ${isAChosen ? 'chosen' : 'subdued'}">
                             <span class="choice-card-name">${optionA.name}</span>
-                            <p class="choice-card-effect">${optionA.effect}</p>
                             <div class="choice-percentage-bar-area">
                                 <span class="choice-percent-number">${optionA.consensus}%</span>
                                 <div class="choice-percent-track">
@@ -166,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <!-- Option B Card -->
                         <div class="upgrade-choice-card ${isBChosen ? 'chosen' : 'subdued'}">
                             <span class="choice-card-name">${optionB.name}</span>
-                            <p class="choice-card-effect">${optionB.effect}</p>
                             <div class="choice-percentage-bar-area">
                                 <span class="choice-percent-number">${optionB.consensus}%</span>
                                 <div class="choice-percent-track">

@@ -14,13 +14,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
-          "effect": "Increases explosion splash damage by +5%",
           "consensus": 92
         },
         "optionB": {
           "id": "rate_of_fire",
           "name": "Rate of Fire",
-          "effect": "Increases weapon firing speed by +8%",
           "consensus": 8
         }
       },
@@ -31,13 +29,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
-          "effect": "Increases headshot multiplier by +15%",
           "consensus": 70
         },
         "optionB": {
           "id": "string_dmg",
           "name": "String Damage",
-          "effect": "Increases string connection damage by +10%",
           "consensus": 30
         }
       },
@@ -48,13 +44,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "reload_speed",
           "name": "Reload Speed",
-          "effect": "Reduces reload duration by -15%",
           "consensus": 85
         },
         "optionB": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
-          "effect": "Adds +2 grenades to total magazine size",
           "consensus": 15
         }
       },
@@ -65,13 +59,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
-          "effect": "Reduces weapon projectile spread bloom by -20%",
           "consensus": 20
         },
         "optionB": {
           "id": "recoil_control",
           "name": "Recoil Control",
-          "effect": "Reduces explosive weapon recoil bump by -15%",
           "consensus": 80
         }
       }
@@ -92,13 +84,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
-          "effect": "Increases base bullet damage by +5%",
           "consensus": 12
         },
         "optionB": {
           "id": "rate_of_fire",
           "name": "Rate of Fire",
-          "effect": "Increases rifle firing rate by +10%",
           "consensus": 88
         }
       },
@@ -109,13 +99,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
-          "effect": "Increases rifle headshot multiplier by +15%",
           "consensus": 95
         },
         "optionB": {
           "id": "string_dmg",
           "name": "String Damage",
-          "effect": "Increases string connection damage by +10%",
           "consensus": 5
         }
       },
@@ -126,13 +114,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "reload_speed",
           "name": "Reload Speed",
-          "effect": "Reduces rifle reload duration by -12%",
           "consensus": 35
         },
         "optionB": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
-          "effect": "Adds +5 rounds to active magazine size",
           "consensus": 65
         }
       },
@@ -143,13 +129,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
-          "effect": "Reduces weapon hipfire spread bloom by -15%",
           "consensus": 22
         },
         "optionB": {
           "id": "recoil_control",
           "name": "Recoil Control",
-          "effect": "Reduces rifle kick and recoil bump by -20%",
           "consensus": 78
         }
       }
@@ -170,13 +154,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
-          "effect": "Increases base round damage by +5%",
           "consensus": 82
         },
         "optionB": {
           "id": "rate_of_fire",
           "name": "Rate of Fire",
-          "effect": "Increases LMG firing speed by +8%",
           "consensus": 18
         }
       },
@@ -187,13 +169,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
-          "effect": "Increases LMG headshot multiplier by +12%",
           "consensus": 40
         },
         "optionB": {
           "id": "string_dmg",
           "name": "String Damage",
-          "effect": "Increases string connection damage by +10%",
           "consensus": 60
         }
       },
@@ -204,13 +184,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
-          "effect": "Adds +15 rounds to the weapon magazine",
           "consensus": 90
         },
         "optionB": {
           "id": "reload_speed",
           "name": "Reload Speed",
-          "effect": "Reduces heavy LMG reload duration by -12%",
           "consensus": 10
         }
       },
@@ -221,13 +199,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
-          "effect": "Improves steady firing spread by -20%",
           "consensus": 75
         },
         "optionB": {
           "id": "recoil_control",
           "name": "Recoil Control",
-          "effect": "Reduces persistent recoil rise by -15%",
           "consensus": 25
         }
       }
@@ -248,13 +224,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
-          "effect": "Increases base SMG bullet damage by +5%",
           "consensus": 30
         },
         "optionB": {
           "id": "rate_of_fire",
           "name": "Rate of Fire",
-          "effect": "Increases SMG weapon firing rate by +8%",
           "consensus": 70
         }
       },
@@ -265,13 +239,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
-          "effect": "Increases headshot multiplier by +12%",
           "consensus": 15
         },
         "optionB": {
           "id": "string_dmg",
           "name": "String Damage",
-          "effect": "Increases string connection damage by +10%",
           "consensus": 85
         }
       },
@@ -282,13 +254,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "reload_speed",
           "name": "Reload Speed",
-          "effect": "Reduces SMG reload duration by -15%",
           "consensus": 96
         },
         "optionB": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
-          "effect": "Adds +4 rounds to SMG magazine size",
           "consensus": 4
         }
       },
@@ -299,13 +269,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
-          "effect": "Reduces SMG bullet spread diameter by -15%",
           "consensus": 72
         },
         "optionB": {
           "id": "recoil_control",
           "name": "Recoil Control",
-          "effect": "Reduces horizontal SMG recoil kick by -15%",
           "consensus": 28
         }
       }
@@ -326,13 +294,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
-          "effect": "Increases sniper body-shot damage by +8%",
           "consensus": 86
         },
         "optionB": {
           "id": "rate_of_fire",
           "name": "Rate of Fire",
-          "effect": "Reduces bolt-action reset time by -10%",
           "consensus": 14
         }
       },
@@ -343,13 +309,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
-          "effect": "Increases headshot multiplier by +25%",
           "consensus": 98
         },
         "optionB": {
           "id": "string_dmg",
           "name": "String Damage",
-          "effect": "Increases string connection damage by +10%",
           "consensus": 2
         }
       },
@@ -360,13 +324,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "reload_speed",
           "name": "Reload Speed",
-          "effect": "Reduces sniper reload duration by -10%",
           "consensus": 62
         },
         "optionB": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
-          "effect": "Adds +1 sniper round per reload load",
           "consensus": 38
         }
       },
@@ -377,13 +339,11 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
-          "effect": "Reduces scope transition sway by -20%",
           "consensus": 20
         },
         "optionB": {
           "id": "recoil_control",
           "name": "Recoil Control",
-          "effect": "Reduces scope recovery recoil kick by -15%",
           "consensus": 80
         }
       }
