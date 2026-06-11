@@ -1,14 +1,14 @@
 const STRINOVA_DATA = [
   {
-    "id": "marina",
-    "name": "Marina",
-    "role": "Duelist",
+    "id": "audrey",
+    "name": "Audrey",
+    "role": "Sentinel",
     "weaponType": "Grenade Launcher",
-    "themeColor": "#ff4a8b",
+    "themeColor": "#fff34a",
     "imageUrl": "images/marina.png",
     "upgradePairs": [
       {
-        "category": "Firepower",
+        "category": "Firing",
         "recommended": "A",
         "buyPriority": 1,
         "optionA": {
@@ -23,7 +23,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Precision",
+        "category": "Critical Hit",
         "recommended": "A",
         "buyPriority": 4,
         "optionA": {
@@ -38,7 +38,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Sustain",
+        "category": "Functions",
         "recommended": "A",
         "buyPriority": 3,
         "optionA": {
@@ -53,7 +53,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Handling",
+        "category": "Accuracy",
         "recommended": "B",
         "buyPriority": 2,
         "optionA": {
@@ -78,7 +78,7 @@ const STRINOVA_DATA = [
     "imageUrl": "",
     "upgradePairs": [
       {
-        "category": "Firepower",
+        "category": "Firing",
         "recommended": "B",
         "buyPriority": 2,
         "optionA": {
@@ -93,7 +93,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Precision",
+        "category": "Critical Hit",
         "recommended": "A",
         "buyPriority": 1,
         "optionA": {
@@ -108,7 +108,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Sustain",
+        "category": "Functions",
         "recommended": "B",
         "buyPriority": 4,
         "optionA": {
@@ -123,7 +123,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Handling",
+        "category": "Accuracy",
         "recommended": "B",
         "buyPriority": 3,
         "optionA": {
@@ -148,7 +148,7 @@ const STRINOVA_DATA = [
     "imageUrl": "",
     "upgradePairs": [
       {
-        "category": "Firepower",
+        "category": "Firing",
         "recommended": "A",
         "buyPriority": 2,
         "optionA": {
@@ -163,7 +163,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Precision",
+        "category": "Critical Hit",
         "recommended": "B",
         "buyPriority": 4,
         "optionA": {
@@ -178,7 +178,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Sustain",
+        "category": "Functions",
         "recommended": "A",
         "buyPriority": 1,
         "optionA": {
@@ -193,7 +193,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Handling",
+        "category": "Accuracy",
         "recommended": "A",
         "buyPriority": 3,
         "optionA": {
@@ -218,7 +218,7 @@ const STRINOVA_DATA = [
     "imageUrl": "",
     "upgradePairs": [
       {
-        "category": "Firepower",
+        "category": "Firing",
         "recommended": "B",
         "buyPriority": 4,
         "optionA": {
@@ -233,7 +233,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Precision",
+        "category": "Critical Hit",
         "recommended": "B",
         "buyPriority": 2,
         "optionA": {
@@ -248,7 +248,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Sustain",
+        "category": "Functions",
         "recommended": "A",
         "buyPriority": 1,
         "optionA": {
@@ -263,7 +263,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Handling",
+        "category": "Accuracy",
         "recommended": "A",
         "buyPriority": 3,
         "optionA": {
@@ -288,7 +288,7 @@ const STRINOVA_DATA = [
     "imageUrl": "",
     "upgradePairs": [
       {
-        "category": "Firepower",
+        "category": "Firing",
         "recommended": "A",
         "buyPriority": 2,
         "optionA": {
@@ -303,7 +303,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Precision",
+        "category": "Critical Hit",
         "recommended": "A",
         "buyPriority": 1,
         "optionA": {
@@ -318,7 +318,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Sustain",
+        "category": "Functions",
         "recommended": "A",
         "buyPriority": 4,
         "optionA": {
@@ -333,7 +333,7 @@ const STRINOVA_DATA = [
         }
       },
       {
-        "category": "Handling",
+        "category": "Accuracy",
         "recommended": "B",
         "buyPriority": 3,
         "optionA": {
