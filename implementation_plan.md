@@ -4,9 +4,12 @@ A responsive, high-fidelity web application hosted on GitHub Pages that displays
 
 ## User Review Required
 
+> [!IMPORTANT]
 > **Technical Stack Update**:
 > Since Node.js is not installed on your system, we will build the site using **Vanilla HTML5, CSS3, and modern JavaScript (ES6)** instead of React/Vite.
 > *   **No Install Required**: You do not need to install Node.js, npm, or run any package installers.
+>   **Direct Preview**: You can open `index.html` directly in any web browser to test your changes.
+> *   **Seamless Hosting**: It will deploy instantly and for free to GitHub Pages by pushing the files directly.
 > *   **Premium Design**: We can still achieve the exact same stunning, responsive, and animated user interface using modern Vanilla CSS (variables, grids, animations) and JavaScript.
 
 ## Proposed Changes
