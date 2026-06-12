@@ -67,6 +67,7 @@ const STRINOVA_DATA = [
           "consensus": 80
         }
       }
+
     ]
   },
   {
@@ -1194,7 +1195,7 @@ const STRINOVA_DATA = [
     "name": "Michele",
     "role": "Sentinel",
     "weaponType": "Assault Rifle",
-    "themeColor": "#00f0ff",
+    "themeColor": "#fadf47",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/f9/Michele_Profile.png/100px-Michele_Profile.png",
     "upgradePairs": [
       {
@@ -1334,7 +1335,7 @@ const STRINOVA_DATA = [
     "name": "Nobunaga",
     "role": "Sentinel",
     "weaponType": "DMR",
-    "themeColor": "#fcfcfc",
+    "themeColor": "#ffffff",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/2/20/Nobunaga_Profile.png/100px-Nobunaga_Profile.png",
     "upgradePairs": [
       {
@@ -1404,7 +1405,7 @@ const STRINOVA_DATA = [
     "name": "Reiichi",
     "role": "Controller",
     "weaponType": "DMR",
-    "themeColor": "#fcfcfcaf",
+    "themeColor": "#fcfcfce0",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/1/14/Reiichi_Profile.png/100px-Reiichi_Profile.png",
     "upgradePairs": [
       {
@@ -1474,7 +1475,7 @@ const STRINOVA_DATA = [
     "name": "Yugiri",
     "role": "Controller",
     "weaponType": "Assault Rifle",
-    "themeColor": "#ddf5f7",
+    "themeColor": "#c9f4f8",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/d/d5/Yugiri_Profile.png/100px-Yugiri_Profile.png",
     "upgradePairs": [
       {
@@ -1544,7 +1545,7 @@ const STRINOVA_DATA = [
     "name": "Yvette",
     "role": "Controller",
     "weaponType": "SMG",
-    "themeColor": "#66420b",
+    "themeColor": "#4d3006cc",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/3/37/Yvette_Profile.png/100px-Yvette_Profile.png",
     "upgradePairs": [
       {
