@@ -6,6 +6,7 @@ const STRINOVA_DATA = [
     "weaponType": "LMG",
     "themeColor": "#fff34a",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/1/16/Audrey_Profile.png/100px-Audrey_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -92,6 +93,7 @@ const STRINOVA_DATA = [
     "weaponType": "Shotgun",
     "themeColor": "#7dff4a",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/b/ba/Bai_Mo_Profile.png/100px-Bai_Mo_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -177,6 +179,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "#fffffff6",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/b/bf/Celestia_Profile.png/100px-Celestia_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -262,6 +265,7 @@ const STRINOVA_DATA = [
     "weaponType": "DMR",
     "themeColor": "#0d0d0e63",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/9/93/Chiyo_Profile.png/100px-Chiyo_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -347,6 +351,7 @@ const STRINOVA_DATA = [
     "weaponType": "Shotgun",
     "themeColor": "#c2630ae1",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/6/6a/Cielle_Profile.png/100px-Cielle_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -432,6 +437,7 @@ const STRINOVA_DATA = [
     "weaponType": "Shotgun",
     "themeColor": "#f72307e1",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/a/a8/Eika_Profile.png/100px-Eika_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -517,6 +523,7 @@ const STRINOVA_DATA = [
     "weaponType": "SMG",
     "themeColor": "#560461ee",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/f2/Flavia_Profile.png/100px-Flavia_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -602,6 +609,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "#c995f3ee",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/a/a8/Fragrans_Profile.png/100px-Fragrans_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -687,6 +695,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "#fc0060",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/a/ad/Fuchsia_Profile.png/100px-Fuchsia_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -772,6 +781,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "hsl(41, 84%, 53%)",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/ff/Galatea_Profile.png/100px-Galatea_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -857,6 +867,7 @@ const STRINOVA_DATA = [
     "weaponType": "Sniper",
     "themeColor": "#bbc0bb",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/c/c4/Kanami_Profile.png/100px-Kanami_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -942,6 +953,7 @@ const STRINOVA_DATA = [
     "weaponType": "Sniper",
     "themeColor": "#7d7e7d",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/1/16/Kokona_Profile.png/100px-Kokona_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1027,6 +1039,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "#0c23f1",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/a/aa/Lawine_Profile.png/100px-Lawine_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1112,6 +1125,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "#b94e72",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/b/b4/Leona_Profile.png/100px-Leona_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1197,6 +1211,7 @@ const STRINOVA_DATA = [
     "weaponType": "DMR",
     "themeColor": "#ffa32c",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/0/03/Maddelena_Profile.png/100px-Maddelena_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1282,6 +1297,7 @@ const STRINOVA_DATA = [
     "weaponType": "SMG",
     "themeColor": "#b2c2b6",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/5/51/Mara_Profile.png/100px-Mara_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1367,6 +1383,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "#ffb649",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/5/56/Meredith_Profile.png/100px-Meredith_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1452,6 +1469,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "#fadf47",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/f9/Michele_Profile.png/100px-Michele_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1537,6 +1555,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "#d64f25",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/7/78/Ming_Profile.png/100px-Ming_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1622,6 +1641,7 @@ const STRINOVA_DATA = [
     "weaponType": "DMR",
     "themeColor": "#ffffff",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/2/20/Nobunaga_Profile.png/100px-Nobunaga_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1707,6 +1727,7 @@ const STRINOVA_DATA = [
     "weaponType": "DMR",
     "themeColor": "#fcfcfce0",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/1/14/Reiichi_Profile.png/100px-Reiichi_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1792,6 +1813,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "#c9f4f8",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/d/d5/Yugiri_Profile.png/100px-Yugiri_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -1877,6 +1899,7 @@ const STRINOVA_DATA = [
     "weaponType": "SMG",
     "themeColor": "#4d3006cc",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/3/37/Yvette_Profile.png/100px-Yvette_Profile.png",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",

@@ -195,6 +195,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${pairsHTML}
                 </div>
             </section>
+            ${char.notes ? `
+            <section class="notes-section">
+                <h3 class="visualizer-section-title">Notes</h3>
+                <p class="character-notes">${char.notes}</p>
+            </section>
+            ` : ''}
         `;
 
         // Open Dialog
