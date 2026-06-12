@@ -6,7 +6,7 @@ const STRINOVA_DATA = [
     "weaponType": "LMG",
     "themeColor": "#fff34a",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/1/16/Audrey_Profile.png/100px-Audrey_Profile.png",
-    "notes": "",
+    "notes": "Audrey A2 is very good you should definitely use it man",
     "upgradePairs": [
       {
         "category": "Shields",
