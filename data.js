@@ -1053,7 +1053,7 @@ const STRINOVA_DATA = [
     "id": "mara",
     "name": "Mara",
     "role": "Duelist",
-    "weaponType": "SMG,
+    "weaponType": "SMG",
     "themeColor": "#b2c2b6",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/5/51/Mara_Profile.png/100px-Mara_Profile.png",
     "upgradePairs": [
