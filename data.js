@@ -6,7 +6,7 @@ const STRINOVA_DATA = [
     "weaponType": "LMG",
     "themeColor": "#fff34a",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/1/16/Audrey_Profile.png/100px-Audrey_Profile.png",
-    "notes": "Audrey A2 is very good you should definitely use it man",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Shields",
@@ -781,7 +781,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "hsl(41, 84%, 53%)",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/ff/Galatea_Profile.png/100px-Galatea_Profile.png",
-    "notes": "",
+    "notes": "This short awakenings explanation is from Kierce and Myeah, make sure to show them both some support!\n Kierce: https://www.youtube.com/@kierce6969\n Myeah: https://www.youtube.com/@Myeah.",
     "upgradePairs": [
       {
         "category": "Shields",
