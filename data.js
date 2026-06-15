@@ -1122,7 +1122,7 @@ const STRINOVA_DATA = [
     "id": "leona",
     "name": "Leona",
     "role": "Sentinel",
-    "weaponType": "Assault Rifle",
+    "weaponType": "LMG",
     "themeColor": "#b94e72",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/b/b4/Leona_Profile.png/100px-Leona_Profile.png",
     "notes": "",
