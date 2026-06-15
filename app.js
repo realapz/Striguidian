@@ -45,9 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const matchesRole = activeRoleFilter === 'all' || char.role.toLowerCase() === activeRoleFilter.toLowerCase();
             
             const normalizedQuery = searchQuery.toLowerCase().trim();
-            const matchesSearch = normalizedQuery === '' || 
+            const matchesSearch = normalizedQuery === '' ||
                 char.name.toLowerCase().includes(normalizedQuery) ||
-                char.weaponName.toLowerCase().includes(normalizedQuery) ||
                 char.weaponType.toLowerCase().includes(normalizedQuery) ||
                 char.role.toLowerCase().includes(normalizedQuery);
 
