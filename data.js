@@ -567,7 +567,7 @@ const STRINOVA_DATA = [
         "optionB": {
           "id": "string_dmg",
           "name": "Stringified Damage",
-          "consensus": 30
+          "consensus": 5
         }
       },
       {
@@ -653,7 +653,7 @@ const STRINOVA_DATA = [
         "optionB": {
           "id": "string_dmg",
           "name": "Stringified Damage",
-          "consensus": 30
+          "consensus": 5
         }
       },
       {
@@ -739,7 +739,7 @@ const STRINOVA_DATA = [
         "optionB": {
           "id": "string_dmg",
           "name": "Stringified Damage",
-          "consensus": 30
+          "consensus": 5
         }
       },
       {
@@ -825,7 +825,7 @@ const STRINOVA_DATA = [
         "optionB": {
           "id": "string_dmg",
           "name": "Stringified Damage",
-          "consensus": 30
+          "consensus": 5
         }
       },
       {
