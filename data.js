@@ -112,6 +112,21 @@ const STRINOVA_DATA = [
           "name": "Shield Recovery +100%",
           "consensus": 50
         }
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -224,6 +239,21 @@ const STRINOVA_DATA = [
           "consensus": 50
         },
     
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -335,6 +365,21 @@ const STRINOVA_DATA = [
           "name": "Regen Speed +100%",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -446,6 +491,21 @@ const STRINOVA_DATA = [
           "name": "CD Recovery Rate +50%",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -557,6 +617,21 @@ const STRINOVA_DATA = [
           "name": "Reload Time -0.8s",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -668,6 +743,21 @@ const STRINOVA_DATA = [
           "name": "Damage to Heat Conversion +50%",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -779,6 +869,21 @@ const STRINOVA_DATA = [
           "name": "-20% Damage Required to Reduce CD",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -895,6 +1000,21 @@ const STRINOVA_DATA = [
           "name": "HP Regen +2/s",
           "consensus": 50
         }
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -1006,6 +1126,21 @@ const STRINOVA_DATA = [
           "name": "+Recovery Rate",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -1122,6 +1257,21 @@ const STRINOVA_DATA = [
           "name": "Decoy Duration +3s",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -1233,6 +1383,21 @@ const STRINOVA_DATA = [
           "name": "Duration +1s",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -1349,6 +1514,21 @@ const STRINOVA_DATA = [
           "name": "Health Regen +2/s",
           "consensus": 50
         }
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -1460,6 +1640,21 @@ const STRINOVA_DATA = [
           "name": "Enemy Exposure Duration +1s",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -1576,6 +1771,21 @@ const STRINOVA_DATA = [
           "name": "",
           "consensus": 50
         }
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -1687,6 +1897,21 @@ const STRINOVA_DATA = [
           "name": "Slow Duration +1s",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -1798,6 +2023,21 @@ const STRINOVA_DATA = [
           "name": "%50 Healing Rate",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -1909,6 +2149,21 @@ const STRINOVA_DATA = [
           "name": "- Airborne Gravity",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -2020,6 +2275,21 @@ const STRINOVA_DATA = [
           "name": "Enemy Exposure Duration +2s",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -2131,6 +2401,21 @@ const STRINOVA_DATA = [
           "name": "Armor Steal +50%",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -2242,6 +2527,21 @@ const STRINOVA_DATA = [
           "name": "Weakness Duration +2s",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -2353,6 +2653,21 @@ const STRINOVA_DATA = [
           "name": "Cooldown -1s",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -2464,6 +2779,21 @@ const STRINOVA_DATA = [
           "name": "Reduce Damage Needed to Trigger",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
@@ -2575,6 +2905,21 @@ const STRINOVA_DATA = [
           "name": "Stealth Entry Speed +50%",
           "consensus": 50
         },
+      },
+      {
+        "category": "Stringification",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "string_movement_spd_+15%",
+          "name": "Stringified Movement SPD +15%",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "46%_string_dmg_reduction",
+          "name": "46% Stringified DMG Reduction",
+          "consensus": 20
+        }
       }
     ]
   },
