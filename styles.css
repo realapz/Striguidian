@@ -835,7 +835,8 @@ body::before {
 
 .community-empty {
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: var(--modal-theme, var(--text-muted));
+    opacity: 0.85;
     padding: 0.5rem 0;
 }
 
