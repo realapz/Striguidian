@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Append community consensus panel if the community layer is active
         if (typeof Community !== 'undefined') {
-            Community.enhanceModal(char.id, modalDetailsBody);
+            Community.enhanceModal(char.id, modalDetailsBody, char);
         }
 
         // Animate the progress fills after modal displays
