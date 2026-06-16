@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let searchQuery = '';
     const rankingCache = {};
     const rankingFetchStarted = {};
+    const choiceCache = {};
 
     // Cache DOM Elements
     const gridContainer = document.getElementById('characters-grid-container');
@@ -118,12 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Build the "Top Buy Order" mini-steps HTML, using the live vote-based
-    // ranking once it's loaded, falling back to the static data.js order until then
+    // ranking and chosen option once loaded, falling back to static data.js values until then
     function buildMiniStepsHtml(char) {
         const ranking = rankingCache[char.id];
+        const choices = choiceCache[char.id];
         const chosenUpgradesSorted = char.upgradePairs
             .map(pair => {
-                const upgrade = (pair.recommended === 'A' || !pair.optionB) ? pair.optionA : pair.optionB;
+                const liveChoice = choices && choices[pair.category];
+                const useB = pair.optionB && (liveChoice ? liveChoice === 'B' : pair.recommended === 'B');
+                const upgrade = useB ? pair.optionB : pair.optionA;
                 return {
                     name: upgrade.name,
                     priority: (ranking && ranking[pair.category]) || pair.buyPriority
@@ -140,16 +144,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
     }
 
-    // Fetch live priority votes for a character once, then refresh its card in place
+    // Pick the live-winning option (A or B) per category: pro consensus wins,
+    // falling back to community consensus when no pro data exists
+    function computeChoiceMap(aggregates) {
+        const map = {};
+        [...(aggregates.community || []), ...(aggregates.pro || [])].forEach(row => {
+            const pctA = Number(row.pct_a) || 0;
+            const pctB = 100 - pctA;
+            map[row.category] = pctA >= pctB ? 'A' : 'B';
+        });
+        return map;
+    }
+
+    // Fetch live priority votes and consensus choices for a character once,
+    // then refresh its card in place
     function ensureRankingLoaded(char) {
         if (rankingFetchStarted[char.id]) return;
         rankingFetchStarted[char.id] = true;
 
         if (typeof Community === 'undefined' || !Community.isEnabled()) return;
 
-        Community.fetchPriorityVotes(char.id).then(votes => {
-            if (!votes || !votes.length) return;
-            rankingCache[char.id] = Community.computeRankedPriorities(char, votes);
+        Promise.all([
+            Community.fetchPriorityVotes(char.id),
+            Community.fetchAggregates(char.id)
+        ]).then(([votes, aggregates]) => {
+            let changed = false;
+            if (votes && votes.length) {
+                rankingCache[char.id] = Community.computeRankedPriorities(char, votes);
+                changed = true;
+            }
+            if (aggregates) {
+                choiceCache[char.id] = computeChoiceMap(aggregates);
+                changed = true;
+            }
+            if (!changed) return;
             const container = document.getElementById(`path-steps-${char.id}`);
             if (container) container.innerHTML = buildMiniStepsHtml(char);
         });
@@ -259,7 +287,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Overlay real pro-submission data onto the main matrix, once it exists
             if (Community.isEnabled()) {
                 Community.fetchAggregates(char.id).then(aggregates => {
-                    if (aggregates && aggregates.pro && aggregates.pro.length) {
+                    if (!aggregates) return;
+                    choiceCache[char.id] = computeChoiceMap(aggregates);
+                    const cardContainer = document.getElementById(`path-steps-${char.id}`);
+                    if (cardContainer) cardContainer.innerHTML = buildMiniStepsHtml(char);
+                    if (aggregates.pro && aggregates.pro.length) {
                         applyProConsensus(char, aggregates.pro);
                     }
                 });
