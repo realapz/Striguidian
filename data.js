@@ -2801,7 +2801,7 @@ const STRINOVA_DATA = [
     "name": "Yvette",
     "role": "Controller",
     "weaponType": "SMG",
-    "themeColor": "#4d3006cc",
+    "themeColor": "#526bf8ea",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/3/37/Yvette_Profile.png/100px-Yvette_Profile.png",
     "notes": "",
     "upgradePairs": [
