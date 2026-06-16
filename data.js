@@ -1121,11 +1121,11 @@ const STRINOVA_DATA = [
           "id": "decoy_duration_increase",
           "name": "Decoy Duration +3s",
           "consensus": 50
-        }
+        },
       }
     ]
   },
-   {
+  {
     "id": "kanami",
     "name": "Kanami",
     "role": "Vanguard",
@@ -2001,7 +2001,7 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "dmg_and_range,
+          "id": "dmg_and_range",
           "name": "+50% Damage and Range",
           "consensus": 50
         },
