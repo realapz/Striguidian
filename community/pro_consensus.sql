@@ -21,6 +21,7 @@ select
     round(100.0 * count(*) filter (where s.choice = 'A') / count(*)) as pct_a,
     round(100.0 * count(*) filter (where s.choice = 'B') / count(*)) as pct_b
 from public.buy_order_submissions s
+where s.user_id not in (select user_id from public.pro_users)
 group by s.character_id, s.category;
 
 create view public.pro_consensus as
