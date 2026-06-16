@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalDetailsBody.style.setProperty('--modal-theme', char.themeColor);
         
         // Generate buy order pairs HTML
-        const pairsHTML = char.upgradePairs.map(pair => {
+        const pairsHTML = char.upgradePairs.map((pair, pairIndex) => {
             const optionA = pair.optionA;
             const optionB = pair.optionB;
             const isAChosen = pair.recommended === 'A';
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="upgrade-pair-row">
                         <div class="upgrade-pair-header">
                             <span class="upgrade-category-title">${pair.category}</span>
-                            <span class="buy-priority-tag">Buy Priority #${pair.buyPriority}</span>
+                            <span class="buy-priority-tag" id="priority-tag-${char.id}-${pairIndex}">Buy Priority #${pair.buyPriority}</span>
                         </div>
                         <div class="upgrade-pair-grid single-option">
                             <div class="upgrade-choice-card chosen">
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="upgrade-pair-row">
                     <div class="upgrade-pair-header">
                         <span class="upgrade-category-title">${pair.category}</span>
-                        <span class="buy-priority-tag">Buy Priority #${pair.buyPriority}</span>
+                        <span class="buy-priority-tag" id="priority-tag-${char.id}-${pairIndex}">Buy Priority #${pair.buyPriority}</span>
                     </div>
                     <div class="upgrade-pair-grid">
                         <!-- Option A Card -->
@@ -239,6 +239,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         applyProConsensus(char, aggregates.pro);
                     }
                 });
+
+                Community.fetchPriorityVotes(char.id).then(votes => {
+                    if (votes && votes.length) {
+                        const ranking = Community.computeRankedPriorities(char, votes);
+                        applyRankedPriorities(char, ranking);
+                    }
+                });
             }
         }
 
@@ -282,6 +289,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 cardB.classList.toggle('chosen', !aChosen);
                 cardB.classList.toggle('subdued', aChosen);
             }
+        });
+    }
+
+    // Re-rank the displayed "Buy Priority #" tags using live submission votes
+    function applyRankedPriorities(char, ranking) {
+        char.upgradePairs.forEach((pair, i) => {
+            const rank = ranking[pair.category];
+            if (!rank) return;
+            const tag = document.getElementById(`priority-tag-${char.id}-${i}`);
+            if (tag) tag.textContent = `Buy Priority #${rank}`;
         });
     }
 

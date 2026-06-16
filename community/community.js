@@ -59,6 +59,39 @@
         }).catch(function () { return null; });
     }
 
+    function fetchPriorityVotes(characterId) {
+        if (!isEnabled()) return Promise.resolve([]);
+        return db.from('priority_votes').select('*').eq('character_id', characterId)
+            .then(function (res) { return res.data || []; })
+            .catch(function () { return []; });
+    }
+
+    function computeRankedPriorities(char, votes) {
+        var voteMap = {};
+        votes.forEach(function (v) {
+            if (!voteMap[v.category]) voteMap[v.category] = {};
+            voteMap[v.category][v.buy_priority] = Number(v.votes) || 0;
+        });
+
+        var remaining = char.upgradePairs.map(function (p) { return p.category; });
+        var ranking = {};
+
+        for (var rank = 1; rank <= remaining.length; rank++) {
+            var best = remaining[0];
+            var bestVotes = (voteMap[best] && voteMap[best][rank]) || 0;
+            remaining.forEach(function (cat) {
+                var count = (voteMap[cat] && voteMap[cat][rank]) || 0;
+                if (count > bestVotes) {
+                    bestVotes = count;
+                    best = cat;
+                }
+            });
+            ranking[best] = rank;
+            remaining.splice(remaining.indexOf(best), 1);
+        }
+        return ranking;
+    }
+
     function hasVoted(characterId, userId) {
         return db.from('buy_order_submissions')
             .select('id')
@@ -271,6 +304,8 @@
         signInWithDiscord: signInWithDiscord,
         signOut: signOut,
         fetchAggregates: fetchAggregates,
+        fetchPriorityVotes: fetchPriorityVotes,
+        computeRankedPriorities: computeRankedPriorities,
         submitBuyOrder: submitBuyOrder,
         enhanceModal: enhanceModal
     };
