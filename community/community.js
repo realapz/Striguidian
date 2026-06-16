@@ -35,7 +35,7 @@
     function signInWithDiscord() {
         if (!db) return;
         db.auth.signInWithOAuth({
-            provider: 'custom:-discord',
+            provider: 'custom:mydiscord',
             options: { redirectTo: global.location.href, scopes: 'identify' }
         });
     }
