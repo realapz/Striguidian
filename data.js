@@ -26,7 +26,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -56,7 +56,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -86,7 +86,7 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "+max_shield",
           "name": "+Max Shield",
@@ -101,7 +101,7 @@ const STRINOVA_DATA = [
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -116,7 +116,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -157,7 +157,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "sprint_speed",
           "name": "Sprint Speed",
@@ -187,7 +187,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -217,18 +217,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "Duration_+1s",
           "name": "Duration +1s",
           "consensus": 50
-        },
-    
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -243,7 +242,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -284,7 +283,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -314,7 +313,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -344,17 +343,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "regen_speed",
           "name": "Regen Speed +100%",
-          "consensus": 50
-        },
+          "consensus": 100
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -369,7 +368,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -410,7 +409,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -440,7 +439,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -470,17 +469,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "cd_recovery",
           "name": "CD Recovery Rate +50%",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -495,7 +494,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -536,7 +535,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "sprint_speed",
           "name": "Sprint Speed",
@@ -566,7 +565,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -596,17 +595,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "reload_time_reduction",
           "name": "Reload Time -0.8s",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -621,7 +620,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -662,7 +661,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "sprint_speed",
           "name": "Sprint Speed",
@@ -692,7 +691,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -722,17 +721,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "damage_to_heat_conversion",
           "name": "Damage to Heat Conversion +50%",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -747,7 +746,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -788,7 +787,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -818,7 +817,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -848,17 +847,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "dmg_required_to_reduce",
           "name": "-20% Damage Required to Reduce CD",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -873,7 +872,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -914,7 +913,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -944,7 +943,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -974,7 +973,7 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "area_of_effect_increase",
           "name": "Area of Effect +50%",
@@ -989,7 +988,7 @@ const STRINOVA_DATA = [
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -1004,7 +1003,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -1045,7 +1044,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -1075,7 +1074,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -1105,17 +1104,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "recovery_rate_increase",
           "name": "+Recovery Rate",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -1130,7 +1129,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -1151,7 +1150,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "hsl(41, 84%, 53%)",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/ff/Galatea_Profile.png/100px-Galatea_Profile.png",
-    "notes": "This short awakenings explanation is from Kierce and Myeah, make sure to show them both some support!\nKierce: https://www.youtube.com/@kierce6969\n Myeah: https://www.youtube.com/@Myeah.",
+    "notes": "This short awakenings explanation is from Kierce and Myeah, make sure to show them both some support\nKierce: https://www.youtube.com/@kierce6969\nMyeah: https://www.youtube.com/@Myeah.",
     "upgradePairs": [
       {
         "category": "Firing",
@@ -1171,7 +1170,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 4,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -1201,7 +1200,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -1231,7 +1230,7 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "cooldown_reduction",
           "name": "Cooldown -5s",
@@ -1241,12 +1240,12 @@ const STRINOVA_DATA = [
           "id": "decoy_duration_increase",
           "name": "Decoy Duration +3s",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -1261,7 +1260,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -1287,7 +1286,7 @@ const STRINOVA_DATA = [
       {
         "category": "Core",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 1,
         "optionA": {
           "id": "rechambering_speed",
           "name": "Rechambering Speed",
@@ -1317,7 +1316,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -1332,7 +1331,7 @@ const STRINOVA_DATA = [
       {
         "category": "Functions",
         "recommended": "A",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "ads_speed",
           "name": "ADS Speed",
@@ -1362,17 +1361,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "duration_+1s",
           "name": "Duration +1s",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -1387,7 +1386,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -1413,7 +1412,7 @@ const STRINOVA_DATA = [
       {
         "category": "Core",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 1,
         "optionA": {
           "id": "rechambering_speed",
           "name": "Rechambering Speed",
@@ -1443,7 +1442,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -1458,7 +1457,7 @@ const STRINOVA_DATA = [
       {
         "category": "Functions",
         "recommended": "A",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "ads_speed",
           "name": "ADS Speed",
@@ -1488,7 +1487,7 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "first_aid_hp_+50",
           "name": "First Aid HP +50",
@@ -1503,7 +1502,7 @@ const STRINOVA_DATA = [
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -1518,7 +1517,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -1544,7 +1543,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -1559,7 +1558,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -1574,7 +1573,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -1589,7 +1588,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -1619,17 +1618,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "enemy_exposure_duration_+1s",
           "name": "Enemy Exposure Duration +1s",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -1644,7 +1643,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -1670,7 +1669,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -1685,7 +1684,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -1700,7 +1699,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -1715,7 +1714,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -1745,7 +1744,7 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "movement_spd_and_armor_regen_+50%",
           "name": "Movement Speed and Armor Regen +50%",
@@ -1760,7 +1759,7 @@ const STRINOVA_DATA = [
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -1775,7 +1774,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -1801,7 +1800,7 @@ const STRINOVA_DATA = [
       {
         "category": "Core",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -1816,7 +1815,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -1831,7 +1830,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -1846,7 +1845,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "sprint_speed",
           "name": "Sprint Speed",
@@ -1876,17 +1875,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "slow_duration_+1s",
           "name": "Slow Duration +1s",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -1901,7 +1900,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -1927,7 +1926,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -1942,7 +1941,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -1957,7 +1956,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -1972,7 +1971,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -2002,17 +2001,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "+50%_healing_rate",
           "name": "%50 Healing Rate",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -2027,7 +2026,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -2053,7 +2052,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -2068,7 +2067,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -2083,7 +2082,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -2098,7 +2097,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -2128,17 +2127,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "-_airborne_gravity",
           "name": "- Airborne Gravity",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -2153,7 +2152,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -2179,7 +2178,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -2194,7 +2193,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -2209,7 +2208,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -2224,7 +2223,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -2254,17 +2253,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "enemy_exposure_duration_+2s",
           "name": "Enemy Exposure Duration +2s",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -2279,7 +2278,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -2305,7 +2304,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -2320,7 +2319,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -2335,7 +2334,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -2350,7 +2349,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -2380,17 +2379,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "armorstreal_+50%",
           "name": "Armor Steal +50%",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -2405,7 +2404,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -2431,7 +2430,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -2446,7 +2445,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -2461,7 +2460,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -2476,7 +2475,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -2506,17 +2505,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "weakeness_duration_+2s",
           "name": "Weakness Duration +2s",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -2531,7 +2530,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -2557,7 +2556,7 @@ const STRINOVA_DATA = [
       {
         "category": "Core",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "ads_speed",
           "name": "ADS Speed",
@@ -2572,7 +2571,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -2587,7 +2586,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -2602,7 +2601,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -2632,17 +2631,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "cooldown_-1s",
           "name": "Cooldown -1s",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -2657,7 +2656,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -2683,7 +2682,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -2698,7 +2697,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -2713,7 +2712,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -2728,7 +2727,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -2758,17 +2757,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "reduce_dmg_needed_to_trigger",
           "name": "Reduce Damage Needed to Trigger",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -2783,7 +2782,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -2809,7 +2808,7 @@ const STRINOVA_DATA = [
       {
         "category": "Firing",
         "recommended": "B",
-        "buyPriority": 2,
+        "buyPriority": 1,
         "optionA": {
           "id": "base_dmg",
           "name": "Base Damage",
@@ -2824,7 +2823,7 @@ const STRINOVA_DATA = [
       {
         "category": "Critical Hit",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 2,
         "optionA": {
           "id": "headshot_dmg",
           "name": "Headshot Damage",
@@ -2839,7 +2838,7 @@ const STRINOVA_DATA = [
       {
         "category": "Capacity",
         "recommended": "B",
-        "buyPriority": 4,
+        "buyPriority": 3,
         "optionA": {
           "id": "mag_capacity",
           "name": "Magazine Capacity",
@@ -2854,7 +2853,7 @@ const STRINOVA_DATA = [
       {
         "category": "Accuracy",
         "recommended": "B",
-        "buyPriority": 3,
+        "buyPriority": 4,
         "optionA": {
           "id": "spread_control",
           "name": "Spread Control",
@@ -2884,17 +2883,17 @@ const STRINOVA_DATA = [
       {
         "category": "Passive Skill",
         "recommended": "A",
-        "buyPriority": 5,
+        "buyPriority": 6,
         "optionA": {
           "id": "stealth_entry_speed_+50%",
           "name": "Stealth Entry Speed +50%",
           "consensus": 50
-        },
+        }
       },
       {
         "category": "Shields",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 7,
         "optionA": {
           "id": "light_shield",
           "name": "Light Shield",
@@ -2909,7 +2908,7 @@ const STRINOVA_DATA = [
       {
         "category": "Stringification",
         "recommended": "A",
-        "buyPriority": 1,
+        "buyPriority": 8,
         "optionA": {
           "id": "string_movement_spd_+15%",
           "name": "Stringified Movement SPD +15%",
@@ -2922,6 +2921,5 @@ const STRINOVA_DATA = [
         }
       }
     ]
-  },
-
+  }
 ];
