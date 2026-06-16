@@ -1,8 +1,11 @@
 -- Run this in the Supabase SQL Editor.
--- Deletes ALL authenticated users and everything tied to them
--- (their pro status and all buy-order submissions/votes).
--- This is destructive and cannot be undone.
+-- Deletes ALL identities and everything tied to them (their pro status and
+-- all submitted builds/votes). This is destructive and cannot be undone.
+-- Logged-in browsers will keep a now-orphaned session JWT until it expires
+-- (see SESSION_TTL_SECONDS in supabase/functions/discord-auth) -- the next
+-- vote attempt will fail with "unknown identity" and they'll need to log
+-- back in, which recreates their identities row.
 
-delete from public.buy_order_submissions;
-delete from public.pro_users;
-delete from auth.users;
+delete from public.submission_choices;
+delete from public.submissions;
+delete from public.identities;

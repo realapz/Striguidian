@@ -1,0 +1,7 @@
+[functions.discord-auth]
+# This function is reached by plain browser navigation (redirect from your
+# page, then redirect back from Discord) -- there's no way to attach an
+# Authorization header to those requests, so platform-level JWT verification
+# has to be off. Auth/CSRF protection for the flow is handled inside the
+# function itself via the signed `state` param.
+verify_jwt = false

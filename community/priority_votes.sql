@@ -1,15 +1,4 @@
--- Run this in the Supabase SQL Editor.
--- Counts how many submissions picked each category at each buy_priority slot,
--- per character. community.js uses this to rank categories by "most #1 picks,
--- then most #2 picks among what's left", etc.
-
-create or replace view public.priority_votes as
-select
-    character_id,
-    category,
-    buy_priority,
-    count(*) as votes
-from public.buy_order_submissions
-group by character_id, category, buy_priority;
-
-grant select on public.priority_votes to anon, authenticated;
+-- Superseded by schema.sql: the `priority_votes` view now lives there
+-- (built from submissions/submission_choices instead of the old
+-- auth.users-linked buy_order_submissions table). Nothing to run here --
+-- this file is kept only as a pointer so it doesn't go stale silently.

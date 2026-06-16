@@ -12,6 +12,92 @@
         return !!cfg.enabled && cfg.backend !== 'none' && !!db;
     }
 
+    // --------------------------------------------------------------------------
+    // Session (custom, NOT Supabase Auth/GoTrue)
+    // --------------------------------------------------------------------------
+    //
+    // Logins go through the discord-auth Edge Function, which does its own
+    // Discord OAuth code exchange with scope=identify only (see
+    // supabase/functions/discord-auth) and hands back a JWT signed with the
+    // project's JWT secret. We never call db.auth.* here -- there's no
+    // auth.users row for any of this, on purpose, so we manage the session
+    // ourselves: store the JWT, decode its claims for display, and attach it
+    // as the Authorization header on a Supabase client used for anything
+    // that needs RLS to see the caller's identity.
+
+    var SESSION_STORAGE_KEY = 'community_session_jwt';
+    var authedClient = null;
+    var authedClientToken = null;
+
+    function decodeJwtPayload(token) {
+        try {
+            var base64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+            var json = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(json);
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function readStoredSession() {
+        var token;
+        try {
+            token = global.localStorage.getItem(SESSION_STORAGE_KEY);
+        } catch (e) {
+            return null;
+        }
+        if (!token) return null;
+        var payload = decodeJwtPayload(token);
+        if (!payload || !payload.exp || payload.exp * 1000 <= Date.now()) {
+            try { global.localStorage.removeItem(SESSION_STORAGE_KEY); } catch (e) {}
+            return null;
+        }
+        return {
+            token: token,
+            identityId: payload.sub,
+            displayName: payload.discord_username,
+            isPro: !!payload.is_pro
+        };
+    }
+
+    function captureSessionFromUrlFragment() {
+        var hash = global.location.hash;
+        if (!hash) return;
+        var tokenMatch = /community_token=([^&]+)/.exec(hash);
+        var errorMatch = /community_error=([^&]+)/.exec(hash);
+        if (!tokenMatch && !errorMatch) return;
+
+        if (tokenMatch) {
+            try { global.localStorage.setItem(SESSION_STORAGE_KEY, decodeURIComponent(tokenMatch[1])); } catch (e) {}
+        }
+        if (errorMatch) {
+            // Surfaced via getLastAuthError() below; deliberately not thrown
+            // since this runs at module load, before any UI exists yet.
+            global.Community_lastAuthError = decodeURIComponent(errorMatch[1]);
+        }
+        var cleaned = global.location.pathname + global.location.search;
+        global.history.replaceState(null, '', cleaned);
+    }
+
+    if (db) captureSessionFromUrlFragment();
+
+    function getSession() {
+        return readStoredSession();
+    }
+
+    function clientFor(session) {
+        if (!session) return db;
+        if (authedClient && authedClientToken === session.token) return authedClient;
+        authedClient = global.supabase.createClient(cfg.supabase.url, cfg.supabase.anonKey, {
+            global: { headers: { Authorization: 'Bearer ' + session.token } },
+            auth: { persistSession: false, autoRefreshToken: false }
+        });
+        authedClientToken = session.token;
+        return authedClient;
+    }
+
     function escapeHtml(value) {
         return String(value == null ? '' : value)
             .replace(/&/g, '&amp;')
@@ -27,22 +113,27 @@
 
     function getUser() {
         if (!db) return Promise.resolve(null);
-        return db.auth.getUser().then(function (res) {
-            return (res.data && res.data.user) || null;
-        }).catch(function () { return null; });
+        var session = getSession();
+        if (!session) return Promise.resolve(null);
+        return Promise.resolve({ id: session.identityId, displayName: session.displayName, isPro: session.isPro });
     }
 
     function signInWithDiscord() {
-        if (!db) return;
-        db.auth.signInWithOAuth({
-            provider: 'custom:mydiscord',
-            options: { redirectTo: global.location.href, scopes: 'identify' }
-        });
+        if (!db || !cfg.supabase) return;
+        var startUrl = cfg.supabase.url + '/functions/v1/discord-auth/start?returnTo=' +
+            encodeURIComponent(global.location.href);
+        global.location.href = startUrl;
     }
 
     function signOut() {
-        if (!db) return Promise.resolve();
-        return db.auth.signOut();
+        try { global.localStorage.removeItem(SESSION_STORAGE_KEY); } catch (e) {}
+        authedClient = null;
+        authedClientToken = null;
+        return Promise.resolve();
+    }
+
+    function getLastAuthError() {
+        return global.Community_lastAuthError || null;
     }
 
     // --------------------------------------------------------------------------
@@ -93,11 +184,13 @@
         return ranking;
     }
 
-    function hasVoted(characterId, userId) {
-        return db.from('buy_order_submissions')
+    function hasVoted(characterId, session) {
+        // RLS on `submissions` already restricts selects to the caller's own
+        // rows (identity_id = auth.uid()), so no explicit identity filter
+        // is needed here -- this query simply can't see anyone else's row.
+        return clientFor(session).from('submissions')
             .select('id')
             .eq('character_id', characterId)
-            .eq('user_id', userId)
             .limit(1)
             .then(function (res) {
                 return !!(res.data && res.data.length > 0);
@@ -106,21 +199,22 @@
 
     function submitBuyOrder(characterId, choices) {
         if (!isEnabled()) return Promise.reject(new Error('community layer disabled'));
-        return getUser().then(function (user) {
-            if (!user) return Promise.reject(new Error('not authenticated'));
-            var rows = choices.map(function (c) {
-                return {
-                    character_id: characterId,
-                    category: c.category,
-                    choice: c.choice,
-                    buy_priority: c.buyPriority,
-                    user_id: user.id
-                };
-            });
-            return db.from('buy_order_submissions').insert(rows).then(function (res) {
-                if (res.error) throw res.error;
-                return res;
-            });
+        var session = getSession();
+        if (!session) return Promise.reject(new Error('not authenticated'));
+
+        var rows = choices.map(function (c) {
+            return { category: c.category, choice: c.choice, buyPriority: c.buyPriority };
+        });
+
+        // submit_build() is a SECURITY DEFINER function (see schema.sql) --
+        // it's the only allowed write path for votes, and it derives the
+        // identity from auth.uid() itself rather than trusting a client-sent id.
+        return clientFor(session).rpc('submit_build', {
+            p_character_id: characterId,
+            p_choices: rows
+        }).then(function (res) {
+            if (res.error) throw res.error;
+            return res;
         });
     }
 
@@ -282,7 +376,7 @@
                 return;
             }
 
-            hasVoted(characterId, user.id).then(function (voted) {
+            hasVoted(characterId, getSession()).then(function (voted) {
                 html += buildSubmitFormHtml(char, voted) + '</section>';
                 container.insertAdjacentHTML('beforeend', html);
 
@@ -304,6 +398,7 @@
         getUser: getUser,
         signInWithDiscord: signInWithDiscord,
         signOut: signOut,
+        getLastAuthError: getLastAuthError,
         fetchAggregates: fetchAggregates,
         fetchPriorityVotes: fetchPriorityVotes,
         computeRankedPriorities: computeRankedPriorities,
