@@ -1752,7 +1752,7 @@ const STRINOVA_DATA = [
         },
         "optionB": {
           "id": "energy_regen_+50%",
-          "name": "",
+          "name": "Energy Regen +50%",
           "consensus": 50
         }
       },

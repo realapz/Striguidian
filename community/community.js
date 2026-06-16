@@ -269,12 +269,8 @@
         if (voted) {
             return '<div class="community-voted"><p class="community-voted-text">&#10003; You\'ve already submitted a build for ' + escapeHtml(char.name) + '.</p></div>';
         }
-        var pairCount = char.upgradePairs.length;
-        var pairInputs = char.upgradePairs.map(function (pair, i) {
-            var priorityOptions = Array.from({ length: pairCount }, function (_, idx) { return idx + 1; }).map(function (n) {
-                return '<option value="' + n + '"' + (n === (i + 1) ? ' selected' : '') + '>' + n + '</option>';
-            }).join('');
 
+        var pairCards = char.upgradePairs.map(function (pair, i) {
             var choiceGroup = !pair.optionB
                 ? '<span class="submit-choice-label submit-choice-fixed">' + escapeHtml(pair.optionA.name) + '</span>'
                 : '' +
@@ -288,20 +284,22 @@
                     '</label>';
 
             return '' +
-                '<div class="submit-pair-row">' +
-                    '<span class="submit-category">' + escapeHtml(pair.category) + '</span>' +
-                    '<div class="submit-choice-group">' + choiceGroup + '</div>' +
-                    '<label class="submit-priority-label">Buy order:&nbsp;' +
-                        '<select name="priority-' + i + '" class="submit-priority-select">' + priorityOptions + '</select>' +
-                    '</label>' +
+                '<div class="submit-pair-row buy-order-card" data-pair-index="' + i + '">' +
+                    '<div class="buy-order-badge" id="buy-badge-' + escapeHtml(char.id) + '-' + i + '">?</div>' +
+                    '<div class="buy-order-card-body">' +
+                        '<span class="submit-category">' + escapeHtml(pair.category) + '</span>' +
+                        '<div class="submit-choice-group">' + choiceGroup + '</div>' +
+                    '</div>' +
                 '</div>';
         }).join('');
 
         return '' +
             '<form class="community-submit-form" id="comm-submit-' + escapeHtml(char.id) + '">' +
-                '<div class="submit-pairs-list">' + pairInputs + '</div>' +
+                '<p class="buy-order-instruction">Click each upgrade in the order you want to buy it. Click again to remove it.</p>' +
+                '<div class="submit-pairs-list">' + pairCards + '</div>' +
                 '<div class="submit-actions">' +
-                    '<button type="submit" class="submit-build-btn">Submit My Build</button>' +
+                    '<button type="submit" class="submit-build-btn" disabled>Submit My Build</button>' +
+                    '<button type="button" class="buy-order-reset-btn" id="comm-reset-' + escapeHtml(char.id) + '">Reset</button>' +
                     '<button type="button" class="submit-signout-btn" id="comm-signout-' + escapeHtml(char.id) + '">Sign Out</button>' +
                 '</div>' +
                 '<p class="submit-error" id="comm-error-' + escapeHtml(char.id) + '" style="display:none"></p>' +
@@ -315,7 +313,66 @@
     function attachFormListeners(characterId, char) {
         var form = document.getElementById('comm-submit-' + characterId);
         var errorEl = document.getElementById('comm-error-' + characterId);
-        if (!form) return;
+        var submitBtn = form ? form.querySelector('.submit-build-btn') : null;
+        var resetBtn = document.getElementById('comm-reset-' + characterId);
+        if (!form || !submitBtn) return;
+
+        var pairCount = char.upgradePairs.length;
+        // priorities[i] = 1-based buy order assigned to pair i, or null if unassigned
+        var priorities = new Array(pairCount).fill(null);
+        var nextPriority = 1;
+
+        function badgeEl(i) {
+            return document.getElementById('buy-badge-' + characterId + '-' + i);
+        }
+
+        function refresh() {
+            char.upgradePairs.forEach(function (_, i) {
+                var badge = badgeEl(i);
+                var card = form.querySelector('.buy-order-card[data-pair-index="' + i + '"]');
+                if (!badge || !card) return;
+                if (priorities[i] !== null) {
+                    badge.textContent = priorities[i];
+                    card.classList.add('buy-order-assigned');
+                } else {
+                    badge.textContent = '?';
+                    card.classList.remove('buy-order-assigned');
+                }
+            });
+            submitBtn.disabled = priorities.some(function (p) { return p === null; });
+        }
+
+        function resetOrder() {
+            priorities = new Array(pairCount).fill(null);
+            nextPriority = 1;
+            refresh();
+        }
+
+        // Clicking a card assigns the next priority; clicking an already-assigned
+        // card removes it and shifts subsequent numbers down so there are no gaps.
+        form.querySelectorAll('.buy-order-card').forEach(function (card) {
+            card.addEventListener('click', function (e) {
+                if (e.target.type === 'radio') return; // let radio clicks through
+                var idx = parseInt(card.getAttribute('data-pair-index'), 10);
+
+                if (priorities[idx] !== null) {
+                    // Remove this card and close the gap
+                    var removed = priorities[idx];
+                    priorities[idx] = null;
+                    priorities = priorities.map(function (p) {
+                        return (p !== null && p > removed) ? p - 1 : p;
+                    });
+                    nextPriority--;
+                } else {
+                    if (nextPriority > pairCount) return; // already full
+                    priorities[idx] = nextPriority;
+                    nextPriority++;
+                }
+                refresh();
+            });
+        });
+
+        if (resetBtn) resetBtn.addEventListener('click', resetOrder);
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -323,22 +380,13 @@
 
             var choices = char.upgradePairs.map(function (pair, i) {
                 var choiceInput = form.querySelector('input[name="choice-' + i + '"]:checked');
-                var priorityInput = form.querySelector('select[name="priority-' + i + '"]');
                 return {
                     category: pair.category,
                     choice: choiceInput ? choiceInput.value : 'A',
-                    buyPriority: priorityInput ? parseInt(priorityInput.value, 10) : (i + 1)
+                    buyPriority: priorities[i]
                 };
             });
 
-            var priorities = choices.map(function (c) { return c.buyPriority; });
-            if (new Set(priorities).size !== priorities.length) {
-                errorEl.textContent = 'Each upgrade must have a unique buy order position.';
-                errorEl.style.display = 'block';
-                return;
-            }
-
-            var submitBtn = form.querySelector('.submit-build-btn');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
 
