@@ -141,8 +141,9 @@
         if (voted) {
             return '<div class="community-voted"><p class="community-voted-text">&#10003; You\'ve already submitted a build for ' + escapeHtml(char.name) + '.</p></div>';
         }
+        var pairCount = char.upgradePairs.length;
         var pairInputs = char.upgradePairs.map(function (pair, i) {
-            var priorityOptions = [1, 2, 3, 4, 5].map(function (n) {
+            var priorityOptions = Array.from({ length: pairCount }, function (_, idx) { return idx + 1; }).map(function (n) {
                 return '<option value="' + n + '"' + (n === pair.buyPriority ? ' selected' : '') + '>' + n + '</option>';
             }).join('');
 
