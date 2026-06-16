@@ -1125,7 +1125,7 @@ const STRINOVA_DATA = [
       }
     ]
   },
-  {
+   {
     "id": "kanami",
     "name": "Kanami",
     "role": "Vanguard",
@@ -1214,13 +1214,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "cd_-5s",
+          "name": "Cooldown -5s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "note_hp_+50%",
+          "name": "Note HP +50%",
           "consensus": 50
         }
       },
@@ -1229,15 +1229,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "duration_+1s",
+          "name": "Duration +1s",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -1330,13 +1325,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "armor_regen_+2/s",
+          "name": "Armor Regen +2/s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "hp_regen_+5/s",
+          "name": "Health Regen +5/s",
           "consensus": 50
         }
       },
@@ -1345,13 +1340,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "first_aid_hp_+50",
+          "name": "First Aid HP +50",
           "consensus": 50
         },
         "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
+          "id": "hp_regen_+2/s",
+          "name": "Health Regen +2/s",
           "consensus": 50
         }
       }
@@ -1446,13 +1441,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "cd_-5s",
+          "name": "Cooldown -5s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "enemy_exposure_duration_+1s",
+          "name": "Enemy Exposure Duration +1s",
           "consensus": 50
         }
       },
@@ -1461,15 +1456,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "enemy_exposure_duration_+1s",
+          "name": "Enemy Exposure Duration +1s",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -1562,13 +1552,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "block_hp_+150",
+          "name": "Block HP +150",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "cd_-10s",
+          "name": "Cooldown -10s",
           "consensus": 50
         }
       },
@@ -1577,13 +1567,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "movement_spd_and_armor_regen_+50%",
+          "name": "Movement Speed and Armor Regen +50%",
           "consensus": 50
         },
         "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
+          "id": "energy_regen_+50%",
+          "name": "",
           "consensus": 50
         }
       }
@@ -1678,13 +1668,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "duration_+5s",
+          "name": "Duration +5s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "max_+3",
+          "name": "Max +3",
           "consensus": 50
         }
       },
@@ -1693,15 +1683,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "slow_duration_+1s",
+          "name": "Slow Duration +1s",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -1794,13 +1779,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "cd_-5s",
+          "name": "Cooldown -5s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "duration_+2s",
+          "name": "Duration +2s",
           "consensus": 50
         }
       },
@@ -1809,15 +1794,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "+50%_healing_rate",
+          "name": "%50 Healing Rate",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -1910,13 +1890,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "duration_+4s",
+          "name": "Duration +4s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "cd_-7s",
+          "name": "Cooldown -7s",
           "consensus": 50
         }
       },
@@ -1925,15 +1905,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "-_airborne_gravity",
+          "name": "- Airborne Gravity",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -2026,13 +2001,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "dmg_and_range,
+          "name": "+50% Damage and Range",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "max_+3",
+          "name": "Max +3",
           "consensus": 50
         }
       },
@@ -2041,15 +2016,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "enemy_exposure_duration_+2s",
+          "name": "Enemy Exposure Duration +2s",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -2142,13 +2112,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "cooldown_-5s",
+          "name": "Cooldown -5s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "duration_+2s",
+          "name": "Duration +2s",
           "consensus": 50
         }
       },
@@ -2157,15 +2127,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "armorstreal_+50%",
+          "name": "Armor Steal +50%",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -2258,13 +2223,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "rate_of_fire_and_weapon_usability_+50%",
+          "name": "Rate of Fire and Weapon Usability +50%",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "armor_regen_+5/s",
+          "name": "Armor Regen +5/s",
           "consensus": 50
         }
       },
@@ -2273,15 +2238,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "weakeness_duration_+2s",
+          "name": "Weakness Duration +2s",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -2374,13 +2334,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "duration_+5s",
+          "name": "Duration +5s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "cooldown_-10s",
+          "name": "Cooldown -10s",
           "consensus": 50
         }
       },
@@ -2389,15 +2349,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "cooldown_-1s",
+          "name": "Cooldown -1s",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -2490,13 +2445,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "cooldown_-15s",
+          "name": "Cooldown -15s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "-20%_energy_cost",
+          "name": "-20% Energy Cost",
           "consensus": 50
         }
       },
@@ -2505,15 +2460,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "reduce_dmg_needed_to_trigger",
+          "name": "Reduce Damage Needed to Trigger",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
@@ -2606,13 +2556,13 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "active_option_a",
-          "name": "TBD",
+          "id": "cooldown_-10s",
+          "name": "Cooldown -10s",
           "consensus": 50
         },
         "optionB": {
-          "id": "active_option_b",
-          "name": "TBD",
+          "id": "+1_dash",
+          "name": "+1 Dash",
           "consensus": 50
         }
       },
@@ -2621,15 +2571,10 @@ const STRINOVA_DATA = [
         "recommended": "A",
         "buyPriority": 5,
         "optionA": {
-          "id": "passive_option_a",
-          "name": "TBD",
+          "id": "stealth_entry_speed_+50%",
+          "name": "Stealth Entry Speed +50%",
           "consensus": 50
         },
-        "optionB": {
-          "id": "passive_option_b",
-          "name": "TBD",
-          "consensus": 50
-        }
       }
     ]
   },
