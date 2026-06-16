@@ -206,6 +206,11 @@ document.addEventListener('DOMContentLoaded', () => {
         detailModal.showModal();
         document.body.style.overflow = 'hidden'; // Block background scroll
 
+        // Append community consensus panel if the community layer is active
+        if (typeof Community !== 'undefined') {
+            Community.enhanceModal(char.id, modalDetailsBody);
+        }
+
         // Animate the progress fills after modal displays
         setTimeout(() => {
             char.upgradePairs.forEach(pair => {

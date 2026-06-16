@@ -75,8 +75,22 @@
         </div>
     </footer>
 
+    <!-- Community Layer Config — fill in your Supabase project URL and anon key -->
+    <script>
+        window.COMMUNITY_CONFIG = {
+            enabled: true,
+            backend: 'supabase',
+            supabase: {
+                url: 'https://supabase.com/dashboard/project/qqtuvzoaighvocrootms',
+                anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFxdHV2em9haWdodm9jcm9vdG1zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1Mzc2ODYsImV4cCI6MjA5NzExMzY4Nn0.NpxgPrOVr4FPXegGhDQdpGPWe9yDl7FRa1EXrvJvxjc'
+            },
+            presentation: 'tabs'
+        };
+    </script>
+
     <!-- Core App Logic -->
     <script src="data.js"></script>
+    <script src="community/community.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
