@@ -75,8 +75,9 @@
 
         var remaining = char.upgradePairs.map(function (p) { return p.category; });
         var ranking = {};
+        var total = remaining.length;
 
-        for (var rank = 1; rank <= remaining.length; rank++) {
+        for (var rank = 1; rank <= total; rank++) {
             var best = remaining[0];
             var bestVotes = (voteMap[best] && voteMap[best][rank]) || 0;
             remaining.forEach(function (cat) {
