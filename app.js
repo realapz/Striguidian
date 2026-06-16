@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let characters = [];
     let activeRoleFilter = 'all';
     let searchQuery = '';
+    const rankingCache = {};
+    const rankingFetchStarted = {};
 
     // Cache DOM Elements
     const gridContainer = document.getElementById('characters-grid-container');
@@ -78,24 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.setAttribute('aria-haspopup', 'dialog');
             card.setAttribute('aria-label', `View weapon upgrades for ${char.name}`);
 
-            // Extract and sort chosen upgrades by priority
-            const chosenUpgradesSorted = char.upgradePairs
-                .map(pair => {
-                    const upgrade = (pair.recommended === 'A' || !pair.optionB) ? pair.optionA : pair.optionB;
-                    return {
-                        name: upgrade.name,
-                        priority: pair.buyPriority
-                    };
-                })
-                .sort((a, b) => a.priority - b.priority);
-
-            const miniStepsHTML = chosenUpgradesSorted.map((upg, index) => {
-                const arrow = index < chosenUpgradesSorted.length - 1 ? '<span class="mini-step-arrow">&rarr;</span>' : '';
-                return `
-                    <span class="mini-step-badge">${upg.name}</span>
-                    ${arrow}
-                `;
-            }).join('');
+            const miniStepsHTML = buildMiniStepsHtml(char);
 
             card.innerHTML = `
                 <div class="card-header-area">
@@ -112,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="quick-path-summary">
                     <div class="quick-path-title">Top Buy Order</div>
-                    <div class="path-steps-mini">
+                    <div class="path-steps-mini" id="path-steps-${char.id}">
                         ${miniStepsHTML}
                     </div>
                 </div>
@@ -128,6 +113,45 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             gridContainer.appendChild(card);
+            ensureRankingLoaded(char);
+        });
+    }
+
+    // Build the "Top Buy Order" mini-steps HTML, using the live vote-based
+    // ranking once it's loaded, falling back to the static data.js order until then
+    function buildMiniStepsHtml(char) {
+        const ranking = rankingCache[char.id];
+        const chosenUpgradesSorted = char.upgradePairs
+            .map(pair => {
+                const upgrade = (pair.recommended === 'A' || !pair.optionB) ? pair.optionA : pair.optionB;
+                return {
+                    name: upgrade.name,
+                    priority: (ranking && ranking[pair.category]) || pair.buyPriority
+                };
+            })
+            .sort((a, b) => a.priority - b.priority);
+
+        return chosenUpgradesSorted.map((upg, index) => {
+            const arrow = index < chosenUpgradesSorted.length - 1 ? '<span class="mini-step-arrow">&rarr;</span>' : '';
+            return `
+                <span class="mini-step-badge">${upg.name}</span>
+                ${arrow}
+            `;
+        }).join('');
+    }
+
+    // Fetch live priority votes for a character once, then refresh its card in place
+    function ensureRankingLoaded(char) {
+        if (rankingFetchStarted[char.id]) return;
+        rankingFetchStarted[char.id] = true;
+
+        if (typeof Community === 'undefined' || !Community.isEnabled()) return;
+
+        Community.fetchPriorityVotes(char.id).then(votes => {
+            if (!votes || !votes.length) return;
+            rankingCache[char.id] = Community.computeRankedPriorities(char, votes);
+            const container = document.getElementById(`path-steps-${char.id}`);
+            if (container) container.innerHTML = buildMiniStepsHtml(char);
         });
     }
 
@@ -240,10 +264,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
+                rankingFetchStarted[char.id] = true;
                 Community.fetchPriorityVotes(char.id).then(votes => {
                     if (votes && votes.length) {
                         const ranking = Community.computeRankedPriorities(char, votes);
+                        rankingCache[char.id] = ranking;
                         applyRankedPriorities(char, ranking);
+                        const cardContainer = document.getElementById(`path-steps-${char.id}`);
+                        if (cardContainer) cardContainer.innerHTML = buildMiniStepsHtml(char);
                     }
                 });
             }
