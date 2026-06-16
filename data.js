@@ -1150,7 +1150,7 @@ const STRINOVA_DATA = [
     "weaponType": "Assault Rifle",
     "themeColor": "hsl(41, 84%, 53%)",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/ff/Galatea_Profile.png/100px-Galatea_Profile.png",
-    "notes": "This short awakenings explanation is from Kierce and Myeah, make sure to show them both some support\nKierce: https://www.youtube.com/@kierce6969\nMyeah: https://www.youtube.com/@Myeah.",
+    "notes": "",
     "upgradePairs": [
       {
         "category": "Firing",
