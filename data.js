@@ -221,7 +221,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "Duration_+1s",
           "name": "Duration +1s",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -473,7 +473,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "cd_recovery",
           "name": "CD Recovery Rate +50%",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -599,7 +599,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "reload_time_reduction",
           "name": "Reload Time -0.8s",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -725,7 +725,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "damage_to_heat_conversion",
           "name": "Damage to Heat Conversion +50%",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -851,7 +851,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "dmg_required_to_reduce",
           "name": "-20% Damage Required to Reduce CD",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -1108,7 +1108,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "recovery_rate_increase",
           "name": "+Recovery Rate",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -1365,7 +1365,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "duration_+1s",
           "name": "Duration +1s",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -1622,7 +1622,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "enemy_exposure_duration_+1s",
           "name": "Enemy Exposure Duration +1s",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -1879,7 +1879,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "slow_duration_+1s",
           "name": "Slow Duration +1s",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -2005,7 +2005,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "+50%_healing_rate",
           "name": "%50 Healing Rate",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -2131,7 +2131,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "-_airborne_gravity",
           "name": "- Airborne Gravity",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -2257,7 +2257,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "enemy_exposure_duration_+2s",
           "name": "Enemy Exposure Duration +2s",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -2383,7 +2383,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "armorstreal_+50%",
           "name": "Armor Steal +50%",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -2509,7 +2509,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "weakeness_duration_+2s",
           "name": "Weakness Duration +2s",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -2635,7 +2635,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "cooldown_-1s",
           "name": "Cooldown -1s",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -2761,7 +2761,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "reduce_dmg_needed_to_trigger",
           "name": "Reduce Damage Needed to Trigger",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
@@ -2887,7 +2887,7 @@ const STRINOVA_DATA = [
         "optionA": {
           "id": "stealth_entry_speed_+50%",
           "name": "Stealth Entry Speed +50%",
-          "consensus": 50
+          "consensus": 100
         }
       },
       {
