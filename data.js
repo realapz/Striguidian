@@ -573,8 +573,8 @@ const STRINOVA_DATA = [
           "consensus": 20
         },
         "optionB": {
-          "id": "recoil_handling",
-          "name": "Recoil Handling",
+          "id": "single-shot_mode",
+          "name": "Single-Shot Mode",
           "consensus": 80
         }
       },
