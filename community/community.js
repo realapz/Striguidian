@@ -285,7 +285,7 @@
 
             return '' +
                 '<div class="submit-pair-row buy-order-card" data-pair-index="' + i + '">' +
-                    '<div class="buy-order-badge" id="buy-badge-' + escapeHtml(char.id) + '-' + i + '" style="color:' + escapeHtml(char.themeColor) + ';border-color:' + escapeHtml(char.themeColor) + '">?</div>' +
+                    '<div class="buy-order-badge" id="buy-badge-' + escapeHtml(char.id) + '-' + i + '" style="color:#fff;border-color:' + escapeHtml(char.themeColor) + '">?</div>' +
                     '<div class="buy-order-card-body">' +
                         '<span class="submit-category">' + escapeHtml(pair.category) + '</span>' +
                         '<div class="submit-choice-group">' + choiceGroup + '</div>' +
@@ -339,7 +339,7 @@
                 } else {
                     badge.textContent = '?';
                     badge.style.background = '';
-                    badge.style.color = char.themeColor;
+                    badge.style.color = '#fff';
                     card.classList.remove('buy-order-assigned');
                 }
             });

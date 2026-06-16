@@ -395,6 +395,22 @@ document.addEventListener('DOMContentLoaded', () => {
         renderGrid();
     });
 
+    // Hide header on scroll down, reveal on scroll up
+    (function () {
+        const header = document.querySelector('.app-header');
+        if (!header) return;
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentY = window.scrollY;
+            if (currentY > lastScrollY && currentY > 60) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            lastScrollY = currentY;
+        }, { passive: true });
+    })();
+
     // Run app initialization
     init();
 });
