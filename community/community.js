@@ -144,7 +144,7 @@
         var pairCount = char.upgradePairs.length;
         var pairInputs = char.upgradePairs.map(function (pair, i) {
             var priorityOptions = Array.from({ length: pairCount }, function (_, idx) { return idx + 1; }).map(function (n) {
-                return '<option value="' + n + '"' + (n === pair.buyPriority ? ' selected' : '') + '>' + n + '</option>';
+                return '<option value="' + n + '"' + (n === (i + 1) ? ' selected' : '') + '>' + n + '</option>';
             }).join('');
 
             var choiceGroup = !pair.optionB
