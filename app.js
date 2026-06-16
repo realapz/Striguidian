@@ -231,17 +231,58 @@ document.addEventListener('DOMContentLoaded', () => {
         // Append community consensus panel if the community layer is active
         if (typeof Community !== 'undefined') {
             Community.enhanceModal(char.id, modalDetailsBody, char);
+
+            // Overlay real pro-submission data onto the main matrix, once it exists
+            if (Community.isEnabled()) {
+                Community.fetchAggregates(char.id).then(aggregates => {
+                    if (aggregates && aggregates.pro && aggregates.pro.length) {
+                        applyProConsensus(char, aggregates.pro);
+                    }
+                });
+            }
         }
 
         // Animate the progress fills after modal displays
         setTimeout(() => {
             char.upgradePairs.forEach(pair => {
                 const fillA = document.getElementById(`fill-${char.id}-${pair.optionA.id}`);
-                const fillB = document.getElementById(`fill-${char.id}-${pair.optionB.id}`);
+                const fillB = pair.optionB ? document.getElementById(`fill-${char.id}-${pair.optionB.id}`) : null;
                 if (fillA) fillA.style.width = `${pair.optionA.consensus}%`;
                 if (fillB) fillB.style.width = `${pair.optionB.consensus}%`;
             });
         }, 100);
+    }
+
+    // Override the static Buy Order Matrix percentages with live pro-submission data
+    function applyProConsensus(char, proRows) {
+        const rowsByCategory = {};
+        proRows.forEach(row => { rowsByCategory[row.category] = row; });
+
+        char.upgradePairs.forEach(pair => {
+            const row = rowsByCategory[pair.category];
+            if (!row || !pair.optionB) return; // skip categories with no live data, or single-option entries
+
+            const pctA = Number(row.pct_a) || 0;
+            const pctB = 100 - pctA;
+
+            const fillA = document.getElementById(`fill-${char.id}-${pair.optionA.id}`);
+            const fillB = document.getElementById(`fill-${char.id}-${pair.optionB.id}`);
+            const cardA = fillA ? fillA.closest('.upgrade-choice-card') : null;
+            const cardB = fillB ? fillB.closest('.upgrade-choice-card') : null;
+
+            if (cardA) cardA.querySelector('.choice-percent-number').textContent = `${pctA}%`;
+            if (cardB) cardB.querySelector('.choice-percent-number').textContent = `${pctB}%`;
+            if (fillA) fillA.style.width = `${pctA}%`;
+            if (fillB) fillB.style.width = `${pctB}%`;
+
+            if (cardA && cardB) {
+                const aChosen = pctA >= pctB;
+                cardA.classList.toggle('chosen', aChosen);
+                cardA.classList.toggle('subdued', !aChosen);
+                cardB.classList.toggle('chosen', !aChosen);
+                cardB.classList.toggle('subdued', aChosen);
+            }
+        });
     }
 
     // Close Modal
