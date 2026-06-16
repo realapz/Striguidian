@@ -295,7 +295,7 @@
 
         return '' +
             '<form class="community-submit-form" id="comm-submit-' + escapeHtml(char.id) + '">' +
-                '<p class="buy-order-instruction">Click each upgrade in the order you want to buy it. Click again to remove it.</p>' +
+                '<p class="buy-order-instruction" style="color:#999;font-size:0.85em;">Click each upgrade in the order you want to buy it. Click again to remove it.</p>' +
                 '<div class="submit-pairs-list">' + pairCards + '</div>' +
                 '<div class="submit-actions">' +
                     '<button type="submit" class="submit-build-btn" disabled>Submit My Build</button>' +
