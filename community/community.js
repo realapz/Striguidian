@@ -36,7 +36,7 @@
         if (!db) return;
         db.auth.signInWithOAuth({
             provider: 'discord',
-            options: { redirectTo: global.location.href }
+            options: { redirectTo: global.location.href, scopes: 'identify' }
         });
     }
 
