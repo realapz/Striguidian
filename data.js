@@ -9,21 +9,6 @@ const STRINOVA_DATA = [
     "notes": "",
     "upgradePairs": [
       {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
-      {
         "category": "Firing",
         "recommended": "A",
         "buyPriority": 1,
@@ -114,6 +99,21 @@ const STRINOVA_DATA = [
         }
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -139,21 +139,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/b/ba/Bai_Mo_Profile.png/100px-Bai_Mo_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Core",
         "recommended": "A",
@@ -241,6 +226,21 @@ const STRINOVA_DATA = [
     
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -266,21 +266,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/b/bf/Celestia_Profile.png/100px-Celestia_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "A",
@@ -367,6 +352,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -392,21 +392,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/9/93/Chiyo_Profile.png/100px-Chiyo_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "A",
@@ -493,6 +478,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -518,21 +518,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/6/6a/Cielle_Profile.png/100px-Cielle_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Core",
         "recommended": "A",
@@ -619,6 +604,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -644,21 +644,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/a/a8/Eika_Profile.png/100px-Eika_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Core",
         "recommended": "A",
@@ -745,6 +730,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -770,21 +770,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/f2/Flavia_Profile.png/100px-Flavia_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "A",
@@ -871,6 +856,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -896,21 +896,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/a/a8/Fragrans_Profile.png/100px-Fragrans_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "A",
@@ -1002,6 +987,21 @@ const STRINOVA_DATA = [
         }
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -1027,21 +1027,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/a/ad/Fuchsia_Profile.png/100px-Fuchsia_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "A",
@@ -1128,6 +1113,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -1153,21 +1153,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/ff/Galatea_Profile.png/100px-Galatea_Profile.png",
     "notes": "This short awakenings explanation is from Kierce and Myeah, make sure to show them both some support!\nKierce: https://www.youtube.com/@kierce6969\n Myeah: https://www.youtube.com/@Myeah.",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "A",
@@ -1259,6 +1244,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -1284,21 +1284,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/c/c4/Kanami_Profile.png/100px-Kanami_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Core",
         "recommended": "B",
@@ -1385,6 +1370,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -1410,21 +1410,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/1/16/Kokona_Profile.png/100px-Kokona_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Core",
         "recommended": "B",
@@ -1516,6 +1501,21 @@ const STRINOVA_DATA = [
         }
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -1541,21 +1541,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/a/aa/Lawine_Profile.png/100px-Lawine_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "B",
@@ -1642,6 +1627,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -1667,21 +1667,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/b/b4/Leona_Profile.png/100px-Leona_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "B",
@@ -1773,6 +1758,21 @@ const STRINOVA_DATA = [
         }
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -1798,21 +1798,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/0/03/Maddelena_Profile.png/100px-Maddelena_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Core",
         "recommended": "B",
@@ -1899,6 +1884,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -1924,21 +1924,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/5/51/Mara_Profile.png/100px-Mara_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "B",
@@ -2025,6 +2010,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -2050,21 +2050,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/5/56/Meredith_Profile.png/100px-Meredith_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "B",
@@ -2151,6 +2136,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -2176,21 +2176,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/f/f9/Michele_Profile.png/100px-Michele_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "B",
@@ -2277,6 +2262,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -2302,21 +2302,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/7/78/Ming_Profile.png/100px-Ming_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "B",
@@ -2403,6 +2388,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -2428,21 +2428,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/2/20/Nobunaga_Profile.png/100px-Nobunaga_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "B",
@@ -2529,6 +2514,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -2554,21 +2554,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/1/14/Reiichi_Profile.png/100px-Reiichi_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Core",
         "recommended": "B",
@@ -2655,6 +2640,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -2680,21 +2680,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/d/d5/Yugiri_Profile.png/100px-Yugiri_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "B",
@@ -2781,6 +2766,21 @@ const STRINOVA_DATA = [
         },
       },
       {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
+      },
+      {
         "category": "Stringification",
         "recommended": "A",
         "buyPriority": 1,
@@ -2806,21 +2806,6 @@ const STRINOVA_DATA = [
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/3/37/Yvette_Profile.png/100px-Yvette_Profile.png",
     "notes": "",
     "upgradePairs": [
-      {
-        "category": "Shields",
-        "recommended": "A",
-        "buyPriority": 1,
-        "optionA": {
-          "id": "light_shield",
-          "name": "Light Shield",
-          "consensus": 80
-        },
-        "optionB": {
-          "id": "heavy_shield",
-          "name": "Heavy Shield",
-          "consensus": 20
-        }
-      },
       {
         "category": "Firing",
         "recommended": "B",
@@ -2905,6 +2890,21 @@ const STRINOVA_DATA = [
           "name": "Stealth Entry Speed +50%",
           "consensus": 50
         },
+      },
+      {
+        "category": "Shields",
+        "recommended": "A",
+        "buyPriority": 1,
+        "optionA": {
+          "id": "light_shield",
+          "name": "Light Shield",
+          "consensus": 80
+        },
+        "optionB": {
+          "id": "heavy_shield",
+          "name": "Heavy Shield",
+          "consensus": 20
+        }
       },
       {
         "category": "Stringification",
