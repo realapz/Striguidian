@@ -659,6 +659,10 @@ body::before {
     position: relative;
 }
 
+.upgrade-pair-grid.single-option {
+    grid-template-columns: 1fr;
+}
+
 .upgrade-choice-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);

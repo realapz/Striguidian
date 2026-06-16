@@ -82,8 +82,37 @@ const STRINOVA_DATA = [
           "name": "Recoil Handling",
           "consensus": 80
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
-
     ]
   },
   {
@@ -168,6 +197,36 @@ const STRINOVA_DATA = [
           "id": "reduce_spread_while_ads",
           "name": "Reduce Spread while ADS",
           "consensus": 80
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -255,6 +314,36 @@ const STRINOVA_DATA = [
           "name": "Recoil Handling",
           "consensus": 80
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -340,6 +429,36 @@ const STRINOVA_DATA = [
           "id": "recoil_handling",
           "name": "Recoil Handling",
           "consensus": 80
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -427,6 +546,36 @@ const STRINOVA_DATA = [
           "name": "Recoil Handling",
           "consensus": 80
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -512,6 +661,36 @@ const STRINOVA_DATA = [
           "id": "reduce_spread_while_ads",
           "name": "Reduce Spread While ADS",
           "consensus": 80
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -599,6 +778,36 @@ const STRINOVA_DATA = [
           "name": "Reduce Spread While ADS",
           "consensus": 80
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -684,6 +893,36 @@ const STRINOVA_DATA = [
           "id": "reduce_spread_while_ads",
           "name": "Reduce Spread While ADS",
           "consensus": 80
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -771,6 +1010,36 @@ const STRINOVA_DATA = [
           "name": "Reduce Spread While ADS",
           "consensus": 80
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -856,6 +1125,36 @@ const STRINOVA_DATA = [
           "id": "reduce_spread_while_ads",
           "name": "Reduce Spread While ADS",
           "consensus": 80
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -943,6 +1242,36 @@ const STRINOVA_DATA = [
           "name": "Quick Zoom Scope",
           "consensus": 28
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -1028,6 +1357,36 @@ const STRINOVA_DATA = [
           "id": "quick_zoom_scope",
           "name": "Quick Zoom Scope",
           "consensus": 28
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -1115,6 +1474,36 @@ const STRINOVA_DATA = [
           "name": "Recoil Handling",
           "consensus": 78
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -1200,6 +1589,36 @@ const STRINOVA_DATA = [
           "id": "ads_speed_and_weapon_switch",
           "name": "ADS Speed and Weapon Switch",
           "consensus": 78
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -1287,6 +1706,36 @@ const STRINOVA_DATA = [
           "name": "Recoil Handling",
           "consensus": 78
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -1372,6 +1821,36 @@ const STRINOVA_DATA = [
           "id": "recoil_handling",
           "name": "Recoil Handling",
           "consensus": 78
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -1459,6 +1938,36 @@ const STRINOVA_DATA = [
           "name": "Recoil Handling",
           "consensus": 78
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -1544,6 +2053,36 @@ const STRINOVA_DATA = [
           "id": "recoil_handling",
           "name": "Recoil Handling",
           "consensus": 78
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -1631,6 +2170,36 @@ const STRINOVA_DATA = [
           "name": "Recoil Handling",
           "consensus": 78
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -1716,6 +2285,36 @@ const STRINOVA_DATA = [
           "id": "recoil_handling",
           "name": "Recoil Handling",
           "consensus": 78
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]
@@ -1803,6 +2402,36 @@ const STRINOVA_DATA = [
           "name": "Spread Shot Mode",
           "consensus": 78
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -1889,6 +2518,36 @@ const STRINOVA_DATA = [
           "name": "Recoil Handling",
           "consensus": 78
         }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
       }
     ]
   },
@@ -1974,6 +2633,36 @@ const STRINOVA_DATA = [
           "id": "recoil_handling",
           "name": "Recoil Handling",
           "consensus": 78
+        }
+      },
+      {
+        "category": "Active Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "active_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "active_option_b",
+          "name": "TBD",
+          "consensus": 50
+        }
+      },
+      {
+        "category": "Passive Skill",
+        "recommended": "A",
+        "buyPriority": 5,
+        "optionA": {
+          "id": "passive_option_a",
+          "name": "TBD",
+          "consensus": 50
+        },
+        "optionB": {
+          "id": "passive_option_b",
+          "name": "TBD",
+          "consensus": 50
         }
       }
     ]

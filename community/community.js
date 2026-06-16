@@ -145,19 +145,23 @@
             var priorityOptions = [1, 2, 3, 4, 5].map(function (n) {
                 return '<option value="' + n + '"' + (n === pair.buyPriority ? ' selected' : '') + '>' + n + '</option>';
             }).join('');
+
+            var choiceGroup = !pair.optionB
+                ? '<span class="submit-choice-label submit-choice-fixed">' + escapeHtml(pair.optionA.name) + '</span>'
+                : '' +
+                    '<label class="submit-choice-label">' +
+                        '<input type="radio" name="choice-' + i + '" value="A"' + (pair.recommended === 'A' ? ' checked' : '') + '> ' +
+                        escapeHtml(pair.optionA.name) +
+                    '</label>' +
+                    '<label class="submit-choice-label">' +
+                        '<input type="radio" name="choice-' + i + '" value="B"' + (pair.recommended === 'B' ? ' checked' : '') + '> ' +
+                        escapeHtml(pair.optionB.name) +
+                    '</label>';
+
             return '' +
                 '<div class="submit-pair-row">' +
                     '<span class="submit-category">' + escapeHtml(pair.category) + '</span>' +
-                    '<div class="submit-choice-group">' +
-                        '<label class="submit-choice-label">' +
-                            '<input type="radio" name="choice-' + i + '" value="A"' + (pair.recommended === 'A' ? ' checked' : '') + '> ' +
-                            escapeHtml(pair.optionA.name) +
-                        '</label>' +
-                        '<label class="submit-choice-label">' +
-                            '<input type="radio" name="choice-' + i + '" value="B"' + (pair.recommended === 'B' ? ' checked' : '') + '> ' +
-                            escapeHtml(pair.optionB.name) +
-                        '</label>' +
-                    '</div>' +
+                    '<div class="submit-choice-group">' + choiceGroup + '</div>' +
                     '<label class="submit-priority-label">Buy order:&nbsp;' +
                         '<select name="priority-' + i + '" class="submit-priority-select">' + priorityOptions + '</select>' +
                     '</label>' +

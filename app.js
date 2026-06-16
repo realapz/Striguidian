@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Extract and sort chosen upgrades by priority
             const chosenUpgradesSorted = char.upgradePairs
                 .map(pair => {
-                    const upgrade = pair.recommended === 'A' ? pair.optionA : pair.optionB;
+                    const upgrade = (pair.recommended === 'A' || !pair.optionB) ? pair.optionA : pair.optionB;
                     return {
                         name: upgrade.name,
                         priority: pair.buyPriority
@@ -141,7 +141,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const optionB = pair.optionB;
             const isAChosen = pair.recommended === 'A';
             const isBChosen = pair.recommended === 'B';
-            
+
+            if (!optionB) {
+                return `
+                    <div class="upgrade-pair-row">
+                        <div class="upgrade-pair-header">
+                            <span class="upgrade-category-title">${pair.category}</span>
+                            <span class="buy-priority-tag">Buy Priority #${pair.buyPriority}</span>
+                        </div>
+                        <div class="upgrade-pair-grid single-option">
+                            <div class="upgrade-choice-card chosen">
+                                <span class="choice-card-name">${optionA.name}</span>
+                                <div class="choice-percentage-bar-area">
+                                    <span class="choice-percent-number">${optionA.consensus}%</span>
+                                    <div class="choice-percent-track">
+                                        <div class="choice-percent-fill" id="fill-${char.id}-${optionA.id}" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             return `
                 <div class="upgrade-pair-row">
                     <div class="upgrade-pair-header">
