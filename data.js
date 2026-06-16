@@ -388,7 +388,7 @@ const STRINOVA_DATA = [
     "name": "Chiyo",
     "role": "Duelist",
     "weaponType": "DMR",
-    "themeColor": "#0d0d0e63",
+    "themeColor": "#e29e71d3",
     "imageUrl": "https://static.wikitide.net/strinovawiki/thumb/9/93/Chiyo_Profile.png/100px-Chiyo_Profile.png",
     "notes": "",
     "upgradePairs": [
