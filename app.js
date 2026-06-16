@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let lastScrollY = window.scrollY;
         window.addEventListener('scroll', () => {
             const currentY = window.scrollY;
-            if (currentY > lastScrollY && currentY > 60) {
+            if (currentY > 60) {
                 header.classList.add('header-hidden');
             } else {
                 header.classList.remove('header-hidden');

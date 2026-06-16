@@ -333,7 +333,7 @@
                 if (!badge || !card) return;
                 if (priorities[i] !== null) {
                     badge.textContent = priorities[i];
-                    badge.style.background = char.themeColor;
+                    badge.style.background = '';
                     badge.style.color = '#fff';
                     card.classList.add('buy-order-assigned');
                 } else {
