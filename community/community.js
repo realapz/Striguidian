@@ -426,8 +426,8 @@
                     '<label class="submit-note-label" for="comm-note-' + escapeHtml(char.id) + '">' +
                         'Note <span class="submit-note-optional">(optional)</span>' +
                     '</label>' +
-                    '<textarea class="submit-note-input" id="comm-note-' + escapeHtml(char.id) + '" rows="2" maxlength="500" placeholder="Share your reasoning or tips for this build..."></textarea>' +
-                    '<span class="submit-note-counter" id="comm-note-counter-' + escapeHtml(char.id) + '">0/500</span>' +
+                    '<textarea class="submit-note-input" id="comm-note-' + escapeHtml(char.id) + '" rows="2" maxlength="1000" placeholder="Share your reasoning or tips for this build..."></textarea>' +
+                    '<span class="submit-note-counter" id="comm-note-counter-' + escapeHtml(char.id) + '">0/1000</span>' +
                 '</div>'
             : '';
 
@@ -551,7 +551,7 @@
             var noteCounter = document.getElementById('comm-note-counter-' + characterId);
             if (noteInput && noteCounter) {
                 var updateCounter = function () {
-                    noteCounter.textContent = noteInput.value.length + '/500';
+                    noteCounter.textContent = noteInput.value.length + '/1000';
                 };
                 updateCounter(); // set initial value (covers pre-filled edit case)
                 noteInput.addEventListener('input', updateCounter);
