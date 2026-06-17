@@ -321,11 +321,19 @@
                     '</span>';
             }).join('');
 
+            var dateStr = '';
+            if (b.created_at) {
+                dateStr = new Date(b.created_at).toLocaleDateString(undefined, {
+                    year: 'numeric', month: 'short', day: 'numeric'
+                });
+            }
+
             return '' +
                 '<div class="pro-build-card" data-name="' + escapeHtml((b.display_name || '').toLowerCase()) + '">' +
                     '<div class="pb-header">' +
                         '<span class="pb-name">' + escapeHtml(b.display_name || 'Unknown') + '</span>' +
                         '<span class="pb-pro-tag">Pro</span>' +
+                        (dateStr ? '<span class="pb-date">Last updated ' + escapeHtml(dateStr) + '</span>' : '') +
                     '</div>' +
                     '<div class="pb-order">' + order + '</div>' +
                     (b.note ? '<p class="pb-note">' + escapeHtml(b.note) + '</p>' : '') +

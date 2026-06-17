@@ -1135,6 +1135,12 @@ body::before {
     color: var(--text-primary);
 }
 
+.pb-date {
+    margin-left: auto;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
 .pb-pro-tag {
     font-size: 0.6rem;
     font-weight: 700;
