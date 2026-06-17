@@ -157,6 +157,13 @@
             .catch(function () { return []; });
     }
 
+    function fetchProBuilds(characterId) {
+        if (!isEnabled()) return Promise.resolve([]);
+        return db.rpc('get_pro_builds', { p_character_id: characterId })
+            .then(function (res) { return res.data || []; })
+            .catch(function () { return []; });
+    }
+
     function computeRankedPriorities(char, votes) {
         var voteMap = {};
         votes.forEach(function (v) {
@@ -207,7 +214,7 @@
         });
     }
 
-    function submitBuyOrder(characterId, choices) {
+    function submitBuyOrder(characterId, choices, note) {
         if (!isEnabled()) return Promise.reject(new Error('community layer disabled'));
         var session = getSession();
         if (!session) return Promise.reject(new Error('not authenticated'));
@@ -221,7 +228,8 @@
         // identity from auth.uid() itself rather than trusting a client-sent id.
         return clientFor(session).rpc('submit_build', {
             p_character_id: characterId,
-            p_choices: rows
+            p_choices: rows,
+            p_note: note || null
         }).then(function (res) {
             if (res.error) throw res.error;
             return res;
@@ -262,6 +270,60 @@
             '</div>';
     }
 
+    function buildProBuildsHtml(builds, char, characterId) {
+        if (!builds || !builds.length) {
+            return '<p class="community-empty">No top-player builds submitted yet.</p>';
+        }
+
+        var cards = builds.map(function (b) {
+            var order = (b.buy_order || []).map(function (item) {
+                var pair = null;
+                for (var k = 0; k < char.upgradePairs.length; k++) {
+                    if (char.upgradePairs[k].category === item.category) { pair = char.upgradePairs[k]; break; }
+                }
+                var label = item.category;
+                if (pair) {
+                    var opt = item.choice === 'B' ? pair.optionB : pair.optionA;
+                    if (opt && opt.name) label = opt.name;
+                }
+                return '' +
+                    '<span class="pb-step">' +
+                        '<span class="pb-num">' + escapeHtml(String(item.buyPriority)) + '</span>' +
+                        escapeHtml(label) +
+                    '</span>';
+            }).join('');
+
+            return '' +
+                '<div class="pro-build-card" data-name="' + escapeHtml((b.display_name || '').toLowerCase()) + '">' +
+                    '<div class="pb-header">' +
+                        '<span class="pb-name">' + escapeHtml(b.display_name || 'Unknown') + '</span>' +
+                        '<span class="pb-pro-tag">Pro</span>' +
+                    '</div>' +
+                    '<div class="pb-order">' + order + '</div>' +
+                    (b.note ? '<p class="pb-note">' + escapeHtml(b.note) + '</p>' : '') +
+                '</div>';
+        }).join('');
+
+        return '' +
+            '<div class="pb-search-wrap">' +
+                '<input type="text" class="pb-search-input" id="pb-search-' + escapeHtml(characterId) + '" placeholder="Search player...">' +
+            '</div>' +
+            '<div class="pb-list" id="pb-list-' + escapeHtml(characterId) + '">' + cards + '</div>';
+    }
+
+    function wireProSearch(characterId) {
+        var input = document.getElementById('pb-search-' + characterId);
+        var list  = document.getElementById('pb-list-'   + characterId);
+        if (!input || !list) return;
+        input.addEventListener('input', function () {
+            var q = input.value.toLowerCase().trim();
+            list.querySelectorAll('.pro-build-card').forEach(function (card) {
+                var name = card.getAttribute('data-name') || '';
+                card.style.display = (!q || name.indexOf(q) !== -1) ? '' : 'none';
+            });
+        });
+    }
+
     function buildLoginPromptHtml(characterId) {
         return '' +
             '<div class="community-login-prompt">' +
@@ -275,7 +337,7 @@
             '</div>';
     }
 
-    function buildSubmitFormHtml(char, voted) {
+    function buildSubmitFormHtml(char, voted, isPro) {
         if (voted) {
             return '' +
                 '<div class="community-voted">' +
@@ -308,10 +370,21 @@
                 '</div>';
         }).join('');
 
+        var noteField = isPro
+            ? '' +
+                '<div class="submit-note-wrap">' +
+                    '<label class="submit-note-label" for="comm-note-' + escapeHtml(char.id) + '">' +
+                        'Note <span class="submit-note-optional">(optional)</span>' +
+                    '</label>' +
+                    '<textarea class="submit-note-input" id="comm-note-' + escapeHtml(char.id) + '" rows="2" maxlength="300" placeholder="Share your reasoning or tips for this build..."></textarea>' +
+                '</div>'
+            : '';
+
         return '' +
             '<form class="community-submit-form" id="comm-submit-' + escapeHtml(char.id) + '">' +
                 '<p class="buy-order-instruction" style="color:' + escapeHtml(char.themeColor) + ';font-size:0.85em;">Click each upgrade in the order you want to buy it. Click again to remove it.</p>' +
                 '<div class="submit-pairs-list">' + pairCards + '</div>' +
+                noteField +
                 '<div class="submit-actions">' +
                     '<button type="submit" class="submit-build-btn" disabled>Submit My Build</button>' +
                     '<button type="button" class="buy-order-reset-btn" id="comm-reset-' + escapeHtml(char.id) + '">Reset</button>' +
@@ -325,7 +398,7 @@
     // Form event wiring
     // --------------------------------------------------------------------------
 
-    function attachFormListeners(characterId, char) {
+    function attachFormListeners(characterId, char, isPro) {
         var form = document.getElementById('comm-submit-' + characterId);
         var errorEl = document.getElementById('comm-error-' + characterId);
         var submitBtn = form ? form.querySelector('.submit-build-btn') : null;
@@ -397,6 +470,9 @@
             e.preventDefault();
             errorEl.style.display = 'none';
 
+            var noteInput = isPro ? document.getElementById('comm-note-' + characterId) : null;
+            var note = noteInput ? noteInput.value.trim() : null;
+
             var choices = char.upgradePairs.map(function (pair, i) {
                 var choiceInput = form.querySelector('input[name="choice-' + i + '"]:checked');
                 return {
@@ -409,7 +485,7 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
 
-            submitBuyOrder(characterId, choices).then(function () {
+            submitBuyOrder(characterId, choices, note).then(function () {
                 form.innerHTML = '<p class="community-voted-text">&#10003; Build submitted! Thank you.</p>';
             }).catch(function (err) {
                 submitBtn.disabled = false;
@@ -428,38 +504,93 @@
         if (!isEnabled() || !container) return;
 
         Promise.all([fetchAggregates(characterId), getUser()]).then(function (res) {
-            var aggs = res[0];
-            var user = res[1];
+            var aggs    = res[0];
+            var user    = res[1];
+            var session = getSession();
+            var isPro   = !!(user && user.isPro);
 
-            var html = '<section class="community-section"><h3 class="visualizer-section-title">Community</h3>';
+            var communityPanelId = 'comm-panel-community-' + characterId;
+            var proBuildsContentId = 'comm-pb-content-' + characterId;
 
-            if (aggs) html += buildAggregatesHtml(aggs);
+            // Build the section shell with two tabs
+            var shell = '' +
+                '<section class="community-section">' +
+                    '<h3 class="visualizer-section-title">Community</h3>' +
+                    '<div class="community-tabs" id="comm-tabs-' + escapeHtml(characterId) + '">' +
+                        '<button class="community-tab community-tab--active" data-tab="community">Community</button>' +
+                        '<button class="community-tab" data-tab="pro-builds">Top-Player Builds</button>' +
+                    '</div>' +
+                    '<div class="community-tab-panel" id="' + escapeHtml(communityPanelId) + '">' +
+                        (aggs ? buildAggregatesHtml(aggs) : '') +
+                        (!user ? buildLoginPromptHtml(characterId) : '') +
+                    '</div>' +
+                    '<div class="community-tab-panel" id="comm-panel-pro-builds-' + escapeHtml(characterId) + '" style="display:none">' +
+                        '<div id="' + escapeHtml(proBuildsContentId) + '"><p class="community-empty">Loading...</p></div>' +
+                    '</div>' +
+                '</section>';
 
+            container.insertAdjacentHTML('beforeend', shell);
+
+            // Tab switching + lazy-load pro builds
+            var tabsEl = document.getElementById('comm-tabs-' + characterId);
+            var proBuildsLoaded = false;
+
+            if (tabsEl) {
+                tabsEl.addEventListener('click', function (e) {
+                    var btn = e.target.closest('.community-tab');
+                    if (!btn) return;
+                    var tab = btn.getAttribute('data-tab');
+
+                    tabsEl.querySelectorAll('.community-tab').forEach(function (b) {
+                        b.classList.toggle('community-tab--active', b === btn);
+                    });
+
+                    var p1 = document.getElementById(communityPanelId);
+                    var p2 = document.getElementById('comm-panel-pro-builds-' + characterId);
+                    if (p1) p1.style.display = tab === 'community'  ? '' : 'none';
+                    if (p2) p2.style.display = tab === 'pro-builds' ? '' : 'none';
+
+                    if (tab === 'pro-builds' && !proBuildsLoaded) {
+                        proBuildsLoaded = true;
+                        fetchProBuilds(characterId).then(function (builds) {
+                            var el = document.getElementById(proBuildsContentId);
+                            if (el) {
+                                el.innerHTML = buildProBuildsHtml(builds, char, characterId);
+                                wireProSearch(characterId);
+                            }
+                        }).catch(function () {
+                            var el = document.getElementById(proBuildsContentId);
+                            if (el) el.innerHTML = '<p class="community-empty">Failed to load top-player builds.</p>';
+                        });
+                    }
+                });
+            }
+
+            // Wire login if logged out
             if (!user) {
-                html += buildLoginPromptHtml(characterId) + '</section>';
-                container.insertAdjacentHTML('beforeend', html);
                 var loginBtn = document.getElementById('comm-login-' + characterId);
                 if (loginBtn) loginBtn.addEventListener('click', signInWithDiscord);
                 return;
             }
 
-            hasVoted(characterId, getSession()).then(function (voted) {
-                html += buildSubmitFormHtml(char, voted) + '</section>';
-                container.insertAdjacentHTML('beforeend', html);
+            // Wire submit form for logged-in users
+            hasVoted(characterId, session).then(function (voted) {
+                var communityPanel = document.getElementById(communityPanelId);
+                if (!communityPanel) return;
+
+                communityPanel.insertAdjacentHTML('beforeend', buildSubmitFormHtml(char, voted, isPro));
 
                 function wireSignout() {
-                    var signoutBtn = document.getElementById('comm-signout-' + characterId);
-                    if (signoutBtn) {
-                        signoutBtn.addEventListener('click', function () {
-                            signOut().then(function () { global.location.reload(); });
-                        });
-                    }
+                    var btn = document.getElementById('comm-signout-' + characterId);
+                    if (btn) btn.addEventListener('click', function () {
+                        signOut().then(function () { global.location.reload(); });
+                    });
                 }
 
                 function switchToForm() {
-                    var votedDiv = container.querySelector('.community-voted');
-                    if (votedDiv) votedDiv.outerHTML = buildSubmitFormHtml(char, false);
-                    attachFormListeners(characterId, char);
+                    var votedDiv = communityPanel.querySelector('.community-voted');
+                    if (votedDiv) votedDiv.outerHTML = buildSubmitFormHtml(char, false, isPro);
+                    attachFormListeners(characterId, char, isPro);
                     wireSignout();
                 }
 
@@ -484,7 +615,7 @@
                         });
                     }
                 } else {
-                    attachFormListeners(characterId, char);
+                    attachFormListeners(characterId, char, isPro);
                     wireSignout();
                 }
             });
@@ -500,6 +631,7 @@
         getLastAuthError: getLastAuthError,
         fetchAggregates: fetchAggregates,
         fetchPriorityVotes: fetchPriorityVotes,
+        fetchProBuilds: fetchProBuilds,
         computeRankedPriorities: computeRankedPriorities,
         submitBuyOrder: submitBuyOrder,
         enhanceModal: enhanceModal

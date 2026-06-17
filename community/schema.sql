@@ -92,7 +92,11 @@ create policy "read own submission choices"
 -- The only allowed write path for votes. auth.uid() resolves to the `sub`
 -- claim of the caller's session JWT (minted by the discord-auth function),
 -- so this is exactly as trustworthy as auth.uid() normally is with GoTrue.
-create or replace function submit_build(p_character_id text, p_choices jsonb)
+-- Drop the old 2-arg overload before recreating with p_note so PostgreSQL
+-- doesn't keep both and get confused when the JS passes all three args.
+drop function if exists submit_build(text, jsonb);
+
+create or replace function submit_build(p_character_id text, p_choices jsonb, p_note text default null)
 returns uuid
 language plpgsql
 security definer
@@ -122,8 +126,10 @@ begin
         raise exception 'each upgrade must have a unique buy order position';
     end if;
 
-    insert into submissions (character_id, identity_id, is_pro)
-    values (p_character_id, v_identity_id, v_is_pro)
+    insert into submissions (character_id, identity_id, is_pro, note)
+    values (p_character_id, v_identity_id, v_is_pro,
+            -- only store note for pro players; ignore it silently for others
+            case when v_is_pro then nullif(trim(p_note), '') else null end)
     on conflict (identity_id, character_id) where status = 'published' do nothing
     returning id into v_submission_id;
 
@@ -139,8 +145,48 @@ begin
 end;
 $$;
 
-revoke all on function submit_build(text, jsonb) from public;
-grant execute on function submit_build(text, jsonb) to authenticated;
+revoke all on function submit_build(text, jsonb, text) from public;
+grant execute on function submit_build(text, jsonb, text) to authenticated;
+
+-- Returns all published pro builds for a character, with buy order pre-sorted
+-- and display_name pulled from identities. SECURITY DEFINER so callers don't
+-- need a SELECT policy on identities (which has none, by design).
+create or replace function get_pro_builds(p_character_id text)
+returns table (
+    submission_id  uuid,
+    display_name   text,
+    note           text,
+    created_at     timestamptz,
+    buy_order      jsonb
+)
+language sql
+security definer
+set search_path = public
+as $$
+    select
+        s.id,
+        i.display_name,
+        s.note,
+        s.created_at,
+        jsonb_agg(
+            jsonb_build_object(
+                'category',    c.category,
+                'choice',      c.choice,
+                'buyPriority', c.buy_priority
+            ) order by c.buy_priority
+        )
+    from submissions s
+    join identities i on i.id = s.identity_id
+    join submission_choices c on c.submission_id = s.id
+    where s.status       = 'published'
+      and s.is_pro       = true
+      and s.character_id = p_character_id
+    group by s.id, i.display_name, s.note, s.created_at
+    order by s.created_at desc;
+$$;
+
+revoke all on function get_pro_builds(text) from public;
+grant execute on function get_pro_builds(text) to anon, authenticated;
 
 -- Lets a user retract their own published submission so they can re-submit.
 -- SECURITY DEFINER so the caller doesn't need a DELETE RLS policy on submissions
