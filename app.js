@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalDetailsBody.style.setProperty('--modal-theme', char.themeColor);
         
         // Generate buy order pairs HTML
-        const pairsHTML = char.upgradePairs.map((pair, pairIndex) => {
+        const allPairHTMLs = char.upgradePairs.map((pair, pairIndex) => {
             const optionA = pair.optionA;
             const optionB = pair.optionB;
             const isAChosen = pair.recommended === 'A';
@@ -223,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="buy-priority-tag" id="priority-tag-${char.id}-${pairIndex}">Buy Priority #${pair.buyPriority}</span>
                     </div>
                     <div class="upgrade-pair-grid">
-                        <!-- Option A Card -->
                         <div class="upgrade-choice-card ${isAChosen ? 'chosen' : 'subdued'}">
                             <span class="choice-card-name">${optionA.name}</span>
                             <div class="choice-percentage-bar-area">
@@ -233,7 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                             </div>
                         </div>
-                        <!-- Option B Card -->
                         <div class="upgrade-choice-card ${isBChosen ? 'chosen' : 'subdued'}">
                             <span class="choice-card-name">${optionB.name}</span>
                             <div class="choice-percentage-bar-area">
@@ -246,7 +244,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             `;
-        }).join('');
+        });
+
+        // Split into two panels: first 4 on the left, the rest on the right
+        const leftPairsHTML  = allPairHTMLs.slice(0, 4).join('');
+        const rightPairsHTML = allPairHTMLs.slice(4).join('');
 
         modalDetailsBody.innerHTML = `
             <div class="detail-header">
@@ -265,7 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <section class="buy-order-section">
                 <h3 class="visualizer-section-title">Upgrade Decision Matrix</h3>
                 <div class="upgrade-pairs-container">
-                    ${pairsHTML}
+                    <div class="upgrade-pairs-column">${leftPairsHTML}</div>
+                    <div class="upgrade-pairs-column">${rightPairsHTML}</div>
                 </div>
             </section>
             ${char.notes ? `

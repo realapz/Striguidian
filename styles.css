@@ -484,7 +484,7 @@ body::before {
 .modal-content-wrapper {
     position: relative;
     width: 100%;
-    max-width: 720px;
+    max-width: 1120px;
     max-height: 90vh;
     background: var(--bg-panel);
     border: 1px solid var(--border-color);
@@ -616,9 +616,36 @@ body::before {
 }
 
 .upgrade-pairs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2.5rem;
+    align-items: start;
+}
+
+/* Divider between the two upgrade columns */
+.upgrade-pairs-column:first-child {
+    border-right: 1px solid var(--border-color);
+    padding-right: 2.5rem;
+}
+
+.upgrade-pairs-column {
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
+    gap: 1.5rem;
+}
+
+/* Collapse to single column on narrow screens */
+@media (max-width: 700px) {
+    .upgrade-pairs-container {
+        grid-template-columns: 1fr;
+    }
+
+    .upgrade-pairs-column:first-child {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 1.5rem;
+    }
 }
 
 .upgrade-pair-row {
