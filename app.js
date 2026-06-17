@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const rankingCache = {};
     const rankingFetchStarted = {};
     const choiceCache = {};
+    const aggregatesCache = {};
 
     // Cache DOM Elements
     const gridContainer = document.getElementById('characters-grid-container');
@@ -175,6 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (aggregates) {
                 choiceCache[char.id] = computeChoiceMap(aggregates);
+                aggregatesCache[char.id] = aggregates;
                 changed = true;
             }
             if (!changed) return;
@@ -279,60 +281,78 @@ document.addEventListener('DOMContentLoaded', () => {
             ` : ''}
         `;
 
-        // Open Dialog
-        detailModal.showModal();
-        document.body.style.overflow = 'hidden'; // Block background scroll
+        // Apply all cached data to the DOM before showModal() so the modal
+        // is correct the instant it becomes visible — no flash of stale data.
+        const hasCachedRanking    = !!rankingCache[char.id];
+        const hasCachedAggregates = !!aggregatesCache[char.id];
+        const communityEnabled    = typeof Community !== 'undefined' && Community.isEnabled();
 
-        // If we already have a cached ranking from a previous open, apply it
-        // instantly so the tags are never invisible and never flash wrong data.
-        if (rankingCache[char.id]) {
+        if (hasCachedRanking) {
             applyRankedPriorities(char, rankingCache[char.id]);
-        } else if (typeof Community === 'undefined' || !Community.isEnabled()) {
-            // No community layer — just show the static priorities right away.
+        } else if (!communityEnabled) {
             applyStaticPriorities(char);
         }
+        // (If community enabled but no cache yet, tags stay opacity:0 until fetch resolves)
 
-        // Append community consensus panel if the community layer is active
-        if (typeof Community !== 'undefined') {
-            Community.enhanceModal(char.id, modalDetailsBody, char);
-
-            // Overlay real pro-submission data onto the main matrix, once it exists
-            if (Community.isEnabled()) {
-                Community.fetchAggregates(char.id).then(aggregates => {
-                    if (!aggregates) return;
-                    choiceCache[char.id] = computeChoiceMap(aggregates);
-                    const cardContainer = document.getElementById(`path-steps-${char.id}`);
-                    if (cardContainer) cardContainer.innerHTML = buildMiniStepsHtml(char);
-                    if (aggregates.pro && aggregates.pro.length) {
-                        applyProConsensus(char, aggregates.pro);
-                    }
-                });
-
-                rankingFetchStarted[char.id] = true;
-                Community.fetchPriorityVotes(char.id).then(votes => {
-                    if (votes && votes.length) {
-                        const ranking = Community.computeRankedPriorities(char, votes);
-                        rankingCache[char.id] = ranking;
-                        applyRankedPriorities(char, ranking);
-                        const cardContainer = document.getElementById(`path-steps-${char.id}`);
-                        if (cardContainer) cardContainer.innerHTML = buildMiniStepsHtml(char);
-                    } else {
-                        // No community votes yet — reveal tags with static priorities.
-                        applyStaticPriorities(char);
-                    }
-                }).catch(() => applyStaticPriorities(char));
+        if (hasCachedAggregates) {
+            // Apply live chosen/subdued state and percentage bars from cache
+            if (aggregatesCache[char.id].pro && aggregatesCache[char.id].pro.length) {
+                applyProConsensus(char, aggregatesCache[char.id].pro);
             }
         }
 
-        // Animate the progress fills after modal displays
-        setTimeout(() => {
-            char.upgradePairs.forEach(pair => {
-                const fillA = document.getElementById(`fill-${char.id}-${pair.optionA.id}`);
-                const fillB = pair.optionB ? document.getElementById(`fill-${char.id}-${pair.optionB.id}`) : null;
-                if (fillA) fillA.style.width = `${pair.optionA.consensus}%`;
-                if (fillB) fillB.style.width = `${pair.optionB.consensus}%`;
-            });
-        }, 100);
+        // Open Dialog — data is already correct at this point if cached
+        detailModal.showModal();
+        document.body.style.overflow = 'hidden';
+
+        // Animate percentage bars from 0 → value.
+        // If aggregates are cached, applyProConsensus already set the live values;
+        // skip the static animation so it doesn't overwrite them.
+        if (!hasCachedAggregates) {
+            setTimeout(() => {
+                char.upgradePairs.forEach(pair => {
+                    const fillA = document.getElementById(`fill-${char.id}-${pair.optionA.id}`);
+                    const fillB = pair.optionB ? document.getElementById(`fill-${char.id}-${pair.optionB.id}`) : null;
+                    if (fillA) fillA.style.width = `${pair.optionA.consensus}%`;
+                    if (fillB) fillB.style.width = `${pair.optionB.consensus}%`;
+                });
+            }, 100);
+        }
+
+        // Append community section and kick off fetches only for data we don't already have
+        if (typeof Community !== 'undefined') {
+            Community.enhanceModal(char.id, modalDetailsBody, char);
+
+            if (communityEnabled) {
+                if (!hasCachedAggregates) {
+                    Community.fetchAggregates(char.id).then(aggregates => {
+                        if (!aggregates) return;
+                        aggregatesCache[char.id] = aggregates;
+                        choiceCache[char.id] = computeChoiceMap(aggregates);
+                        const cardContainer = document.getElementById(`path-steps-${char.id}`);
+                        if (cardContainer) cardContainer.innerHTML = buildMiniStepsHtml(char);
+                        if (aggregates.pro && aggregates.pro.length) {
+                            applyProConsensus(char, aggregates.pro);
+                        }
+                    });
+                }
+
+                if (!hasCachedRanking) {
+                    rankingFetchStarted[char.id] = true;
+                    Community.fetchPriorityVotes(char.id).then(votes => {
+                        if (votes && votes.length) {
+                            const ranking = Community.computeRankedPriorities(char, votes);
+                            rankingCache[char.id] = ranking;
+                            applyRankedPriorities(char, ranking);
+                            const cardContainer = document.getElementById(`path-steps-${char.id}`);
+                            if (cardContainer) cardContainer.innerHTML = buildMiniStepsHtml(char);
+                        } else {
+                            applyStaticPriorities(char);
+                        }
+                    }).catch(() => applyStaticPriorities(char));
+                }
+            }
+        }
     }
 
     // Override the static Buy Order Matrix percentages with live pro-submission data
