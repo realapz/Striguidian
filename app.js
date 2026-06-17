@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="upgrade-pair-row">
                         <div class="upgrade-pair-header">
                             <span class="upgrade-category-title">${pair.category}</span>
-                            <span class="buy-priority-tag" id="priority-tag-${char.id}-${pairIndex}">Buy Priority #${pair.buyPriority}</span>
+                            <span class="buy-priority-tag" id="priority-tag-${char.id}-${pairIndex}" style="opacity:0;transition:opacity 0.15s">Buy Priority #${pair.buyPriority}</span>
                         </div>
                         <div class="upgrade-pair-grid single-option">
                             <div class="upgrade-choice-card chosen">
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="upgrade-pair-row">
                     <div class="upgrade-pair-header">
                         <span class="upgrade-category-title">${pair.category}</span>
-                        <span class="buy-priority-tag" id="priority-tag-${char.id}-${pairIndex}">Buy Priority #${pair.buyPriority}</span>
+                        <span class="buy-priority-tag" id="priority-tag-${char.id}-${pairIndex}" style="opacity:0;transition:opacity 0.15s">Buy Priority #${pair.buyPriority}</span>
                     </div>
                     <div class="upgrade-pair-grid">
                         <div class="upgrade-choice-card ${isAChosen ? 'chosen' : 'subdued'}">
@@ -283,6 +283,15 @@ document.addEventListener('DOMContentLoaded', () => {
         detailModal.showModal();
         document.body.style.overflow = 'hidden'; // Block background scroll
 
+        // If we already have a cached ranking from a previous open, apply it
+        // instantly so the tags are never invisible and never flash wrong data.
+        if (rankingCache[char.id]) {
+            applyRankedPriorities(char, rankingCache[char.id]);
+        } else if (typeof Community === 'undefined' || !Community.isEnabled()) {
+            // No community layer — just show the static priorities right away.
+            applyStaticPriorities(char);
+        }
+
         // Append community consensus panel if the community layer is active
         if (typeof Community !== 'undefined') {
             Community.enhanceModal(char.id, modalDetailsBody, char);
@@ -307,8 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         applyRankedPriorities(char, ranking);
                         const cardContainer = document.getElementById(`path-steps-${char.id}`);
                         if (cardContainer) cardContainer.innerHTML = buildMiniStepsHtml(char);
+                    } else {
+                        // No community votes yet — reveal tags with static priorities.
+                        applyStaticPriorities(char);
                     }
-                });
+                }).catch(() => applyStaticPriorities(char));
             }
         }
 
@@ -355,13 +367,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Re-rank the displayed "Buy Priority #" tags using live submission votes
+    // Re-rank the displayed "Buy Priority #" tags using live submission votes.
+    // Also reveals the tags (they start at opacity 0 to prevent a flash of
+    // stale static data before the live fetch completes).
     function applyRankedPriorities(char, ranking) {
         char.upgradePairs.forEach((pair, i) => {
-            const rank = ranking[pair.category];
-            if (!rank) return;
             const tag = document.getElementById(`priority-tag-${char.id}-${i}`);
-            if (tag) tag.textContent = `Buy Priority #${rank}`;
+            if (!tag) return;
+            const rank = ranking[pair.category];
+            tag.textContent = `Buy Priority #${rank ?? pair.buyPriority}`;
+            tag.style.opacity = '1';
+        });
+    }
+
+    // Reveals the priority tags with the static priorities from data.js.
+    // Used when the community layer is disabled or no votes exist yet.
+    function applyStaticPriorities(char) {
+        char.upgradePairs.forEach((pair, i) => {
+            const tag = document.getElementById(`priority-tag-${char.id}-${i}`);
+            if (tag) {
+                tag.textContent = `Buy Priority #${pair.buyPriority}`;
+                tag.style.opacity = '1';
+            }
         });
     }
 
