@@ -164,6 +164,18 @@
             .catch(function () { return []; });
     }
 
+    // Fetches the caller's live is_pro from the DB rather than trusting the
+    // JWT claim -- admins can flip the flag at any time without the user
+    // re-logging in, so the JWT may be stale.
+    function fetchMyProfile() {
+        if (!isEnabled()) return Promise.resolve(null);
+        var session = getSession();
+        if (!session) return Promise.resolve(null);
+        return clientFor(session).rpc('get_my_profile')
+            .then(function (res) { return (res.data && res.data[0]) || null; })
+            .catch(function () { return null; });
+    }
+
     function computeRankedPriorities(char, votes) {
         var voteMap = {};
         votes.forEach(function (v) {
@@ -503,11 +515,13 @@
     function enhanceModal(characterId, container, char) {
         if (!isEnabled() || !container) return;
 
-        Promise.all([fetchAggregates(characterId), getUser()]).then(function (res) {
+        Promise.all([fetchAggregates(characterId), getUser(), fetchMyProfile()]).then(function (res) {
             var aggs    = res[0];
             var user    = res[1];
+            var profile = res[2]; // live DB row — overrides stale JWT claim
             var session = getSession();
-            var isPro   = !!(user && user.isPro);
+            // Prefer the live DB value; fall back to JWT claim if the RPC failed
+            var isPro   = profile ? !!profile.is_pro : !!(user && user.isPro);
 
             var communityPanelId = 'comm-panel-community-' + characterId;
             var proBuildsContentId = 'comm-pb-content-' + characterId;

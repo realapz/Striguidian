@@ -60,6 +60,7 @@ create index if not exists submissions_character_published
 
 alter table submissions enable row level security;
 
+drop policy if exists "read own submissions" on submissions;
 create policy "read own submissions"
     on submissions for select
     to authenticated
@@ -78,6 +79,7 @@ create table if not exists submission_choices (
 
 alter table submission_choices enable row level security;
 
+drop policy if exists "read own submission choices" on submission_choices;
 create policy "read own submission choices"
     on submission_choices for select
     to authenticated
@@ -213,6 +215,24 @@ $$;
 
 revoke all on function delete_submission(text) from public;
 grant execute on function delete_submission(text) to authenticated;
+
+-- Returns the calling user's live is_pro status straight from identities.
+-- Needed because is_pro is also stored in the session JWT (for display), but
+-- the JWT isn't re-minted when an admin flips the flag in the DB -- so the
+-- modal reads this instead of trusting the JWT claim.
+create or replace function get_my_profile()
+returns table (is_pro boolean, display_name text)
+language sql
+security definer
+set search_path = public
+as $$
+    select is_pro, display_name
+    from identities
+    where id = auth.uid();
+$$;
+
+revoke all on function get_my_profile() from public;
+grant execute on function get_my_profile() to authenticated;
 
 -- Aggregation views; the front-end reads these, never raw votes.
 
