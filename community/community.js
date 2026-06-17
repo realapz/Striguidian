@@ -164,6 +164,22 @@
             .catch(function () { return []; });
     }
 
+    // Fetches the caller's existing submission for a character so the edit
+    // form can be pre-populated with their previous choices.
+    function fetchMySubmission(characterId) {
+        if (!isEnabled()) return Promise.resolve(null);
+        var session = getSession();
+        if (!session) return Promise.resolve(null);
+        return clientFor(session)
+            .from('submissions')
+            .select('id, note, submission_choices(category, choice, buy_priority)')
+            .eq('character_id', characterId)
+            .eq('status', 'published')
+            .limit(1)
+            .then(function (res) { return (res.data && res.data[0]) || null; })
+            .catch(function () { return null; });
+    }
+
     // Fetches the caller's live is_pro from the DB rather than trusting the
     // JWT claim -- admins can flip the flag at any time without the user
     // re-logging in, so the JWT may be stale.
@@ -349,7 +365,9 @@
             '</div>';
     }
 
-    function buildSubmitFormHtml(char, voted, isPro) {
+    // existingChoices: array of {category, choice, buy_priority} from a previous
+    // submission, used to pre-check radio buttons when the user edits their build.
+    function buildSubmitFormHtml(char, voted, isPro, existingChoices) {
         if (voted) {
             return '' +
                 '<div class="community-voted">' +
@@ -359,16 +377,25 @@
                 '</div>';
         }
 
+        // Build a quick lookup so each pair can know its previous A/B choice
+        var prevChoiceMap = {};
+        if (existingChoices) {
+            existingChoices.forEach(function (c) { prevChoiceMap[c.category] = c.choice; });
+        }
+
         var pairCards = char.upgradePairs.map(function (pair, i) {
+            var prev = prevChoiceMap[pair.category]; // 'A', 'B', or undefined
             var choiceGroup = !pair.optionB
                 ? '<span class="submit-choice-label submit-choice-fixed">' + escapeHtml(pair.optionA.name) + '</span>'
                 : '' +
                     '<label class="submit-choice-label">' +
-                        '<input type="radio" name="choice-' + i + '" value="A"' + (pair.recommended === 'A' ? ' checked' : '') + '> ' +
+                        '<input type="radio" name="choice-' + i + '" value="A"' +
+                            ((prev ? prev === 'A' : pair.recommended === 'A') ? ' checked' : '') + '> ' +
                         escapeHtml(pair.optionA.name) +
                     '</label>' +
                     '<label class="submit-choice-label">' +
-                        '<input type="radio" name="choice-' + i + '" value="B"' + (pair.recommended === 'B' ? ' checked' : '') + '> ' +
+                        '<input type="radio" name="choice-' + i + '" value="B"' +
+                            ((prev ? prev === 'B' : pair.recommended === 'B') ? ' checked' : '') + '> ' +
                         escapeHtml(pair.optionB.name) +
                     '</label>';
 
@@ -410,7 +437,9 @@
     // Form event wiring
     // --------------------------------------------------------------------------
 
-    function attachFormListeners(characterId, char, isPro) {
+    // existingSubmission: { note, submission_choices: [{category, choice, buy_priority}] }
+    // Pass it when restoring an edit so the form starts with the previous state.
+    function attachFormListeners(characterId, char, isPro, existingSubmission) {
         var form = document.getElementById('comm-submit-' + characterId);
         var errorEl = document.getElementById('comm-error-' + characterId);
         var submitBtn = form ? form.querySelector('.submit-build-btn') : null;
@@ -421,6 +450,22 @@
         // priorities[i] = 1-based buy order assigned to pair i, or null if unassigned
         var priorities = new Array(pairCount).fill(null);
         var nextPriority = 1;
+
+        // Pre-fill from existing submission if editing
+        if (existingSubmission && existingSubmission.submission_choices) {
+            existingSubmission.submission_choices
+                .slice()
+                .sort(function (a, b) { return a.buy_priority - b.buy_priority; })
+                .forEach(function (c) {
+                    for (var k = 0; k < char.upgradePairs.length; k++) {
+                        if (char.upgradePairs[k].category === c.category) {
+                            priorities[k] = c.buy_priority;
+                            if (c.buy_priority >= nextPriority) nextPriority = c.buy_priority + 1;
+                            break;
+                        }
+                    }
+                });
+        }
 
         function badgeEl(i) {
             return document.getElementById('buy-badge-' + characterId + '-' + i);
@@ -475,6 +520,15 @@
                 refresh();
             });
         });
+
+        // Apply pre-filled state immediately (badges + submit button enabled state)
+        refresh();
+
+        // Pre-fill note textarea if editing a pro build
+        if (isPro && existingSubmission && existingSubmission.note) {
+            var noteTextarea = document.getElementById('comm-note-' + characterId);
+            if (noteTextarea) noteTextarea.value = existingSubmission.note;
+        }
 
         if (resetBtn) resetBtn.addEventListener('click', resetOrder);
 
@@ -601,10 +655,13 @@
                     });
                 }
 
-                function switchToForm() {
+                function switchToForm(existingSubmission) {
+                    var existingChoices = existingSubmission
+                        ? existingSubmission.submission_choices || []
+                        : null;
                     var votedDiv = communityPanel.querySelector('.community-voted');
-                    if (votedDiv) votedDiv.outerHTML = buildSubmitFormHtml(char, false, isPro);
-                    attachFormListeners(characterId, char, isPro);
+                    if (votedDiv) votedDiv.outerHTML = buildSubmitFormHtml(char, false, isPro, existingChoices);
+                    attachFormListeners(characterId, char, isPro, existingSubmission);
                     wireSignout();
                 }
 
@@ -614,22 +671,22 @@
                     if (editBtn) {
                         editBtn.addEventListener('click', function () {
                             editBtn.disabled = true;
-                            editBtn.textContent = 'Removing...';
+                            editBtn.textContent = 'Loading...';
                             if (editErr) editErr.style.display = 'none';
-                            deleteSubmission(characterId).then(function () {
-                                switchToForm();
-                            }).catch(function (err) {
-                                editBtn.disabled = false;
-                                editBtn.textContent = 'Edit Submission';
-                                if (editErr) {
-                                    editErr.textContent = err.message || 'Could not remove submission. Please try again.';
-                                    editErr.style.display = 'block';
-                                }
+                            // Fetch their existing choices before switching — the
+                            // actual deletion happens inside submit_build when they
+                            // re-submit, so closing the modal without re-submitting
+                            // leaves the original build intact.
+                            fetchMySubmission(characterId).then(function (existing) {
+                                switchToForm(existing);
+                            }).catch(function () {
+                                // Still open the form even if fetch fails; it just won't pre-fill
+                                switchToForm(null);
                             });
                         });
                     }
                 } else {
-                    attachFormListeners(characterId, char, isPro);
+                    attachFormListeners(characterId, char, isPro, null);
                     wireSignout();
                 }
             });

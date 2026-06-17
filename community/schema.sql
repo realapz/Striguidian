@@ -128,16 +128,18 @@ begin
         raise exception 'each upgrade must have a unique buy order position';
     end if;
 
+    -- Delete any existing published submission first so re-submissions (edits)
+    -- replace the old one atomically instead of erroring.
+    delete from submissions
+    where character_id = p_character_id
+      and identity_id  = v_identity_id
+      and status       = 'published';
+
     insert into submissions (character_id, identity_id, is_pro, note)
     values (p_character_id, v_identity_id, v_is_pro,
             -- only store note for pro players; ignore it silently for others
             case when v_is_pro then nullif(trim(p_note), '') else null end)
-    on conflict (identity_id, character_id) where status = 'published' do nothing
     returning id into v_submission_id;
-
-    if v_submission_id is null then
-        raise exception 'already voted for this character';
-    end if;
 
     insert into submission_choices (submission_id, category, choice, buy_priority)
     select v_submission_id, elem->>'category', elem->>'choice', (elem->>'buyPriority')::int
