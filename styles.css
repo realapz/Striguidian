@@ -1249,6 +1249,14 @@ body::before {
     border-color: rgba(255, 255, 255, 0.25);
 }
 
+.submit-note-counter {
+    display: block;
+    text-align: right;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
 /* Notes Section */
 .notes-section {
     margin-top: 2rem;

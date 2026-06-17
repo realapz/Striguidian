@@ -426,7 +426,8 @@
                     '<label class="submit-note-label" for="comm-note-' + escapeHtml(char.id) + '">' +
                         'Note <span class="submit-note-optional">(optional)</span>' +
                     '</label>' +
-                    '<textarea class="submit-note-input" id="comm-note-' + escapeHtml(char.id) + '" rows="2" maxlength="300" placeholder="Share your reasoning or tips for this build..."></textarea>' +
+                    '<textarea class="submit-note-input" id="comm-note-' + escapeHtml(char.id) + '" rows="2" maxlength="500" placeholder="Share your reasoning or tips for this build..."></textarea>' +
+                    '<span class="submit-note-counter" id="comm-note-counter-' + escapeHtml(char.id) + '">0/500</span>' +
                 '</div>'
             : '';
 
@@ -542,6 +543,19 @@
         if (isPro && existingSubmission && existingSubmission.note) {
             var noteTextarea = document.getElementById('comm-note-' + characterId);
             if (noteTextarea) noteTextarea.value = existingSubmission.note;
+        }
+
+        // Live character counter for the note field
+        if (isPro) {
+            var noteInput = document.getElementById('comm-note-' + characterId);
+            var noteCounter = document.getElementById('comm-note-counter-' + characterId);
+            if (noteInput && noteCounter) {
+                var updateCounter = function () {
+                    noteCounter.textContent = noteInput.value.length + '/500';
+                };
+                updateCounter(); // set initial value (covers pre-filled edit case)
+                noteInput.addEventListener('input', updateCounter);
+            }
         }
 
         if (resetBtn) resetBtn.addEventListener('click', resetOrder);
