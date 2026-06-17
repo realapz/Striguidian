@@ -142,6 +142,32 @@ $$;
 revoke all on function submit_build(text, jsonb) from public;
 grant execute on function submit_build(text, jsonb) to authenticated;
 
+-- Lets a user retract their own published submission so they can re-submit.
+-- SECURITY DEFINER so the caller doesn't need a DELETE RLS policy on submissions
+-- (there intentionally isn't one -- all writes go through these functions).
+create or replace function delete_submission(p_character_id text)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+    v_identity_id uuid := auth.uid();
+begin
+    if v_identity_id is null then
+        raise exception 'not authenticated';
+    end if;
+
+    delete from submissions
+    where character_id = p_character_id
+      and identity_id  = v_identity_id
+      and status       = 'published';
+end;
+$$;
+
+revoke all on function delete_submission(text) from public;
+grant execute on function delete_submission(text) to authenticated;
+
 -- Aggregation views; the front-end reads these, never raw votes.
 
 create or replace view community_consensus as

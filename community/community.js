@@ -197,6 +197,16 @@
             }).catch(function () { return false; });
     }
 
+    function deleteSubmission(characterId) {
+        if (!isEnabled()) return Promise.reject(new Error('community layer disabled'));
+        var session = getSession();
+        if (!session) return Promise.reject(new Error('not authenticated'));
+        return clientFor(session).rpc('delete_submission', { p_character_id: characterId }).then(function (res) {
+            if (res.error) throw res.error;
+            return res;
+        });
+    }
+
     function submitBuyOrder(characterId, choices) {
         if (!isEnabled()) return Promise.reject(new Error('community layer disabled'));
         var session = getSession();
@@ -267,7 +277,12 @@
 
     function buildSubmitFormHtml(char, voted) {
         if (voted) {
-            return '<div class="community-voted"><p class="community-voted-text">&#10003; You\'ve already submitted a build for ' + escapeHtml(char.name) + '.</p></div>';
+            return '' +
+                '<div class="community-voted">' +
+                    '<p class="community-voted-text">&#10003; You\'ve already submitted a build for ' + escapeHtml(char.name) + '.</p>' +
+                    '<button type="button" class="community-edit-btn" id="comm-edit-' + escapeHtml(char.id) + '">Edit Submission</button>' +
+                    '<p class="community-edit-error" id="comm-edit-error-' + escapeHtml(char.id) + '" style="display:none;color:var(--accent-red);font-size:0.8rem;margin-top:0.5rem;"></p>' +
+                '</div>';
         }
 
         var pairCards = char.upgradePairs.map(function (pair, i) {
@@ -432,13 +447,45 @@
                 html += buildSubmitFormHtml(char, voted) + '</section>';
                 container.insertAdjacentHTML('beforeend', html);
 
-                if (!voted) attachFormListeners(characterId, char);
+                function wireSignout() {
+                    var signoutBtn = document.getElementById('comm-signout-' + characterId);
+                    if (signoutBtn) {
+                        signoutBtn.addEventListener('click', function () {
+                            signOut().then(function () { global.location.reload(); });
+                        });
+                    }
+                }
 
-                var signoutBtn = document.getElementById('comm-signout-' + characterId);
-                if (signoutBtn) {
-                    signoutBtn.addEventListener('click', function () {
-                        signOut().then(function () { global.location.reload(); });
-                    });
+                function switchToForm() {
+                    var votedDiv = container.querySelector('.community-voted');
+                    if (votedDiv) votedDiv.outerHTML = buildSubmitFormHtml(char, false);
+                    attachFormListeners(characterId, char);
+                    wireSignout();
+                }
+
+                if (voted) {
+                    var editBtn = document.getElementById('comm-edit-' + characterId);
+                    var editErr = document.getElementById('comm-edit-error-' + characterId);
+                    if (editBtn) {
+                        editBtn.addEventListener('click', function () {
+                            editBtn.disabled = true;
+                            editBtn.textContent = 'Removing...';
+                            if (editErr) editErr.style.display = 'none';
+                            deleteSubmission(characterId).then(function () {
+                                switchToForm();
+                            }).catch(function (err) {
+                                editBtn.disabled = false;
+                                editBtn.textContent = 'Edit Submission';
+                                if (editErr) {
+                                    editErr.textContent = err.message || 'Could not remove submission. Please try again.';
+                                    editErr.style.display = 'block';
+                                }
+                            });
+                        });
+                    }
+                } else {
+                    attachFormListeners(characterId, char);
+                    wireSignout();
                 }
             });
         });
