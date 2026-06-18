@@ -1286,6 +1286,111 @@ body::before {
     margin-top: 0.2rem;
 }
 
+/* Guide submission fields (pro only) */
+.submit-guide-wrap {
+    margin-top: 0.75rem;
+}
+
+.submit-guide-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.submit-guide-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.submit-guide-input {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    padding: 0.45rem 0.65rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+
+.submit-guide-input:focus {
+    outline: none;
+    border-color: var(--modal-theme, var(--accent-blue));
+}
+
+@media (max-width: 600px) {
+    .submit-guide-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Guides tab
+   -------------------------------------------------------------------------- */
+.guide-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.25rem 0;
+}
+
+.guide-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.guide-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.guide-credit {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.guide-credit strong {
+    color: var(--text-secondary);
+}
+
+.guide-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--modal-theme, var(--accent-blue));
+    text-decoration: none;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--modal-theme, var(--accent-blue));
+    border-radius: 6px;
+    width: fit-content;
+    margin-top: 0.15rem;
+    transition: background 0.15s, color 0.15s;
+}
+
+.guide-link:hover {
+    background: var(--modal-theme, var(--accent-blue));
+    color: #fff;
+}
+
+.guide-link-icon {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
 /* Notes Section */
 .notes-section {
     margin-top: 2rem;

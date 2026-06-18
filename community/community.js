@@ -164,6 +164,13 @@
             .catch(function () { return []; });
     }
 
+    function fetchGuides(characterId) {
+        if (!isEnabled()) return Promise.resolve([]);
+        return db.rpc('get_guides', { p_character_id: characterId })
+            .then(function (res) { return res.data || []; })
+            .catch(function () { return []; });
+    }
+
     // Fetches the caller's existing submission for a character so the edit
     // form can be pre-populated with their previous choices.
     function fetchMySubmission(characterId) {
@@ -172,7 +179,7 @@
         if (!session) return Promise.resolve(null);
         return clientFor(session)
             .from('submissions')
-            .select('id, note, submission_choices(category, choice, buy_priority)')
+            .select('id, note, guide_url, guide_credit, submission_choices(category, choice, buy_priority)')
             .eq('character_id', characterId)
             .eq('status', 'published')
             .limit(1)
@@ -242,7 +249,7 @@
         });
     }
 
-    function submitBuyOrder(characterId, choices, note) {
+    function submitBuyOrder(characterId, choices, note, guideUrl, guideCredit) {
         if (!isEnabled()) return Promise.reject(new Error('community layer disabled'));
         var session = getSession();
         if (!session) return Promise.reject(new Error('not authenticated'));
@@ -256,8 +263,10 @@
         // identity from auth.uid() itself rather than trusting a client-sent id.
         return clientFor(session).rpc('submit_build', {
             p_character_id: characterId,
-            p_choices: rows,
-            p_note: note || null
+            p_choices:      rows,
+            p_note:         note        || null,
+            p_guide_url:    guideUrl    || null,
+            p_guide_credit: guideCredit || null
         }).then(function (res) {
             if (res.error) throw res.error;
             return res;
@@ -360,6 +369,51 @@
         });
     }
 
+    function buildGuidesHtml(guides) {
+        if (!guides || !guides.length) {
+            return '<p class="community-empty">No guides submitted yet.</p>';
+        }
+
+        var cards = guides.map(function (g) {
+            var dateStr = g.created_at
+                ? new Date(g.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
+                : '';
+
+            // Auto-detect a friendly label from the URL
+            var url = g.guide_url || '';
+            var linkLabel = 'View Guide';
+            if (/youtube\.com|youtu\.be/i.test(url))  linkLabel = 'Watch on YouTube';
+            else if (/docs\.google\.com/i.test(url))  linkLabel = 'View Google Doc';
+            else if (/twitch\.tv/i.test(url))         linkLabel = 'Watch on Twitch';
+            else if (/bilibili/i.test(url))            linkLabel = 'Watch on Bilibili';
+
+            // Link icon (chain-link SVG)
+            var linkIcon =
+                '<svg class="guide-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+                    '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>' +
+                    '<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' +
+                '</svg>';
+
+            return '' +
+                '<div class="guide-card">' +
+                    '<div class="guide-card-header">' +
+                        '<span class="pb-name">' + escapeHtml(g.display_name || 'Unknown') + '</span>' +
+                        '<span class="pb-pro-tag">Pro</span>' +
+                        (dateStr ? '<span class="pb-date">Last updated ' + escapeHtml(dateStr) + '</span>' : '') +
+                    '</div>' +
+                    (g.guide_credit
+                        ? '<p class="guide-credit">Credit: <strong>' + escapeHtml(g.guide_credit) + '</strong></p>'
+                        : '') +
+                    (g.note ? '<p class="pb-note">' + escapeHtml(g.note) + '</p>' : '') +
+                    '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" class="guide-link">' +
+                        linkIcon + escapeHtml(linkLabel) +
+                    '</a>' +
+                '</div>';
+        }).join('');
+
+        return '<div class="guide-list">' + cards + '</div>';
+    }
+
     function buildLoginPromptHtml(characterId) {
         return '' +
             '<div class="community-login-prompt">' +
@@ -428,6 +482,22 @@
                     '</label>' +
                     '<textarea class="submit-note-input" id="comm-note-' + escapeHtml(char.id) + '" rows="2" maxlength="1000" placeholder="Share your reasoning or tips for this build..."></textarea>' +
                     '<span class="submit-note-counter" id="comm-note-counter-' + escapeHtml(char.id) + '">0/1000</span>' +
+                '</div>' +
+                '<div class="submit-guide-wrap">' +
+                    '<div class="submit-guide-row">' +
+                        '<div class="submit-guide-field">' +
+                            '<label class="submit-note-label" for="comm-guide-url-' + escapeHtml(char.id) + '">' +
+                                'Guide Link <span class="submit-note-optional">(optional — YouTube, Google Doc, etc.)</span>' +
+                            '</label>' +
+                            '<input type="url" class="submit-guide-input" id="comm-guide-url-' + escapeHtml(char.id) + '" placeholder="https://...">' +
+                        '</div>' +
+                        '<div class="submit-guide-field">' +
+                            '<label class="submit-note-label" for="comm-guide-credit-' + escapeHtml(char.id) + '">' +
+                                'Credit <span class="submit-note-optional">(who made the guide)</span>' +
+                            '</label>' +
+                            '<input type="text" class="submit-guide-input" id="comm-guide-credit-' + escapeHtml(char.id) + '" placeholder="e.g. Your name or channel" maxlength="100">' +
+                        '</div>' +
+                    '</div>' +
                 '</div>'
             : '';
 
@@ -558,10 +628,15 @@
         // Apply pre-filled state immediately (badges + submit button enabled state)
         refresh();
 
-        // Pre-fill note textarea if editing a pro build
-        if (isPro && existingSubmission && existingSubmission.note) {
+        // Pre-fill note + guide fields if editing a pro build
+        if (isPro && existingSubmission) {
             var noteTextarea = document.getElementById('comm-note-' + characterId);
-            if (noteTextarea) noteTextarea.value = existingSubmission.note;
+            if (noteTextarea && existingSubmission.note) noteTextarea.value = existingSubmission.note;
+
+            var guideUrlInput    = document.getElementById('comm-guide-url-'    + characterId);
+            var guideCreditInput = document.getElementById('comm-guide-credit-' + characterId);
+            if (guideUrlInput    && existingSubmission.guide_url)    guideUrlInput.value    = existingSubmission.guide_url;
+            if (guideCreditInput && existingSubmission.guide_credit) guideCreditInput.value = existingSubmission.guide_credit;
         }
 
         // Live character counter for the note field
@@ -583,8 +658,12 @@
             e.preventDefault();
             errorEl.style.display = 'none';
 
-            var noteInput = isPro ? document.getElementById('comm-note-' + characterId) : null;
-            var note = noteInput ? noteInput.value.trim() : null;
+            var noteInput        = isPro ? document.getElementById('comm-note-'         + characterId) : null;
+            var guideUrlInput    = isPro ? document.getElementById('comm-guide-url-'    + characterId) : null;
+            var guideCreditInput = isPro ? document.getElementById('comm-guide-credit-' + characterId) : null;
+            var note        = noteInput        ? noteInput.value.trim()        : null;
+            var guideUrl    = guideUrlInput    ? guideUrlInput.value.trim()    : null;
+            var guideCredit = guideCreditInput ? guideCreditInput.value.trim() : null;
 
             var choices = char.upgradePairs.map(function (pair, i) {
                 var choiceInput = form.querySelector('input[name="choice-' + i + '"]:checked');
@@ -598,7 +677,7 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
 
-            submitBuyOrder(characterId, choices, note).then(function () {
+            submitBuyOrder(characterId, choices, note, guideUrl, guideCredit).then(function () {
                 form.innerHTML = '<p class="community-voted-text">&#10003; Build submitted! Thank you.</p>';
             }).catch(function (err) {
                 submitBtn.disabled = false;
@@ -624,16 +703,18 @@
             // Prefer the live DB value; fall back to JWT claim if the RPC failed
             var isPro   = profile ? !!profile.is_pro : !!(user && user.isPro);
 
-            var communityPanelId = 'comm-panel-community-' + characterId;
-            var proBuildsContentId = 'comm-pb-content-' + characterId;
+            var communityPanelId   = 'comm-panel-community-'  + characterId;
+            var proBuildsContentId = 'comm-pb-content-'       + characterId;
+            var guidesContentId    = 'comm-guides-content-'   + characterId;
 
-            // Build the section shell with two tabs
+            // Build the section shell with three tabs
             var shell = '' +
                 '<section class="community-section">' +
                     '<h3 class="visualizer-section-title">Community</h3>' +
                     '<div class="community-tabs" id="comm-tabs-' + escapeHtml(characterId) + '">' +
                         '<button class="community-tab community-tab--active" data-tab="community">Community</button>' +
                         '<button class="community-tab" data-tab="pro-builds">Top-Player Builds</button>' +
+                        '<button class="community-tab" data-tab="guides">Guides</button>' +
                     '</div>' +
                     '<div class="community-tab-panel" id="' + escapeHtml(communityPanelId) + '">' +
                         (aggs ? buildAggregatesHtml(aggs) : '') +
@@ -642,13 +723,17 @@
                     '<div class="community-tab-panel" id="comm-panel-pro-builds-' + escapeHtml(characterId) + '" style="display:none">' +
                         '<div id="' + escapeHtml(proBuildsContentId) + '"><p class="community-empty">Loading...</p></div>' +
                     '</div>' +
+                    '<div class="community-tab-panel" id="comm-panel-guides-' + escapeHtml(characterId) + '" style="display:none">' +
+                        '<div id="' + escapeHtml(guidesContentId) + '"><p class="community-empty">Loading...</p></div>' +
+                    '</div>' +
                 '</section>';
 
             container.insertAdjacentHTML('beforeend', shell);
 
-            // Tab switching + lazy-load pro builds
+            // Tab switching + lazy-load pro builds and guides
             var tabsEl = document.getElementById('comm-tabs-' + characterId);
             var proBuildsLoaded = false;
+            var guidesLoaded    = false;
 
             if (tabsEl) {
                 tabsEl.addEventListener('click', function (e) {
@@ -662,8 +747,10 @@
 
                     var p1 = document.getElementById(communityPanelId);
                     var p2 = document.getElementById('comm-panel-pro-builds-' + characterId);
+                    var p3 = document.getElementById('comm-panel-guides-'     + characterId);
                     if (p1) p1.style.display = tab === 'community'  ? '' : 'none';
                     if (p2) p2.style.display = tab === 'pro-builds' ? '' : 'none';
+                    if (p3) p3.style.display = tab === 'guides'     ? '' : 'none';
 
                     if (tab === 'pro-builds' && !proBuildsLoaded) {
                         proBuildsLoaded = true;
@@ -676,6 +763,17 @@
                         }).catch(function () {
                             var el = document.getElementById(proBuildsContentId);
                             if (el) el.innerHTML = '<p class="community-empty">Failed to load top-player builds.</p>';
+                        });
+                    }
+
+                    if (tab === 'guides' && !guidesLoaded) {
+                        guidesLoaded = true;
+                        fetchGuides(characterId).then(function (guides) {
+                            var el = document.getElementById(guidesContentId);
+                            if (el) el.innerHTML = buildGuidesHtml(guides);
+                        }).catch(function () {
+                            var el = document.getElementById(guidesContentId);
+                            if (el) el.innerHTML = '<p class="community-empty">Failed to load guides.</p>';
                         });
                     }
                 });
@@ -750,6 +848,7 @@
         fetchAggregates: fetchAggregates,
         fetchPriorityVotes: fetchPriorityVotes,
         fetchProBuilds: fetchProBuilds,
+        fetchGuides: fetchGuides,
         computeRankedPriorities: computeRankedPriorities,
         submitBuyOrder: submitBuyOrder,
         enhanceModal: enhanceModal

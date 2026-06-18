@@ -94,11 +94,23 @@ create policy "read own submission choices"
 -- The only allowed write path for votes. auth.uid() resolves to the `sub`
 -- claim of the caller's session JWT (minted by the discord-auth function),
 -- so this is exactly as trustworthy as auth.uid() normally is with GoTrue.
--- Drop the old 2-arg overload before recreating with p_note so PostgreSQL
--- doesn't keep both and get confused when the JS passes all three args.
-drop function if exists submit_build(text, jsonb);
 
-create or replace function submit_build(p_character_id text, p_choices jsonb, p_note text default null)
+-- Add guide columns if they don't exist yet (safe to re-run).
+alter table submissions add column if not exists guide_url    text;
+alter table submissions add column if not exists guide_credit text;
+
+-- Drop old overloads before recreating with the full signature so PostgreSQL
+-- doesn't keep stale versions that clash with the new argument list.
+drop function if exists submit_build(text, jsonb);
+drop function if exists submit_build(text, jsonb, text);
+
+create or replace function submit_build(
+    p_character_id text,
+    p_choices      jsonb,
+    p_note         text    default null,
+    p_guide_url    text    default null,
+    p_guide_credit text    default null
+)
 returns uuid
 language plpgsql
 security definer
@@ -135,10 +147,12 @@ begin
       and identity_id  = v_identity_id
       and status       = 'published';
 
-    insert into submissions (character_id, identity_id, is_pro, note)
+    insert into submissions (character_id, identity_id, is_pro, note, guide_url, guide_credit)
     values (p_character_id, v_identity_id, v_is_pro,
-            -- only store note for pro players; ignore it silently for others
-            case when v_is_pro then nullif(trim(p_note), '') else null end)
+            -- guide fields and note are only stored for pro players
+            case when v_is_pro then nullif(trim(p_note), '')         else null end,
+            case when v_is_pro then nullif(trim(p_guide_url), '')    else null end,
+            case when v_is_pro then nullif(trim(p_guide_credit), '') else null end)
     returning id into v_submission_id;
 
     insert into submission_choices (submission_id, category, choice, buy_priority)
@@ -149,8 +163,8 @@ begin
 end;
 $$;
 
-revoke all on function submit_build(text, jsonb, text) from public;
-grant execute on function submit_build(text, jsonb, text) to authenticated;
+revoke all on function submit_build(text, jsonb, text, text, text) from public;
+grant execute on function submit_build(text, jsonb, text, text, text) to authenticated;
 
 -- Returns all published pro builds for a character, with buy order pre-sorted
 -- and display_name pulled from identities. SECURITY DEFINER so callers don't
@@ -191,6 +205,42 @@ $$;
 
 revoke all on function get_pro_builds(text) from public;
 grant execute on function get_pro_builds(text) to anon, authenticated;
+
+-- Returns all published pro submissions that include a guide link for a
+-- character. SECURITY DEFINER so callers don't need a SELECT policy on
+-- identities (which has none, by design).
+create or replace function get_guides(p_character_id text)
+returns table (
+    submission_id  uuid,
+    display_name   text,
+    guide_url      text,
+    guide_credit   text,
+    note           text,
+    created_at     timestamptz
+)
+language sql
+security definer
+set search_path = public
+as $$
+    select
+        s.id,
+        i.display_name,
+        s.guide_url,
+        s.guide_credit,
+        s.note,
+        s.created_at
+    from submissions s
+    join identities i on i.id = s.identity_id
+    where s.status        = 'published'
+      and s.is_pro        = true
+      and s.guide_url    is not null
+      and s.guide_url    <> ''
+      and s.character_id  = p_character_id
+    order by s.created_at desc;
+$$;
+
+revoke all on function get_guides(text) from public;
+grant execute on function get_guides(text) to anon, authenticated;
 
 -- Lets a user retract their own published submission so they can re-submit.
 -- SECURITY DEFINER so the caller doesn't need a DELETE RLS policy on submissions
