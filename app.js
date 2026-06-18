@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="choice-percentage-bar-area">
                                     <span class="choice-percent-number">${optionA.consensus}%</span>
                                     <div class="choice-percent-track">
-                                        <div class="choice-percent-fill" id="fill-${char.id}-${optionA.id}" style="width: 0%"></div>
+                                        <div class="choice-percent-fill" id="fill-${char.id}-${pairIndex}-a" style="width: 0%"></div>
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="choice-percentage-bar-area">
                                 <span class="choice-percent-number">${optionA.consensus}%</span>
                                 <div class="choice-percent-track">
-                                    <div class="choice-percent-fill" id="fill-${char.id}-${optionA.id}" style="width: 0%"></div>
+                                    <div class="choice-percent-fill" id="fill-${char.id}-${pairIndex}-a" style="width: 0%"></div>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="choice-percentage-bar-area">
                                 <span class="choice-percent-number">${optionB.consensus}%</span>
                                 <div class="choice-percent-track">
-                                    <div class="choice-percent-fill" id="fill-${char.id}-${optionB.id}" style="width: 0%"></div>
+                                    <div class="choice-percent-fill" id="fill-${char.id}-${pairIndex}-b" style="width: 0%"></div>
                                 </div>
                             </div>
                         </div>
@@ -310,9 +310,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // skip the static animation so it doesn't overwrite them.
         if (!hasCachedAggregates) {
             setTimeout(() => {
-                char.upgradePairs.forEach(pair => {
-                    const fillA = document.getElementById(`fill-${char.id}-${pair.optionA.id}`);
-                    const fillB = pair.optionB ? document.getElementById(`fill-${char.id}-${pair.optionB.id}`) : null;
+                char.upgradePairs.forEach((pair, pairIndex) => {
+                    const fillA = document.getElementById(`fill-${char.id}-${pairIndex}-a`);
+                    const fillB = pair.optionB ? document.getElementById(`fill-${char.id}-${pairIndex}-b`) : null;
                     if (fillA) fillA.style.width = `${pair.optionA.consensus}%`;
                     if (fillB) fillB.style.width = `${pair.optionB.consensus}%`;
                 });
@@ -360,15 +360,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const rowsByCategory = {};
         proRows.forEach(row => { rowsByCategory[row.category] = row; });
 
-        char.upgradePairs.forEach(pair => {
+        // Fill IDs are pairIndex-based (fill-{charId}-{i}-a/b) to avoid
+        // collisions when two pairs share the same option id in data.js.
+        char.upgradePairs.forEach((pair, i) => {
+            const fillA = document.getElementById(`fill-${char.id}-${i}-a`);
+            const fillB = document.getElementById(`fill-${char.id}-${i}-b`);
+
+            if (!pair.optionB) {
+                // Single-option (passive/unique upgrade): no live choice data,
+                // but we still need to animate the fill from 0 → static value
+                // when aggregates are cached (the setTimeout path is skipped then).
+                if (fillA) fillA.style.width = `${pair.optionA.consensus}%`;
+                return;
+            }
+
             const row = rowsByCategory[pair.category];
-            if (!row || !pair.optionB) return; // skip categories with no live data, or single-option entries
+            if (!row) return; // no live pro data for this dual-option pair yet
 
             const pctA = Number(row.pct_a) || 0;
             const pctB = 100 - pctA;
 
-            const fillA = document.getElementById(`fill-${char.id}-${pair.optionA.id}`);
-            const fillB = document.getElementById(`fill-${char.id}-${pair.optionB.id}`);
             const cardA = fillA ? fillA.closest('.upgrade-choice-card') : null;
             const cardB = fillB ? fillB.closest('.upgrade-choice-card') : null;
 
