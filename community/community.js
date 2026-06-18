@@ -512,11 +512,30 @@
             refresh();
         }
 
-        // Clicking a card assigns the next priority; clicking an already-assigned
-        // card removes it and shifts subsequent numbers down so there are no gaps.
+        // Clicking a card (anywhere on it, including the radio dot) assigns the
+        // next priority; clicking an already-assigned card removes it and shifts
+        // subsequent numbers down so there are no gaps.
+        //
+        // When a <label> is clicked the browser immediately fires a synthetic
+        // click on the contained <input type="radio"> as well. We want BOTH a
+        // direct radio-dot click AND a label click to assign priority exactly
+        // once, so we use a per-card flag to absorb that second synthetic event.
         form.querySelectorAll('.buy-order-card').forEach(function (card) {
+            var skipNextRadioClick = false;
             card.addEventListener('click', function (e) {
-                if (e.target.type === 'radio') return; // let radio clicks through
+                if (e.target.closest && e.target.closest('.submit-choice-label')) {
+                    // Label click: browser will fire a synthetic radio click next;
+                    // mark it so we skip that one and don't assign priority twice.
+                    skipNextRadioClick = true;
+                } else if (e.target.type === 'radio') {
+                    if (skipNextRadioClick) {
+                        // This is the synthetic follow-up from a label click – skip it.
+                        skipNextRadioClick = false;
+                        return;
+                    }
+                    // Direct click on the radio dot – fall through to assign priority.
+                }
+
                 var idx = parseInt(card.getAttribute('data-pair-index'), 10);
 
                 if (priorities[idx] !== null) {
