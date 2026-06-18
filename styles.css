@@ -947,6 +947,35 @@ body::before {
     flex-wrap: wrap;
 }
 
+.buy-order-card {
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.buy-order-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.buy-order-assigned {
+    border-color: var(--modal-theme, var(--accent-blue)) !important;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.buy-order-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 2px solid; /* border-color comes from inline style set per character */
+    font-size: 0.82rem;
+    font-weight: 700;
+    pointer-events: none; /* clicks fall through to the parent .buy-order-card */
+}
+
 .submit-category {
     font-size: 0.82rem;
     font-weight: 700;
