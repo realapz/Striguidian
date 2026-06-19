@@ -1369,40 +1369,94 @@ body::before {
 }
 
 /* --------------------------------------------------------------------------
-   Guides tab
+   Guides tab — accordion cards
    -------------------------------------------------------------------------- */
-.guide-list {
+.guide-accordion-list {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
     padding: 0.25rem 0;
 }
 
-.guide-card {
-    background: rgba(255, 255, 255, 0.02);
+.guide-accordion {
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    padding: 0.85rem 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
+    overflow: hidden;
 }
 
-.guide-card-header {
+.guide-accordion-header {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: space-between;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border: none;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 600;
+    gap: 0.75rem;
+    transition: background 0.15s;
+}
+
+.guide-accordion-header:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.guide-accordion-title {
+    flex: 1;
+}
+
+.guide-accordion-chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+}
+
+.guide-accordion-chevron.rotated {
+    transform: rotate(180deg);
+}
+
+.guide-accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    border-top: 0px solid var(--border-color);
+}
+
+.guide-accordion-body.open {
+    max-height: 500px;
+    border-top-width: 1px;
+}
+
+.guide-accordion-note {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0.75rem 1rem 0;
+    white-space: pre-wrap;
+}
+
+.guide-accordion-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem 0.75rem;
     flex-wrap: wrap;
 }
 
-.guide-credit {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    margin: 0;
-}
-
-.guide-credit strong {
-    color: var(--text-secondary);
+.guide-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
 }
 
 .guide-link {
@@ -1416,8 +1470,7 @@ body::before {
     padding: 0.3rem 0.7rem;
     border: 1px solid var(--modal-theme, var(--accent-blue));
     border-radius: 6px;
-    width: fit-content;
-    margin-top: 0.15rem;
+    white-space: nowrap;
     transition: background 0.15s, color 0.15s;
 }
 
@@ -1430,6 +1483,39 @@ body::before {
     width: 13px;
     height: 13px;
     flex-shrink: 0;
+}
+
+/* Guide submit form (pro only, top of Guides tab) */
+.guide-submit-section {
+    margin-bottom: 1rem;
+}
+
+.guide-submit-title {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0 0 0.65rem;
+}
+
+.guide-submit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.guide-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.guide-section-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: 1rem 0;
 }
 
 /* Notes Section */

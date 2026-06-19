@@ -179,7 +179,7 @@
         if (!session) return Promise.resolve(null);
         return clientFor(session)
             .from('submissions')
-            .select('id, note, guide_url, guide_credit, submission_choices(category, choice, buy_priority)')
+            .select('id, note, submission_choices(category, choice, buy_priority)')
             .eq('character_id', characterId)
             .eq('status', 'published')
             .limit(1)
@@ -249,7 +249,7 @@
         });
     }
 
-    function submitBuyOrder(characterId, choices, note, guideUrl, guideCredit) {
+    function submitBuyOrder(characterId, choices, note) {
         if (!isEnabled()) return Promise.reject(new Error('community layer disabled'));
         var session = getSession();
         if (!session) return Promise.reject(new Error('not authenticated'));
@@ -264,9 +264,22 @@
         return clientFor(session).rpc('submit_build', {
             p_character_id: characterId,
             p_choices:      rows,
-            p_note:         note        || null,
-            p_guide_url:    guideUrl    || null,
-            p_guide_credit: guideCredit || null
+            p_note:         note || null
+        }).then(function (res) {
+            if (res.error) throw res.error;
+            return res;
+        });
+    }
+
+    function submitGuide(characterId, title, note, guideUrl) {
+        if (!isEnabled()) return Promise.reject(new Error('community layer disabled'));
+        var session = getSession();
+        if (!session) return Promise.reject(new Error('not authenticated'));
+        return clientFor(session).rpc('submit_guide', {
+            p_character_id: characterId,
+            p_title:        title,
+            p_note:         note     || null,
+            p_guide_url:    guideUrl || null
         }).then(function (res) {
             if (res.error) throw res.error;
             return res;
@@ -374,12 +387,24 @@
             return '<p class="community-empty">No guides submitted yet.</p>';
         }
 
+        var chevron =
+            '<svg class="guide-accordion-chevron" viewBox="0 0 24 24" fill="none" ' +
+                'stroke="currentColor" stroke-width="2.5" aria-hidden="true">' +
+                '<polyline points="6 9 12 15 18 9"/>' +
+            '</svg>';
+
+        var linkIcon =
+            '<svg class="guide-link-icon" viewBox="0 0 24 24" fill="none" ' +
+                'stroke="currentColor" stroke-width="2" aria-hidden="true">' +
+                '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>' +
+                '<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' +
+            '</svg>';
+
         var cards = guides.map(function (g) {
             var dateStr = g.created_at
                 ? new Date(g.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
                 : '';
 
-            // Auto-detect a friendly label from the URL
             var url = g.guide_url || '';
             var linkLabel = 'View Guide';
             if (/youtube\.com|youtu\.be/i.test(url))  linkLabel = 'Watch on YouTube';
@@ -387,31 +412,121 @@
             else if (/twitch\.tv/i.test(url))         linkLabel = 'Watch on Twitch';
             else if (/bilibili/i.test(url))            linkLabel = 'Watch on Bilibili';
 
-            // Link icon (chain-link SVG)
-            var linkIcon =
-                '<svg class="guide-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">' +
-                    '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>' +
-                    '<path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' +
-                '</svg>';
-
             return '' +
-                '<div class="guide-card">' +
-                    '<div class="guide-card-header">' +
-                        '<span class="pb-name">' + escapeHtml(g.display_name || 'Unknown') + '</span>' +
-                        '<span class="pb-pro-tag">Pro</span>' +
-                        (dateStr ? '<span class="pb-date">Last updated ' + escapeHtml(dateStr) + '</span>' : '') +
+                '<div class="guide-accordion">' +
+                    '<button class="guide-accordion-header" aria-expanded="false">' +
+                        '<span class="guide-accordion-title">' + escapeHtml(g.title || 'Untitled') + '</span>' +
+                        chevron +
+                    '</button>' +
+                    '<div class="guide-accordion-body">' +
+                        (g.note ? '<p class="guide-accordion-note">' + escapeHtml(g.note) + '</p>' : '') +
+                        '<div class="guide-accordion-footer">' +
+                            '<div class="guide-meta">' +
+                                '<span class="pb-name">' + escapeHtml(g.display_name || 'Unknown') + '</span>' +
+                                '<span class="pb-pro-tag">Pro</span>' +
+                                (dateStr ? '<span class="pb-date">' + escapeHtml(dateStr) + '</span>' : '') +
+                            '</div>' +
+                            '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" class="guide-link">' +
+                                linkIcon + escapeHtml(linkLabel) +
+                            '</a>' +
+                        '</div>' +
                     '</div>' +
-                    (g.guide_credit
-                        ? '<p class="guide-credit">Credit: <strong>' + escapeHtml(g.guide_credit) + '</strong></p>'
-                        : '') +
-                    (g.note ? '<p class="pb-note">' + escapeHtml(g.note) + '</p>' : '') +
-                    '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener noreferrer" class="guide-link">' +
-                        linkIcon + escapeHtml(linkLabel) +
-                    '</a>' +
                 '</div>';
         }).join('');
 
-        return '<div class="guide-list">' + cards + '</div>';
+        return '<div class="guide-accordion-list">' + cards + '</div>';
+    }
+
+    // Wires click-to-toggle on all accordion headers inside a container.
+    function wireGuideAccordions(containerEl) {
+        containerEl.querySelectorAll('.guide-accordion-header').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var body    = btn.nextElementSibling;
+                var isOpen  = body.classList.contains('open');
+                body.classList.toggle('open', !isOpen);
+                btn.setAttribute('aria-expanded', String(!isOpen));
+                var chevron = btn.querySelector('.guide-accordion-chevron');
+                if (chevron) chevron.classList.toggle('rotated', !isOpen);
+            });
+        });
+    }
+
+    // Guide submit form rendered at the top of the Guides tab (pro users only).
+    function buildGuideSubmitFormHtml(char) {
+        var id = escapeHtml(char.id);
+        return '' +
+            '<div class="guide-submit-section">' +
+                '<h4 class="guide-submit-title">Submit a Guide</h4>' +
+                '<form class="guide-submit-form" id="guide-form-' + id + '">' +
+                    '<div class="guide-form-field">' +
+                        '<label class="submit-note-label" for="guide-title-' + id + '">Title</label>' +
+                        '<input type="text" class="submit-guide-input" id="guide-title-' + id + '" ' +
+                            'maxlength="100" placeholder="e.g. Full weapon upgrade walkthrough" required>' +
+                    '</div>' +
+                    '<div class="guide-form-field">' +
+                        '<label class="submit-note-label" for="guide-note-' + id + '">' +
+                            'Note <span class="submit-note-optional">(optional)</span>' +
+                        '</label>' +
+                        '<textarea class="submit-note-input" id="guide-note-' + id + '" rows="2" ' +
+                            'maxlength="500" placeholder="Brief description of what the guide covers..."></textarea>' +
+                    '</div>' +
+                    '<div class="guide-form-field">' +
+                        '<label class="submit-note-label" for="guide-url-' + id + '">Guide Link</label>' +
+                        '<input type="url" class="submit-guide-input" id="guide-url-' + id + '" ' +
+                            'placeholder="https://..." required>' +
+                    '</div>' +
+                    '<div class="submit-actions" style="margin-top:0.65rem">' +
+                        '<button type="submit" class="submit-build-btn" id="guide-submit-btn-' + id + '">Submit Guide</button>' +
+                    '</div>' +
+                    '<p class="submit-error" id="guide-error-' + id + '" style="display:none"></p>' +
+                '</form>' +
+                '<div class="guide-section-divider"></div>' +
+            '</div>';
+    }
+
+    // Wires the guide submit form; calls onSuccess(guides) with refreshed list after submit.
+    function wireGuideForm(characterId, char, onSuccess) {
+        var form      = document.getElementById('guide-form-'       + characterId);
+        var errorEl   = document.getElementById('guide-error-'      + characterId);
+        var submitBtn = document.getElementById('guide-submit-btn-' + characterId);
+        if (!form || !submitBtn) return;
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (errorEl) errorEl.style.display = 'none';
+
+            var title = (document.getElementById('guide-title-' + characterId) || {}).value || '';
+            var note  = (document.getElementById('guide-note-'  + characterId) || {}).value || '';
+            var url   = (document.getElementById('guide-url-'   + characterId) || {}).value || '';
+            title = title.trim(); note = note.trim(); url = url.trim();
+
+            if (!title) {
+                if (errorEl) { errorEl.textContent = 'Please enter a title.'; errorEl.style.display = 'block'; }
+                return;
+            }
+            if (!url) {
+                if (errorEl) { errorEl.textContent = 'Please enter a guide link.'; errorEl.style.display = 'block'; }
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            submitGuide(characterId, title, note || null, url)
+                .then(function () {
+                    form.innerHTML = '<p class="community-voted-text">&#10003; Guide submitted! Thank you.</p>';
+                    return fetchGuides(characterId);
+                })
+                .then(function (guides) { if (onSuccess) onSuccess(guides); })
+                .catch(function (err) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit Guide';
+                    if (errorEl) {
+                        errorEl.textContent = (err && err.message) || 'Submission failed. Please try again.';
+                        errorEl.style.display = 'block';
+                    }
+                });
+        });
     }
 
     function buildLoginPromptHtml(characterId) {
@@ -482,22 +597,6 @@
                     '</label>' +
                     '<textarea class="submit-note-input" id="comm-note-' + escapeHtml(char.id) + '" rows="2" maxlength="1000" placeholder="Share your reasoning or tips for this build..."></textarea>' +
                     '<span class="submit-note-counter" id="comm-note-counter-' + escapeHtml(char.id) + '">0/1000</span>' +
-                '</div>' +
-                '<div class="submit-guide-wrap">' +
-                    '<div class="submit-guide-row">' +
-                        '<div class="submit-guide-field">' +
-                            '<label class="submit-note-label" for="comm-guide-url-' + escapeHtml(char.id) + '">' +
-                                'Guide Link <span class="submit-note-optional">(optional — YouTube, Google Doc, etc.)</span>' +
-                            '</label>' +
-                            '<input type="url" class="submit-guide-input" id="comm-guide-url-' + escapeHtml(char.id) + '" placeholder="https://...">' +
-                        '</div>' +
-                        '<div class="submit-guide-field">' +
-                            '<label class="submit-note-label" for="comm-guide-credit-' + escapeHtml(char.id) + '">' +
-                                'Credit <span class="submit-note-optional">(who made the guide)</span>' +
-                            '</label>' +
-                            '<input type="text" class="submit-guide-input" id="comm-guide-credit-' + escapeHtml(char.id) + '" placeholder="e.g. Your name or channel" maxlength="100">' +
-                        '</div>' +
-                    '</div>' +
                 '</div>'
             : '';
 
@@ -628,15 +727,10 @@
         // Apply pre-filled state immediately (badges + submit button enabled state)
         refresh();
 
-        // Pre-fill note + guide fields if editing a pro build
-        if (isPro && existingSubmission) {
+        // Pre-fill note textarea if editing a pro build
+        if (isPro && existingSubmission && existingSubmission.note) {
             var noteTextarea = document.getElementById('comm-note-' + characterId);
-            if (noteTextarea && existingSubmission.note) noteTextarea.value = existingSubmission.note;
-
-            var guideUrlInput    = document.getElementById('comm-guide-url-'    + characterId);
-            var guideCreditInput = document.getElementById('comm-guide-credit-' + characterId);
-            if (guideUrlInput    && existingSubmission.guide_url)    guideUrlInput.value    = existingSubmission.guide_url;
-            if (guideCreditInput && existingSubmission.guide_credit) guideCreditInput.value = existingSubmission.guide_credit;
+            if (noteTextarea) noteTextarea.value = existingSubmission.note;
         }
 
         // Live character counter for the note field
@@ -658,12 +752,8 @@
             e.preventDefault();
             errorEl.style.display = 'none';
 
-            var noteInput        = isPro ? document.getElementById('comm-note-'         + characterId) : null;
-            var guideUrlInput    = isPro ? document.getElementById('comm-guide-url-'    + characterId) : null;
-            var guideCreditInput = isPro ? document.getElementById('comm-guide-credit-' + characterId) : null;
-            var note        = noteInput        ? noteInput.value.trim()        : null;
-            var guideUrl    = guideUrlInput    ? guideUrlInput.value.trim()    : null;
-            var guideCredit = guideCreditInput ? guideCreditInput.value.trim() : null;
+            var noteInput = isPro ? document.getElementById('comm-note-' + characterId) : null;
+            var note = noteInput ? noteInput.value.trim() : null;
 
             var choices = char.upgradePairs.map(function (pair, i) {
                 var choiceInput = form.querySelector('input[name="choice-' + i + '"]:checked');
@@ -677,7 +767,7 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
 
-            submitBuyOrder(characterId, choices, note, guideUrl, guideCredit).then(function () {
+            submitBuyOrder(characterId, choices, note).then(function () {
                 form.innerHTML = '<p class="community-voted-text">&#10003; Build submitted! Thank you.</p>';
             }).catch(function (err) {
                 submitBtn.disabled = false;
@@ -768,9 +858,26 @@
 
                     if (tab === 'guides' && !guidesLoaded) {
                         guidesLoaded = true;
+                        var guidePanel = document.getElementById('comm-panel-guides-' + characterId);
+
+                        // Inject the submit form at the top of the tab for pro users
+                        if (isPro && user && guidePanel) {
+                            guidePanel.insertAdjacentHTML('afterbegin', buildGuideSubmitFormHtml(char));
+                            wireGuideForm(characterId, char, function (guides) {
+                                var listEl = document.getElementById(guidesContentId);
+                                if (listEl) {
+                                    listEl.innerHTML = buildGuidesHtml(guides);
+                                    wireGuideAccordions(listEl);
+                                }
+                            });
+                        }
+
                         fetchGuides(characterId).then(function (guides) {
                             var el = document.getElementById(guidesContentId);
-                            if (el) el.innerHTML = buildGuidesHtml(guides);
+                            if (el) {
+                                el.innerHTML = buildGuidesHtml(guides);
+                                wireGuideAccordions(el);
+                            }
                         }).catch(function () {
                             var el = document.getElementById(guidesContentId);
                             if (el) el.innerHTML = '<p class="community-empty">Failed to load guides.</p>';

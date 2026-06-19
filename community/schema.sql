@@ -95,22 +95,17 @@ create policy "read own submission choices"
 -- claim of the caller's session JWT (minted by the discord-auth function),
 -- so this is exactly as trustworthy as auth.uid() normally is with GoTrue.
 
--- Add guide columns if they don't exist yet (safe to re-run).
-alter table submissions add column if not exists guide_url    text;
-alter table submissions add column if not exists guide_credit text;
+-- Guides are now a separate table — remove the temporary columns that were
+-- briefly added to submissions, and revert submit_build to its 3-arg form.
+alter table submissions drop column if exists guide_url;
+alter table submissions drop column if exists guide_credit;
 
--- Drop old overloads before recreating with the full signature so PostgreSQL
--- doesn't keep stale versions that clash with the new argument list.
+-- Drop all previous overloads before recreating the clean 3-arg version.
 drop function if exists submit_build(text, jsonb);
 drop function if exists submit_build(text, jsonb, text);
+drop function if exists submit_build(text, jsonb, text, text, text);
 
-create or replace function submit_build(
-    p_character_id text,
-    p_choices      jsonb,
-    p_note         text    default null,
-    p_guide_url    text    default null,
-    p_guide_credit text    default null
-)
+create or replace function submit_build(p_character_id text, p_choices jsonb, p_note text default null)
 returns uuid
 language plpgsql
 security definer
@@ -147,12 +142,9 @@ begin
       and identity_id  = v_identity_id
       and status       = 'published';
 
-    insert into submissions (character_id, identity_id, is_pro, note, guide_url, guide_credit)
+    insert into submissions (character_id, identity_id, is_pro, note)
     values (p_character_id, v_identity_id, v_is_pro,
-            -- guide fields and note are only stored for pro players
-            case when v_is_pro then nullif(trim(p_note), '')         else null end,
-            case when v_is_pro then nullif(trim(p_guide_url), '')    else null end,
-            case when v_is_pro then nullif(trim(p_guide_credit), '') else null end)
+            case when v_is_pro then nullif(trim(p_note), '') else null end)
     returning id into v_submission_id;
 
     insert into submission_choices (submission_id, category, choice, buy_priority)
@@ -163,8 +155,90 @@ begin
 end;
 $$;
 
-revoke all on function submit_build(text, jsonb, text, text, text) from public;
-grant execute on function submit_build(text, jsonb, text, text, text) to authenticated;
+revoke all on function submit_build(text, jsonb, text) from public;
+grant execute on function submit_build(text, jsonb, text) to authenticated;
+
+-- ---------------------------------------------------------------------------
+-- Separate guides table (independent of buy-order submissions).
+-- A pro player can submit multiple guides per character.
+-- ---------------------------------------------------------------------------
+create table if not exists guides (
+    id           uuid primary key default gen_random_uuid(),
+    character_id text not null,
+    identity_id  uuid not null references identities (id) on delete cascade,
+    title        text not null,
+    note         text,
+    guide_url    text not null,
+    status       text not null default 'published'
+                     check (status in ('published', 'flagged', 'removed')),
+    created_at   timestamptz not null default now()
+);
+
+create index if not exists guides_character_published
+    on guides (character_id) where status = 'published';
+
+alter table guides enable row level security;
+
+-- Anyone can read published guides (anon included — no login needed to browse).
+drop policy if exists "read published guides" on guides;
+create policy "read published guides"
+    on guides for select
+    using (status = 'published');
+
+-- All writes go through submit_guide() below (SECURITY DEFINER).
+-- No insert/update/delete RLS policies needed here.
+
+-- Submits a new guide for a character. Only pro players are allowed.
+-- Each call inserts a fresh row — pros can have multiple guides per character.
+create or replace function submit_guide(
+    p_character_id text,
+    p_title        text,
+    p_note         text default null,
+    p_guide_url    text default null
+)
+returns uuid
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+    v_identity_id uuid := auth.uid();
+    v_is_pro      boolean;
+    v_guide_id    uuid;
+begin
+    if v_identity_id is null then
+        raise exception 'not authenticated';
+    end if;
+
+    select is_pro into v_is_pro from identities where id = v_identity_id;
+    if not coalesce(v_is_pro, false) then
+        raise exception 'only pro players can submit guides';
+    end if;
+
+    if nullif(trim(p_title), '') is null then
+        raise exception 'title is required';
+    end if;
+
+    if nullif(trim(p_guide_url), '') is null then
+        raise exception 'guide link is required';
+    end if;
+
+    insert into guides (character_id, identity_id, title, note, guide_url)
+    values (
+        p_character_id,
+        v_identity_id,
+        trim(p_title),
+        nullif(trim(p_note), ''),
+        trim(p_guide_url)
+    )
+    returning id into v_guide_id;
+
+    return v_guide_id;
+end;
+$$;
+
+revoke all on function submit_guide(text, text, text, text) from public;
+grant execute on function submit_guide(text, text, text, text) to authenticated;
 
 -- Returns all published pro builds for a character, with buy order pre-sorted
 -- and display_name pulled from identities. SECURITY DEFINER so callers don't
@@ -206,37 +280,34 @@ $$;
 revoke all on function get_pro_builds(text) from public;
 grant execute on function get_pro_builds(text) to anon, authenticated;
 
--- Returns all published pro submissions that include a guide link for a
--- character. SECURITY DEFINER so callers don't need a SELECT policy on
--- identities (which has none, by design).
+-- Returns all published guides for a character from the dedicated guides table.
+-- SECURITY DEFINER so callers don't need a SELECT policy on identities.
+drop function if exists get_guides(text);
 create or replace function get_guides(p_character_id text)
 returns table (
-    submission_id  uuid,
-    display_name   text,
-    guide_url      text,
-    guide_credit   text,
-    note           text,
-    created_at     timestamptz
+    guide_id     uuid,
+    display_name text,
+    title        text,
+    note         text,
+    guide_url    text,
+    created_at   timestamptz
 )
 language sql
 security definer
 set search_path = public
 as $$
     select
-        s.id,
+        g.id,
         i.display_name,
-        s.guide_url,
-        s.guide_credit,
-        s.note,
-        s.created_at
-    from submissions s
-    join identities i on i.id = s.identity_id
-    where s.status        = 'published'
-      and s.is_pro        = true
-      and s.guide_url    is not null
-      and s.guide_url    <> ''
-      and s.character_id  = p_character_id
-    order by s.created_at desc;
+        g.title,
+        g.note,
+        g.guide_url,
+        g.created_at
+    from guides g
+    join identities i on i.id = g.identity_id
+    where g.status       = 'published'
+      and g.character_id = p_character_id
+    order by g.created_at desc;
 $$;
 
 revoke all on function get_guides(text) from public;
