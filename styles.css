@@ -440,7 +440,7 @@ body::before {
 }
 
 .quick-path-summary {
-    margin-top: auto;
+    margin-top: 1rem;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     padding: 0.75rem 1rem;
