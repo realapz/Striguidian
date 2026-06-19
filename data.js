@@ -950,8 +950,8 @@ const STRINOVA_DATA = [
           "consensus": 20
         },
         "optionB": {
-          "id": "reduce_spread_while_ads",
-          "name": "Reduce Spread While ADS",
+          "id": "recoil_handling",
+          "name": "Recoil Handling",
           "consensus": 80
         }
       },
@@ -1081,8 +1081,8 @@ const STRINOVA_DATA = [
           "consensus": 20
         },
         "optionB": {
-          "id": "reduce_spread_while_ads",
-          "name": "Reduce Spread While ADS",
+          "id": "recoil_handling",
+          "name": "Recoil Handling",
           "consensus": 80
         }
       },
