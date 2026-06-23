@@ -66,7 +66,7 @@ function check(data) {
                 problems.push(`${at}: "buyPriority" is not a number`);
             }
 
-            ['optionA', 'optionB'].forEach(key => {
+            ['optionA'].forEach(key => {
                 const opt = pair[key];
                 if (!opt || typeof opt !== 'object') {
                     problems.push(`${at}: "${key}" is missing`);
@@ -78,6 +78,15 @@ function check(data) {
                     problems.push(`${at}: "${key}.consensus" is not a number`);
                 }
             });
+
+            if (pair.optionB) {
+                const opt = pair.optionB;
+                if (!isNonEmptyString(opt.id)) problems.push(`${at}: "optionB.id" is missing or empty`);
+                if (!isNonEmptyString(opt.name)) problems.push(`${at}: "optionB.name" is missing or empty`);
+                if (typeof opt.consensus !== 'number' || Number.isNaN(opt.consensus)) {
+                    problems.push(`${at}: "optionB.consensus" is not a number`);
+                }
+            }
 
             const a = pair.optionA && pair.optionA.consensus;
             const b = pair.optionB && pair.optionB.consensus;

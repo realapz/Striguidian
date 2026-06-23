@@ -2004,7 +2004,7 @@ const STRINOVA_DATA = [
         "buyPriority": 6,
         "optionA": {
           "id": "+50%_healing_rate",
-          "name": "%50 Healing Rate",
+          "name": "+50% Healing Rate",
           "consensus": 100
         }
       },
