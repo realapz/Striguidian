@@ -2840,8 +2840,8 @@ const STRINOVA_DATA = [
         "recommended": "B",
         "buyPriority": 3,
         "optionA": {
-          "id": "mag_capacity",
-          "name": "Magazine Capacity",
+          "id": "sprint_speed",
+          "name": "Sprint Speed",
           "consensus": 35
         },
         "optionB": {
