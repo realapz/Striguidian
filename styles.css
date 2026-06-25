@@ -336,7 +336,7 @@ body::before {
 
 .characters-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
     gap: 1.5rem;
 }
 
@@ -498,7 +498,7 @@ body::before {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     border: none;
     background: transparent;
     display: none; /* Controlled by display attribute of element & open state */
@@ -674,6 +674,23 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+}
+
+/* Keep close button visible while scrolling on mobile */
+@media (max-width: 768px) {
+    .modal-close-btn {
+        position: fixed;
+        top: 1.25rem;
+        right: 1.25rem;
+        z-index: 1001;
+    }
+}
+
+/* Reduce side padding on small screens */
+@media (max-width: 480px) {
+    .app-main {
+        padding: 1.5rem 1rem 4rem 1rem;
+    }
 }
 
 /* Collapse to single column on narrow screens */
